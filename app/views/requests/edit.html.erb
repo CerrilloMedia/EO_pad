@@ -1,0 +1,24 @@
+EDIT for request #<%= @request.id %>
+<%= form_with(model: @request, local: true) do |f| %>
+  <div class="form-group">
+    <%= tag.small "client name", class: 'ml-2 form-text'%>
+    <%= f.text_field :client_name, class: 'form-control col-md-6' %>
+  </div>
+  <div class="form-group">
+    <%= tag.small "subject", class: 'ml-2 form-text'%>
+    <%= f.text_field :subject, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= tag.small "message", class: 'form-text ml-2'%>
+    <%= f.text_area :body, class: 'form-control' %>
+    <small class="form-text text-light ml-2">message must be between 3 and 300 characters</small>
+  </div>
+  <div class="form-group">
+    <%= f.check_box :status, {}, "completed", "active" %> Completed?
+  </div>
+  <div class="form-group">
+    <%= f.submit class: 'btn btn-success' %>
+    <%= link_to "delete", @request, method: :delete, class: 'btn btn-danger', data: {confirm: "are you sure?"} %>
+  </div>
+</div>
+<% end %>

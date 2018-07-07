@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-4">
+      <h3>Requests:</h3>
+  </div>
+</div>
+<% @requests.each do |r| %>
+<div class="card-body p-0 p-sm-1 mb-2 mb-sm-2" id="request_<%= r.id %>">
+  <div class="card border-0 border-sm-1">
+    <div class="card-header text-right bg-warning text-dark rounded-0">
+      <%= tag.div r.subject, class: 'float-left' %>
+      <%= tag.small time_ago_in_words(r.created_at) + " ago ", class: 'mr-2' %>
+      <%= link_to "edit", edit_request_path(r), class: 'btn btn-outline-dark btn-sm' %>
+      <a class="btn btn-dark btn-sm" href="#request_body_<%= r.id %>" data-toggle="collapse">
+        <i class="fas fa-bars"></i>
+      </a>
+    </div>
+    <div class="card-body collapse" id="request_body_<%= r.id %>">
+      <%= tag.small class:"" do %>
+        Client: <%= r.client_name %>
+      <% end %>
+      <hr class="mt-1 mb-1">
+      <%= r.body %>
+      <div id="status-<%= r.id %>" class="float-right">
+        completed: <%= r.completed? ? icon('far', 'check-square', class: 'strong') : icon('far', 'square', class: 'strong') %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
+</div>
