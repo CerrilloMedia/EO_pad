@@ -17,3 +17,8 @@
 //= require popper
 //= require bootstrap
 //= require_tree .
+
+$( document ).on('turbolinks:load', function() {
+  console.log("every visit");
+
+});

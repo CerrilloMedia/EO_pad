@@ -1,13 +1,6 @@
 # Exploring Options
-####  A collaborative app for salon professionals looking to
+####  A collaborative app for salon professionals looking to utilize a waitlist for guest opportunities.
 
-* ruby 2.4.1p111
-* rails 5.2
-
-task:
-  subject
-  body
-  recipient <-- add at a later migration
-  author    <-- add at a later migration
-  status: enum? active, pending, completed
-  
+##### As of right now:
+  - anyone can create a request
+  - each request can have one availability. I will expand to up to 5 availabilities maximum utilizing [Cocoon](https://github.com/nathanvda/cocoon)

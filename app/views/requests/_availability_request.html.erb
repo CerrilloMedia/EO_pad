@@ -1,0 +1,21 @@
+<div class="input-group no-border">
+  <div class="col-6 col-md-3">
+    <%= a.date_field :date, class: 'form-control form-control-sm text-light no-bg' %>
+    <small>earliest date:</small>
+  </div>
+  <div class="col-6 col-md-3">
+    <%= a.date_field :endDate, class: 'form-control form-control-sm text-light no-bg' %>
+    <small>latest date:</small>
+  </div>
+  <div class="col-6 col-md-3">
+    <%= a.time_field :startTime, class: 'form-control form-control-sm text-light no-bg' %>
+    <small>start by:</small>
+  </div>
+  <div class="col-6 col-md-3">
+    <%= a.time_field :endTime, class: 'form-control form-control-sm text-light no-bg' %>
+    <small>finish by:</small>
+  </div>
+  <div class="col-12 text-right">
+    Delete: <%= a.check_box :_destroy %>
+  </div>
+</div>

@@ -1,3 +1,11 @@
+
+<% if @request.errors.any? %>
+
+  <% @availabilities.each.errors.full_messages.each do |m| %>
+    <%= tag.span m %><br>
+  <% end %>
+
+<% end %>
 <div class="card">
   <div class="card-header text-right">
     <div id="status-<%= @request.id %>" class="float-left">
@@ -7,11 +15,23 @@
   </div>
   <div class="card-body">
     <%= tag.div @request.subject, class: '' %>
-
+    <% if @request.availabilities %>
+    <hr class="m-2">
+      <div class="">
+        <ul class='list-group availabilities-ul'>
+          <% @request.availabilities.each_with_index do |availability, index| %>
+            <li class="list-group-item no-bg no-border p-0">
+              <%= render partial: 'datetime_request', locals: { availability: availability, index: index} %>
+            </li>
+            <hr class="m-2">
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
     <%= tag.small class:"" do %>
       Client: <%= @request.client_name %>
     <% end %>
     <hr class="mt-1 mb-1">
-    <%= @request.body %><br>
+    <%= @request.body %>
   </div>
 </div>
