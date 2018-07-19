@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_30_203551) do
+ActiveRecord::Schema.define(version: 2018_07_08_215250) do
+
+  create_table "availabilities", force: :cascade do |t|
+    t.date "date"
+    t.time "startTime"
+    t.time "endTime"
+    t.date "endDate"
+    t.integer "request_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_id"], name: "index_availabilities_on_request_id"
+  end
 
   create_table "requests", force: :cascade do |t|
     t.string "subject"

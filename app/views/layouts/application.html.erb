@@ -30,7 +30,9 @@
       <!-- flash messages container -->
     <% if flash %>
       <% flash.each do |name,msg| %>
-        <%= content_tag :div, msg, class: [:alert, alert_for(name)] %>
+        <%= content_tag :div, id: "flash-alert", class: [:alert, alert_for(name)], role:"alert" do %>
+          <%= msg %><button type="button" class="close" data-dismiss="alert" ><%= icon("fas", "times", class: 'fa-sm float-right', id: 'alert-close' ) %></button>
+        <% end %>
       <% end %>
     <% end %>
 

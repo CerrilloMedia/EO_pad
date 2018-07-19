@@ -26,3 +26,25 @@ body {
   background-color: rgba(255, 255, 255, 0.10);
   border-radius: 0;
 }
+
+.no-bg {
+  background: none !important;
+}
+
+.no-border {
+  border: none !important;
+}
+
+.no-border-radius {
+  border-radius: 0 !important;
+}
+
+.badge-float {
+  position: absolute !important;
+  right: -2px !important;
+  top: -2px !important;
+}
+
+.availabilities-ul li:even {
+  background: blue !important;
+}
