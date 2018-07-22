@@ -14,8 +14,7 @@ class RequestsController < ApplicationController
     @request = Request.new
     # In order to allow passing of nested attributes you must also build the association
     # to an object (Request) which has also yet to be built
-    @request.availabilities.build
-    @availabilities = @request.availabilities
+    @availabilities = @request.availabilities.build
   end
 
 
@@ -37,8 +36,8 @@ class RequestsController < ApplicationController
 
     if @request.availabilities.empty?
       @request.availabilities.build
-      @availabilities = @request.availabilities
     end
+    @availabilities = @request.availabilities
   end
 
   def update
@@ -47,7 +46,7 @@ class RequestsController < ApplicationController
       flash[:notice] = "request updated"
       redirect_to @request
     else
-      puts @request.errors
+      
       flash[:alert] = "unable to process request, please try again"
       render :edit
     end

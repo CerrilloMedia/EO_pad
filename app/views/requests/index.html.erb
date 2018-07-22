@@ -23,22 +23,24 @@
           Client: <%= r.client_name %>
         <% end %>
         <hr class="mt-1 mb-1">
-        <%= tag.div r.body, class: 'mb-2' %>
-        <% if r.availabilities.any? %>
-        <button href="#request_body_<%= r.id %>_availabilities" class="btn btn-outline-light btn-sm no-border position-relative p-1 m-1 collapsed" data-toggle="collapse">
-          <%= icon("fas fa-lg", "list-alt", class:"fa-lg") %>
-          <i class="badge badge-light badge-float bg-warning"><%= r.availabilities.size %></i>
-        </button>
-        <div id="status-<%= r.id %>" class="float-right">
-          completed: <%= r.completed? ? icon('far', 'check-square', class: 'strong') : icon('far', 'square', class: 'strong') %>
-        </div>
-        <div class="collapse" id="request_body_<%= r.id %>_availabilities">
-          <div class="card-body">
-            <% r.availabilities.each_with_index do |a, i| %>
-              <%= render partial: 'datetime_request', locals: { availability: a, index: i } %>
-            <% end %>
+        <%= tag.div r.body, class: 'mb-2' do %>
+          <% if r.availabilities.any? %>
+            <button href="#request_body_<%= r.id %>_availabilities" class="btn btn-outline-light btn-sm no-border position-relative p-1 m-1 collapsed" data-toggle="collapse">
+              <%= icon("fas fa-lg", "list-alt", class:"fa-lg") %>
+              <i class="badge badge-light badge-float bg-warning"><%= r.availabilities.size %></i>
+            </button>
+
+            <div class="collapse" id="request_body_<%= r.id %>_availabilities">
+              <div class="card-body">
+                <% r.availabilities.each_with_index do |a, i| %>
+                  <%= render partial: 'datetime_request', locals: { availability: a, index: i } %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+          <div id="status-<%= r.id %>" class="">
+            completed: <%= r.completed? ? icon('far', 'check-square', class: 'strong') : icon('far', 'square', class: 'strong') %>
           </div>
-        </div>
         <% end %>
       </div>
     </div>
