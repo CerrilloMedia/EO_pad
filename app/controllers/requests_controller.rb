@@ -12,42 +12,40 @@ class RequestsController < ApplicationController
 
   def new
     @request = Request.new
-    # In order to allow passing of nested attributes you must also build the association
-    # to an object (Request) which has also yet to be built
-    @availabilities = @request.availabilities.build
   end
 
 
   def create
     @request = Request.new(request_params)
-
-    if @request.save
-      flash[:notice] = "request saved"
-      redirect_to @request
-    else
-      puts @request.errors
-      # puts @request.availabilities.errors
-      flash[:alert] = "unable to process request, please try again"
-      render :new
+    begin
+      if @request.save
+        flash[:notice] = "request saved"
+        redirect_to @request
+      else
+        # puts @request.availabilities.errors
+        flash[:alert] = "unable to process request, please try again"
+        render :new
+      end
+    rescue ActiveRecord::NestedAttributes::TooManyRecords
+      flash[:alert] = "Limit reached for availabilies"
+      render :edit
     end
   end
 
   def edit
-
-    if @request.availabilities.empty?
-      @request.availabilities.build
-    end
-    @availabilities = @request.availabilities
   end
 
   def update
-
-    if @request.update(request_params)
-      flash[:notice] = "request updated"
-      redirect_to @request
-    else
-      
-      flash[:alert] = "unable to process request, please try again"
+    begin
+      if @request.update(request_params)
+        flash[:notice] = "request updated"
+        redirect_to @request
+      else
+        flash[:alert] = "unable to update request, please try again"
+        render :edit
+      end
+    rescue ActiveRecord::NestedAttributes::TooManyRecords
+      flash[:alert] = "Limit reached for availabilies"
       render :edit
     end
   end
