@@ -2,23 +2,22 @@ Editing request #<%= @request.id %>
 <%= form_with(model: @request, local: true) do |f| %>
 
 <% if @request.errors.any? %>
-
   <% @request.errors.full_messages.each do |m| %>
     <%= m %><br>
   <% end %>
-
 <% end %>
 
   <div class="form-group">
     <%= tag.small "client name", class: 'ml-2 form-text'%>
     <%= f.text_field :client_name, class: 'form-control col-md-6' %>
   </div>
-  <div class="row">
-    <div class="col p-0">
-      <%= f.fields_for :availabilities, @availabilities do |a| %>
-        <%= render 'availability_request', :a => a %>
+  <div id="availabilities" class="form-group">
+      <%= f.fields_for :availabilities do |a| %>
+        <%= render 'availability_fields', :f => a %>
       <% end %>
-    </div>
+      <div class="add-availabilities">
+        <%= link_to_add_association "add date & time range", f, :availabilities, html_options = { class: 'btn btn-sm btn-outline-light'} %>
+      </div>
   </div>
   <div class="form-group">
     <%= tag.small "subject", class: 'ml-2 form-text'%>

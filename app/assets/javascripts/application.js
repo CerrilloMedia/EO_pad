@@ -16,9 +16,9 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require cocoon
 //= require_tree .
 
 $( document ).on('turbolinks:load', function() {
-  console.log("every visit");
 
 });
