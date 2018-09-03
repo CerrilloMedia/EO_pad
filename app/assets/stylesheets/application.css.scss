@@ -16,9 +16,11 @@
 @import "font-awesome";
 @import "bootstrap";
 
+// mobile first
+
 body {
-  color: #bed1e4;
-  background: #294d6f;
+  color: $dark;
+  background: $light;
 }
 
 .card {
@@ -47,4 +49,40 @@ body {
 
 .availabilities-ul li:even {
   background: blue !important;
+}
+
+.bg-warning-completed {
+  background-color: #f8c246a3 !important;
+}
+
+.box-shadow-complete {
+  box-shadow: -4px 0px $success inset !important;
+}
+
+// Toggle
+[data-toggle="collapse"][aria-expanded="true"] > .bs-toggle
+{
+    -webkit-transform: rotate(180deg);
+    -moz-transform:    rotate(180deg);
+    -ms-transform:     rotate(180deg);
+    -o-transform:      rotate(180deg);
+    transform:         rotate(180deg);
+}
+
+.border-top-warning {
+  border-top: 1px solid rgb(248, 194, 70) !important;
+}
+
+.bg-dark {
+  background: #343a40cc !important;
+}
+
+// mobile zoom override & empty input min-height
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px !important;
+    min-height: 36px;
+  }
 }

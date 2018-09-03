@@ -1,23 +1,28 @@
 <div class="input-group no-border nested-fields">
-  <div class="col-6 col-md-3 pl-0 pr-1 px-sm-2">
-    <%= f.date_field :date, class: 'form-control form-control-sm text-light no-bg' %>
+<div class="col-12 col-sm-6 col-md-5 p-0">
+  <div class="col-6 float-left px-1 mb-2">
     <small>earliest date:</small>
+    <%= f.date_field :date, class: 'form-control form-control-sm no-bg', placeholder: "start date" %>
   </div>
-  <div class="col-6 col-md-3 pl-1 pr-0 px-sm-2">
-    <%= f.date_field :endDate, class: 'form-control form-control-sm text-light no-bg' %>
+  <div class="col-6 float-left px-1 mb-2">
     <small>latest date:</small>
+    <%= f.date_field :endDate, class: 'form-control form-control-sm no-bg' %>
   </div>
-  <div class="col-6 col-md-3 pl-0 pr-1 px-sm-2">
-    <%= f.time_field :startTime, class: 'form-control form-control-sm text-light no-bg' %>
+</div>
+<div class="col-12 col-sm-6 col-md-5 p-0">
+  <div class="col-6 float-left px-1 mb-2">
     <small>start by:</small>
+    <%= f.time_field :startTime, class: 'form-control form-control-sm no-bg' %>
   </div>
-  <div class="col-6 col-md-3 pl-1 pr-0 px-sm-2">
-    <%= f.time_field :endTime, class: 'form-control form-control-sm text-light no-bg' %>
+  <div class="col-6 float-left px-1 mb-2">
     <small>finish by:</small>
+    <%= f.time_field :endTime, class: 'form-control form-control-sm no-bg' %>
   </div>
-  <div class="col-12 text-center text-sm-right my-2">
-    <%= link_to_remove_association f, { class: 'btn btn-outline-warning col-xs-1 col-sm-1 p-0'} do %>
-    <%= icon('fas', 'minus') %>
+</div>
+
+  <div class="col-12 col-md-2 text-center text-sm-right p-0 mt-md-4 mb-2">
+    <%= link_to_remove_association f, { class: 'btn btn-outline-warning col-sm-3 col-md-12 px-0'} do %>
+    remove <span class="d-none d-sm-inline d-md-none d-lg-inline">date/time</span>
     <% end %>
   </div>
 </div>

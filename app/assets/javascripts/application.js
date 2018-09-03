@@ -21,4 +21,38 @@
 
 $( document ).on('turbolinks:load', function() {
 
+
+// timeout FUNCTION, set utilize
+  window.sessionStorage.setItem('timeout',parseInt(document.getElementById('timeout-clock').innerHTML));
+
+  function timedown() {
+
+    if (window.sessionStorage.getItem('timeout_ID')) {
+      clearTimeout(window.sessionStorage.getItem('timeout_ID'));
+    };
+
+    var timeout_clock = document.getElementById('timeout-clock');
+
+    if (timeout_clock) {
+      time = sessionStorage.getItem('timeout');
+
+      if (time > 0) {
+        window.sessionStorage.setItem('timeout', time - 1);
+        timeout_clock.innerHTML = (time - 1) + " sec";
+
+          // console.log(timeOutID);
+          var timeOutID = setTimeout(timedown, 1000);
+          window.sessionStorage.setItem('timeout_ID',timeOutID);
+
+      } else {
+        // redirect to self and trigger server side Devise session timeout check
+        console.log("logging off due to inactivity");
+        window.location = window.location.href;
+      };
+
+    };
+  };
+
+  timedown();
+
 });

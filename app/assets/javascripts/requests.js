@@ -4,7 +4,9 @@
 
 $( document ).on('turbolinks:load', function() {
 
-  var availabilities_count = $("#availabilities")[0].getElementsByClassName('nested-fields').length;
+  // LIMIT THE NUMBER OF DATE/TIME AVAILABILITIES IN EACH REQUEST
+
+  // var availabilities_count = $("#availabilities")[0].getElementsByClassName('nested-fields').length;
   var limit = 4;
 
   $('#availabilities').on('cocoon:before-insert', function(e) {
@@ -15,9 +17,13 @@ $( document ).on('turbolinks:load', function() {
     };
   })
   .on('cocoon:after-insert', function(e) {
+    // remove add_button if limit exceeded
     if (availabilities_count == limit - 1 ) {
       $("#availabilities a.add_fields").hide();
     };
+    // focus on date input of the recently added availability
+    var last_element = this.getElementsByClassName('nested-fields')[availabilities_count];
+    last_element.firstElementChild.firstElementChild.focus();
   })
   .on('cocoon:after-remove', function() {
     if (availabilities_count < limit ) {
