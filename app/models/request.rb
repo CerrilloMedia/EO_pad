@@ -1,4 +1,5 @@
 class Request < ApplicationRecord
+
   has_many :availabilities, inverse_of: :request, dependent: :destroy
   accepts_nested_attributes_for :availabilities, allow_destroy: true,
                                 reject_if: :all_blank, limit: 4

@@ -6,32 +6,52 @@
   <% end %>
 
 <% end %>
-<div class="card">
-  <div class="card-header text-right">
-    <div id="status-<%= @request.id %>" class="float-left">
-      completed: <%= @request.completed? ? icon('far', 'check-square', class: 'strong') : icon('far', 'square', class: 'strong') %>
-    </div>
-    <%= tag.small time_ago_in_words(@request.created_at) + " ago ", class: 'mr-2' %> <%= link_to "edit", edit_request_path(@request), class: 'btn btn-outline-primary btn-sm' %>
-  </div>
-  <div class="card-body">
-    <%= tag.div @request.subject, class: '' %>
-    <% if @request.availabilities %>
-    <hr class="m-2">
-      <div class="">
-        <ul class='list-group availabilities-ul'>
-          <% @request.availabilities.each_with_index do |availability, index| %>
-            <li class="list-group-item no-bg no-border p-0">
-              <%= render partial: 'datetime_request', locals: { availability: availability, index: index} %>
-            </li>
-            <hr class="m-2">
-          <% end %>
-        </ul>
+
+<div class="card bg-white">
+  <div class="p-2 p-sm-3 p-md-4">
+    <div class="col">
+      <div class="row">
+        <%= tag.div @request.subject, class: 'col p-0 h5' %>
+        <%= tag.div class:'col-12 p-0 card-title' do %>
+          for <%= @request.client_name %>
+        <% end %>
       </div>
-    <% end %>
-    <%= tag.small class:"" do %>
-      Client: <%= @request.client_name %>
-    <% end %>
-    <hr class="mt-1 mb-1">
-    <%= @request.body %>
+    </div>
+
+    <%= tag.div @request.body, class: 'mb-2' %>
+
+      <% if @request.availabilities.any? %>
+
+      <div class="col px-0 px-sm-1">
+        <div class="row">
+          <div class="col-2 col-sm-1 pt-1">
+            <hr class="mt-1 border-top-warning">
+          </div>
+          <div class="small text-center">
+            <span class="">requests</span>
+          </div>
+          <div class="col pt-1">
+            <hr class="my-1 border-top-warning">
+          </div>
+        </div>
+      </div>
+        <div class="d-block d-md-flex">
+          <div class="col">
+            <div class="row">
+              <% @request.availabilities.each_with_index do |a, i| %>
+                <%= render partial: 'datetime_request', locals: { availability: a, index: i } %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+  </div>
+  <div class="p-2 p-sm-3 p-md-4 text-right">
+    <div id="status-<%= @request.id %>" class="float-left">
+      <span class="small p-1 rounded border <%= @request.completed? ? 'text-success border-success' : 'text-warning border-warning' %>">
+        status: <%= @request.completed? ? "completed" : "pending" %>
+      </span>
+    </div>
+    <%= tag.small "created #{time_ago_in_words(@request.created_at)}" + " ago ", class: 'mr-2' %> <%= link_to "edit", edit_request_path(@request), class: 'btn btn-outline-primary btn-sm' %>
   </div>
 </div>

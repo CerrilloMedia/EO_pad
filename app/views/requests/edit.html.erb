@@ -15,8 +15,8 @@ Editing request #<%= @request.id %>
       <%= f.fields_for :availabilities do |a| %>
         <%= render 'availability_fields', :f => a %>
       <% end %>
-      <div class="add-availabilities">
-        <%= link_to_add_association "add date & time range", f, :availabilities, html_options = { class: 'btn btn-sm btn-outline-light'} %>
+      <div class="add-availabilities px-1">
+        <%= link_to_add_association "add date & time range", f, :availabilities, html_options = { class: 'btn btn-sm btn-outline-dark'} %>
       </div>
   </div>
   <div class="form-group">
@@ -29,7 +29,6 @@ Editing request #<%= @request.id %>
     <small class="form-text text-light ml-2">message must be between 3 and 300 characters</small>
   </div>
   <!--  -->
-  <% "First check if object has persisted in the database before allowing for the checkbox to exist" %>
   <% if f.object.persisted? %>
     <div class="form-group">
       <%= f.check_box :status, {}, "completed", "active" %> Completed?

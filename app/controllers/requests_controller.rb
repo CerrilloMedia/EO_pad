@@ -1,4 +1,5 @@
 class RequestsController < ApplicationController
+  before_action :authenticate_user!
 
   before_action :get_request, only: [:show, :edit, :update, :destroy]
 
@@ -7,7 +8,7 @@ class RequestsController < ApplicationController
   end
 
   def show
-    # @request = Request.find(params[:id])
+    # @request = Request.find(params[:id]) moved to before_action
   end
 
   def new
@@ -22,7 +23,6 @@ class RequestsController < ApplicationController
         flash[:notice] = "request saved"
         redirect_to @request
       else
-        # puts @request.availabilities.errors
         flash[:alert] = "unable to process request, please try again"
         render :new
       end
@@ -33,9 +33,11 @@ class RequestsController < ApplicationController
   end
 
   def edit
+    # @request = Request.find(params[:id]) moved to before_action
   end
 
   def update
+    @request.methods
     begin
       if @request.update(request_params)
         flash[:notice] = "request updated"

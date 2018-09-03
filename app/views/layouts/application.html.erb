@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>ExploringOptions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,30 +13,58 @@
 
   <body>
     <div class="container">
-        <ul class="nav justify-content-end">
-          <li class="nav-item m-1">
-            <span class="nav-link">Exploring Options</span>
-          </li>
-          <li class="nav-item m-1">
-            <%= link_to "HOME", root_path, class: "btn btn-outline-light" %>
-          </li>
-          <li class="nav-item m-1">
-            <%= link_to new_request_path, class: "btn btn-light" do %>
-              New
-            <% end %>
-          </li>
-        </ul>
+      <nav class="navbar navbar-expand-md row">
+        <span class="navbar-brand" href="#">
+          Exploring Options
+        </span>
+        <div>
+        <% if current_user %>
+          <span class='rounded-left py-2 px-2 d-inline'>Timeout in: <%= tag.span current_user.timeout_in, class: "text-monospace",id: 'timeout-clock' %></span>
+          <%= link_to destroy_user_session_path, method: :delete, class: 'btn btn-outline-dark' do %>
+            <span>Sign Out</span>
+          <% end %>
+          <%= link_to edit_user_registration_path, class: 'btn btn-outline-dark' do %>
+            <%= icon('fas', 'user-cog') %>
+          <% end %>
+        <% else %>
+          <%= link_to new_user_session_path, class: 'btn btn-outline-dark' do %>
+            <span>Login</span>
+          <% end %>
+        <% end %>
+        </div>
+        <button class="navbar-toggler bg-warning py-2" type="button" data-toggle="collapse" data-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle Navigation">
+          <%= icon('fas', 'bars') %>
+        </button>
+        <div id="navbarDropdown" class="collapse navbar-collapse">
+          <ul class="navbar-nav justify-content-end">
+            <li class="nav-item m-1">
+              <%= link_to root_path, class: "btn btn-outline-dark" do %>
+
+                <%= icon('fas', 'home', class: 'p-0 m-0') %>
+                <span class="d-inline-block d-md-none d-lg-inline-block"> Home</span>
+              <% end %>
+            </li>
+            <li class="nav-item m-1">
+              <%= link_to new_request_path, class: "btn btn-outline-success" do %>
+                New
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </nav>
     </div>
     <div class="container p-1">
       <!-- flash messages container -->
     <% if flash %>
       <% flash.each do |name,msg| %>
-        <%= content_tag :div, id: "flash-alert", class: [:alert, alert_for(name)], role:"alert" do %>
-          <%= msg %><button type="button" class="close" data-dismiss="alert" ><%= icon("fas", "times", class: 'fa-sm float-right', id: 'alert-close' ) %></button>
+        <% unless name == "timedout" %>
+          <%= content_tag :div, id: "flash-alert", class: [:alert, alert_for(name)], role:"alert" do %>
+            <%= msg %><button type="button" class="close" data-dismiss="alert" ><%= icon("fas", "times", class: 'fa-sm float-right', id: 'alert-close' ) %></button>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>
-
+    <%= current_user ? user_session["last_request_at"] : "not-logged-in" %>
       <%= yield %>
     </div>
   </body>
