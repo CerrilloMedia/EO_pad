@@ -26,7 +26,7 @@ module RequestsHelper
 
     time = [] <<  if a.startTime || a.endTime
                     if a.startTime.nil?
-                      ["before", format_time(a.endTime)]
+                      ["by", format_time(a.endTime)]
                     elsif a.endTime.nil?
                       ["after", format_time(a.startTime)]
                     else

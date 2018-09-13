@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_02_180429) do
+ActiveRecord::Schema.define(version: 2018_09_07_061904) do
 
   create_table "availabilities", force: :cascade do |t|
     t.date "date"
@@ -30,6 +30,10 @@ ActiveRecord::Schema.define(version: 2018_09_02_180429) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "client_name"
+    t.integer "user_id"
+    t.integer "recipient_id"
+    t.index ["recipient_id"], name: "index_requests_on_recipient_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

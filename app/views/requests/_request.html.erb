@@ -1,0 +1,94 @@
+<div class="text-dark card-body p-0 p-sm-1 mb-2 mb-sm-2" id="request_<%= request.id %>">
+  <div class="flex-column position-relative bg-white rounded-0 p-2 p-md-3 border">
+    <div class=" bg-white rounded-0 d-flex justify-content-between">
+      <div class="d-block flex-sm-grow-1 d-sm-flex justify-content-sm-between align-items-center">
+
+          <%= tag.div request.subject, class: '' %>
+          <%= tag.div time_ago_in_words(request.created_at) + " ago ", class: 'small mr-2' %>
+
+      </div>
+      <div id="request_<%= request.id %>_tools" class="d-flex">
+        <%= link_to request_path(request), class: 'btn p-2 p-sm-0 px-sm-1 text-dark btn-lg' do %>
+          <%= icon('far', 'comments') %>
+        <% end %>
+        <%= link_to edit_request_path(request), class: 'btn p-2 p-sm-0 px-sm-1 text-dark btn-lg' do %>
+          <%= icon('fas', 'edit') %>
+        <% end %>
+        <a class="btn p-2 p-sm-0 px-sm-1 text-dark btn-lg" href="#request_body_<%= request.id %>" data-toggle="collapse" data-loading-text="open" aria-expanded="false">
+          <%= icon('fas', 'chevron-down', class: 'bs-toggle') %>
+        </a>
+      </div>
+    </div>
+    <div class="flex-column collapse" id="request_body_<%= request.id %>" aria-expanded="false">
+
+        <div class="py-1 my-1">
+          <%= tag.i request.client_name %>
+          <%= tag.div request.body, class: 'col p-0 mb-2' %>
+        </div>
+
+          <% if request.availabilities.any? %>
+            <div class="col px-0 px-sm-1">
+              <div class="row">
+                <div class="col-2 col-sm-1 pt-1">
+                  <hr class="mt-1 hr-divider">
+                </div>
+                <div class="small text-center">
+                  <span class="">requests</span>
+                </div>
+                <div class="col pt-1">
+                  <hr class="my-1 hr-divider">
+                </div>
+              </div>
+            </div>
+              <div class="d-block d-md-flex">
+                <div class="col">
+                  <div class="row">
+                    <% request.availabilities.each_with_index do |a, i| %>
+                      <%= render partial: 'requests/datetime_request', locals: { availability: a, index: i } %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <div class="col px-0 px-sm-1">
+                  <div class="d-block pt-1">
+                    <hr class="mt-1 hr-divider">
+                  </div>
+              </div>
+            <% end %>
+
+
+        <div class="d-flex mt-2 pt-2">
+          <% if request.completed? %>
+          <div class="">
+            <span class="d-none d-md-block small p-1 rounded border-0 bg-success text-light">
+              status: completed
+            </span>
+            <span class="d-flex d-md-none align-items-center" title="status: completed">
+              <%= icon('fas', 'flag-checkered', class: 'text-success') %>
+              <span class="small pl-2">complete</span>
+            </span>
+          </div>
+          <% else %>
+          <div class="">
+            <span class="d-none d-md-block small p-1 rounded border-0 bg-warning">
+              status: pending
+            </span>
+            <span class="d-flex d-md-none align-items-center" title="status: pending">
+              <%= icon('fas', 'flag', class: 'text-warning') %>
+              <span class="small pl-2">pending</span>
+            </span>
+          </div>
+          <% end %>
+        </div>
+        <div class="d-flex mt-2">
+          <div class="small text-muted" >
+            <% if task %>
+              <span>assigned to <%= tag.span request.recipient.display_name, class: "text-dark" %> by <%= tag.span request.user.display_name, class: "text-dark" %></span>
+            <% else %>
+              <span>assigned to <%= tag.span request.user.display_name, class: "text-dark" %> by <%= tag.span request.recipient.display_name, class: "text-dark" %></span>
+            <% end %>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

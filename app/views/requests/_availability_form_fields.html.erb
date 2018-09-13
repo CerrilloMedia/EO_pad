@@ -2,26 +2,26 @@
 <div class="col-12 col-sm-6 col-md-5 p-0">
   <div class="col-6 float-left px-1 mb-2">
     <small>earliest date:</small>
-    <%= f.date_field :date, class: 'form-control form-control-sm no-bg', placeholder: "start date" %>
+    <%= f.date_field :date, class: 'form-control form-control-sm', placeholder: "start date" %>
   </div>
   <div class="col-6 float-left px-1 mb-2">
     <small>latest date:</small>
-    <%= f.date_field :endDate, class: 'form-control form-control-sm no-bg' %>
+    <%= f.date_field :endDate, class: 'form-control form-control-sm' %>
   </div>
 </div>
 <div class="col-12 col-sm-6 col-md-5 p-0">
   <div class="col-6 float-left px-1 mb-2">
     <small>start by:</small>
-    <%= f.time_field :startTime, class: 'form-control form-control-sm no-bg' %>
+    <%= f.time_field :startTime, class: 'form-control form-control-sm' %>
   </div>
   <div class="col-6 float-left px-1 mb-2">
     <small>finish by:</small>
-    <%= f.time_field :endTime, class: 'form-control form-control-sm no-bg' %>
+    <%= f.time_field :endTime, class: 'form-control form-control-sm' %>
   </div>
 </div>
 
   <div class="col-12 col-md-2 text-center text-sm-right p-0 mt-md-4 mb-2">
-    <%= link_to_remove_association f, { class: 'btn btn-outline-warning col-sm-3 col-md-12 px-0'} do %>
+    <%= link_to_remove_association f, { class: 'btn btn-warning col-sm-3 col-md-12 px-0'} do %>
     remove <span class="d-none d-sm-inline d-md-none d-lg-inline">date/time</span>
     <% end %>
   </div>

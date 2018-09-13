@@ -1,78 +1,22 @@
 <div class="col px-0">
-  <div class="col-4">
-      <h3>Requests</h3>
+  <div class="col">
+      <h3>Requests for <span><%= @user.display_name %></span></h3>
   </div>
 </div>
 
-<div class="col-12 col-xl-8">
-  <div class="">
-  <% @requests.each do |r| %>
-
-    <div class="text-dark card-body p-0 p-sm-1 mb-2 mb-sm-2" id="request_<%= r.id %>">
-      <div class="card col bg-white">
-        <div class="<%= 'box-shadow-complete' if r.completed? %> rounded-0 row p-2">
-          <div class="col">
-            <div class="row">
-              <%= tag.div r.subject, class: 'col col-12 col-sm-9 col-md-10 px-0 px-sm-1' %>
-              <%= tag.div time_ago_in_words(r.created_at) + " ago ", class: 'col small px-sm-1 px-0 mb-2 mb-sm-0' %>
-            </div>
-          </div>
-          <div class="request-tools float-xs-none float-sm-right">
-            <%= link_to request_path(r), class: 'btn p-0 px-1 text-dark btn-lg' do %>
-              <%= icon('far', 'comments') %>
-            <% end %>
-            <%= link_to edit_request_path(r), class: 'btn p-0 px-1 text-dark btn-lg' do %>
-              <%= icon('fas', 'edit') %>
-            <% end %>
-            <a class="btn p-0 px-1 text-dark btn-lg" href="#request_body_<%= r.id %>" data-toggle="collapse" data-loading-text="open" aria-expanded="false">
-              <%= icon('fas', 'chevron-down', class: 'bs-toggle') %>
-            </a>
-          </div>
-        </div>
-        <div class="collapse row" id="request_body_<%= r.id %>" aria-expanded="false">
-          <div class="card-body p-1 m-1">
-            <%= tag.div class:"" do %>
-              Client: <%= r.client_name %>
-            <% end %>
-            <%= tag.div r.body, class: 'col p-0 mb-2' do %>
-
-              <% if r.availabilities.any? %>
-              <div class="col px-0 px-sm-1">
-                <div class="row">
-                  <div class="col-2 col-sm-1 pt-1">
-                    <hr class="mt-1 border-top-warning">
-                  </div>
-                  <div class="small text-center">
-                    <span class="">requests</span>
-                  </div>
-                  <div class="col pt-1">
-                    <hr class="my-1 border-top-warning">
-                  </div>
-                </div>
-              </div>
-                <div class="d-block d-md-flex">
-                  <div class="col">
-                    <div class="row">
-                      <% r.availabilities.each_with_index do |a, i| %>
-                        <%= render partial: 'datetime_request', locals: { availability: a, index: i } %>
-                      <% end %>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-
-            <% end %>
-            <div id="status-<%= r.id %>" class="float-left">
-              <span class="small p-1 text-light rounded border-0 bg-<%= r.completed? ? 'success' : 'warning' %>">
-                status: <%= r.completed? ? "completed" : "pending" %>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  <% end %>
+<div class="row">
+  <div class="card-header">
+    Requests you've submitted
+  </div>
+  <div class="col-12 col-xl-8">
+    <%= render partial: 'request', collection: @user.requests, locals: { task: false } %>
+  </div>
 </div>
-</div>
+<div class="row">
+  <div class="card-header">
+    Tasks assigned to you
+  </div>
+  <div class="col-12 col-xl-8">
+    <%= render partial: 'request', collection: @user.tasks, locals: { task: true } %>
+  </div>
 </div>
