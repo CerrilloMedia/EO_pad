@@ -37,4 +37,10 @@ module RequestsHelper
     joiner = "::" if date.count + time.count == 2
     [date,["<br>"],time].flatten.join(" ").html_safe
   end
+
+  def request_footer(request)
+
+    "hi".html_safe
+  end
+
 end

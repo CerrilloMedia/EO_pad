@@ -9,7 +9,7 @@
 </div>
 <% end %>
 
-<div class="container-fluid">
+
   <div class="form-group">
     <% cn = @request.errors[:subject].present? %>
     <%= tag.small "client name", class: "ml-2 form-text #{ cn ? 'text-danger strong' : '' }" %>
@@ -50,6 +50,6 @@
     <%= link_to "delete", @request, method: :delete, class: 'btn btn-danger', data: {confirm: "are you sure?"} %>
     <%= link_to "Cancel", (:back|| root_path), class: 'btn btn-warning' %>
   </div>
-</div>
+
 </div>
 <% end %>

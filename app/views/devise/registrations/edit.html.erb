@@ -1,70 +1,68 @@
-
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-
-<div class="row">
-  <div class="col">
-    <div class="form-group row">
-        <%= f.label :firstname, class: 'col-2' %>
-      <div class="col-10">
-        <%= f.text_field :firstname, autocomplete: "firstname", placeholder: "first name" %>
-      </div>
+<div class="col-sm-8 col-md-6 offset-sm-2 offset-md-3 col-lg-4 offset-lg-4 mobile-expand">
+  <div class="">
+    <div class="text-center text-sm-left">
+      <h2>Edit <%= resource_name.to_s.humanize %></h2>
     </div>
+    <div class="p-1">
 
-    <div class="form-group row">
-      <%= f.label :lastname, class: 'col-2' %>
-      <div class="col-10">
-        <%= f.text_field :lastname, autocomplete: "lastname" %>
-      </div>
-    </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= devise_error_messages! %>
 
-    <div class="form-group row">
-      <%= f.label :email, class: 'col-2' %>
-      <div class="col-10">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
-    </div>
+        <div class="form-group mb-1">
+          <% firstname = resource.errors.messages.include? :firstname %>
+          <%= f.label :firstname, class: "small #{ firstname ? 'text-danger':' '} "%>
+          <%= f.text_field :firstname, autocomplete: "firstname", class: "form-control #{ firstname ? 'border border-danger':' '} " %>
+        </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+        <div class="form-group mb-1">
+          <% lastname = resource.errors.messages.include? :lastname %>
+          <%= f.label :lastname, class: "small #{ lastname ? 'text-danger':' '} "%>
+          <%= f.text_field :lastname, autocomplete: "lastname", class: "form-control #{ lastname ? 'border border-danger':' '} " %>
+        </div>
 
-  <div class="form-group row">
-    <%= f.label :password, class:'col-2' %>
-    <div class="col-10">
-      <%= f.password_field :password, autocomplete: "off" %>
-      <% if @minimum_password_length %>
-        <br />
-        <em><%= @minimum_password_length %> characters minimum</em>
+        <div class="form-group mb-1">
+          <% email = resource.errors.messages.include? :email %>
+          <%= f.label :email, class: "small #{ email ? 'text-danger':' '} "%>
+          <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "form-control #{ email ? 'border border-danger':' '} " %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="form-group mb-1">
+          <% pw = resource.errors.messages.include? :password %>
+          <%= f.label :password, class: "small #{ pw ? 'text-danger':' '} "%>
+          <% if @minimum_password_length %>
+          <em class="small">(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "off", class: "form-control #{ pw ? 'border border-danger':' '} " %>
+        </div>
+
+        <div class="form-group mb-1">
+          <% pwc = resource.errors.messages.include? :password_confirmation %>
+          <%= f.label :password_confirmation, class: "small #{ pwc ? 'text-danger':' '} "%>
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control #{ pwc ? 'border border-danger':' '} " %>
+        </div>
+
+        <div class="form-group my-3">
+          <%= f.submit "Update", class: 'btn btn-dark w-100' %>
+        </div>
       <% end %>
+
     </div>
   </div>
-
-  <div class="form-group row">
-    <%= f.label :password_confirmation, class: 'col-2' %>
-    <div class="col-10">
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+<div class="d-block p-1">
+  <div class="d-flex">
+    <%= link_to "Back", :back, class: 'btn btn-warning' %>
+  </div>
+  <div class="d-block mt-2">
+    <div class="d-flex mx-1">
+      Unhappy?
+    </div>
+    <div class="d-flex my-2 align-items-center">
+      <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-sm btn-outline-danger' %>
     </div>
   </div>
-
-  <div class="form-group row">
-    <div class="col-2">
-      <%= f.label :current_password %><br><i class="small">(we need your current password to confirm your changes)</i>
-    </div>
-    <div class="col-10">
-      <%= f.password_field :current_password, autocomplete: "off" %>
-    </div>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>
+</div>

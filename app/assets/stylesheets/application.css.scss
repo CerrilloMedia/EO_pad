@@ -18,6 +18,14 @@
 
 // mobile first
 
+html, body {
+  height: 100%;
+}
+
+div {
+  // min-height: 100%;
+}
+
 body {
   color: $dark;
   background: $light;
@@ -87,26 +95,6 @@ body {
   word-break: break-word;
 }
 
-#sticky_footer a i {
-  text-shadow: 0px 0px 1px #72591b;
-}
-
-.popover {
-  text-align: center;
-  background: transparent;
-  border: 1px solid transparent;
-  display: none;
-  max-width: 100%;
-  .arrow {
-    display: none;
-  }
-  .popover-body {
-    padding: 0;
-    color: #212529;
-    display: inline-flex;
-  }
-}
-
 // Toggle Request Window
 [data-toggle="collapse"][aria-expanded="false"] > .bs-toggle {
 
@@ -165,13 +153,26 @@ body {
   left: -3px;
 }
 
+.fa-2x {
+  font-size: 1.5em;
+}
+
+.form-control:focus { // Bootstrap override
+    border-color: #fbf700;
+    box-shadow: 0 0 0 0.2rem rgba(248, 194, 70, .125);
+}
+.custom-select:focus {
+  border-color: #fbf700;
+  box-shadow: none;
+}
+
 // mobile zoom override & empty input min-height
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   select,
   textarea,
   input {
     font-size: 16px !important;
-    min-height: 36px;
+    // min-height: 36px;
   }
 }
 
@@ -183,22 +184,46 @@ body {
     background-color: #e3e3e3;
   }
   .fa-2x {
-    font-size: 1.5em;
+    font-size: 1.2em;
   }
-  .popover {
-    display: block;
-    width: calc(100% - 10px);
-    position: absolute !important;
-    margin: none;
-    .popover-body {
-      display: block;
-      width: 100%;
-    }
-  }
+
   .btn-wrap {
     white-space: normal;
   }
-  .sticky-padding {
-    padding-bottom: 4em;
+
+  .user-profile-card {
+    font-size: .85em;
+  }
+
+  .mobile-expand {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #e3e3e3;
+    z-index: 100;
+    padding: 10% 0 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  #taskTab {
+    font-size: .8em;
+  }
+
+  .center-button {
+    // background: none;
+    // z-index: 1;
+    // margin-left: -1.75em !important;
+    // margin-right: -1.75em !important;
+    // margin-top: -1em !important;
+    // margin-bottom: -1em !important;
+    // div {
+    //   height: calc(4em - 10%) !important;
+    //   width: calc(4em - 10%) !important;
+    //
+    // }
+
   }
 }

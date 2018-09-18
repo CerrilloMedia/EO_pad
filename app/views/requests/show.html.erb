@@ -39,18 +39,23 @@
   </div>
   <div class="p-2 p-sm-3 p-md-4 text-right">
   <div class="d-flex justify-content-between mb-2">
-    <div id="request_<%= @request.id %>_status" class="float-left">
+    <div id="request_<%= @request.id %>_status" class="w-50 text-left">
       <span class="small p-1 rounded border <%= @request.completed? ? 'bg-success text-white' : 'bg-warning' %>">
         status: <%= @request.completed? ? "completed" : "pending" %>
       </span>
     </div>
-    <div class="">
-      <%= link_to "edit", edit_request_path(@request), class: 'btn btn-outline-primary btn-sm' %>
-    </div>
-  </div>
-    <div class="small text-muted" >
+    <div class="w-50 small text-muted">
       <span>assigned </span><%= tag.span "#{time_ago_in_words(@request.created_at)}" + " ago " %> to <%= tag.span @recipient.display_name, class: "text-dark" %> by <%= tag.span @user.display_name, class: "text-dark" %></span>
     </div>
+  </div>
+  <div class="">
+    <% if current_user == @request.user || @request.recipient %>
+      <%= link_to edit_request_path(@request), class: 'btn btn-outline-primary btn-sm' do %>
+        <%= icon('fas', 'edit') %> Edit
+      <% end %>
+    <% end %>
+
+  </div>
   </div>
 
 </div>

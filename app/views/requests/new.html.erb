@@ -1,4 +1,3 @@
-<div class="container">
 <%= form_with(model: @request, local: true) do |f| %>
 
 <% if @request.errors.any? %>
@@ -14,9 +13,11 @@
   </div>
 
   <div class="form-group">
-    <%= tag.small "assigned to", class: 'ml-2 form-text'%>
+    <% re = @request.errors[:recipient].present? %>
+    <%= tag.small "assigned to", class: "ml-2 form-text #{ re ? 'text-danger strong' : ''}"%>
     <div class="input-group">
-      <%= f.select :recipient_id, {},{}, { :class => 'custom-select col-md-6'} do %>
+      <%= f.select :recipient_id, {},{}, { :class => "custom-select col-md-6 no-bg border-top-0 border-left-0 border-right-0 rounded-0 " } do %>
+        <option >-- select user</option>
         <%= options_from_collection_for_select(@users, :id, :display_name, params[:recipient_id]) %>
       <% end %>
     </div>
@@ -52,4 +53,3 @@
   </div>
 
 <% end %>
-</div>
