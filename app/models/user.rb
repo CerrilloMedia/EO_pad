@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :requests
   has_many :tasks, :class_name => 'Request', :foreign_key => 'recipient'
-  has_many :todos, :class_name => 'ToDo', :foreign_key => 'recipient'
+
 
   devise :database_authenticatable, :registerable, :confirmable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -26,5 +26,6 @@ class User < ApplicationRecord
   def is_self(user)
     user.id == self.id
   end
+
 
 end

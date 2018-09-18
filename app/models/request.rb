@@ -18,6 +18,7 @@ class Request < ApplicationRecord
 
   scope :completed, -> {where(status: 'completed')}
   scope :active, -> { where(status: 'active') }
-
+  scope :my, -> { where("user_id = recipient_id") }
+  scope :assigned, -> { where("user_id != recipient_id") }
 
 end

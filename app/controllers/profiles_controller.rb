@@ -1,10 +1,11 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :get_user
+  before_action :get_user, only: [:show]
 
   def show
     @requests = @user.requests  # requests which user has assigned to others
-    @tasks    = @user.tasks     # requests which have been assigned to user
+    @tasks    = @user.tasks
+    @todos    = @requests - @tasks   # requests which have been assigned to user
   end
 
   private

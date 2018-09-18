@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
 
-  get 'welcome/index'
   devise_for :users
 
   resources :users do
-    resources :requests, only: [:show]
+    resources :requests, only: [:show, :index]
   end
 
   resources :requests do
@@ -12,7 +11,6 @@ Rails.application.routes.draw do
   end
 
   get '/profile/:id', to: "profiles#show", as: 'profiles'
-  # get '/profile', to: "profiles#index", as: 'profiles_index'
 
   root 'welcome#index'
 end

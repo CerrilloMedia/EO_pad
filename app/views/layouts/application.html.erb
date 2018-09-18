@@ -57,20 +57,20 @@
       </nav>
     </div>
     <div class="container p-sm-1 pb-5">
-    <% if flash.any? %>
-    <!-- ERROR messages -->
-    <div class="small alert alert-warning alert-dismissible fade show" role="alert">
-      <button type="button" class="close" data-dismiss="alert" ><%= icon("fas", "times", class: 'fa-sm float-right', id: 'alert-close' ) %></button>
-      <% flash.each do |name,msg| %>
-        <% unless name == "timedout" %>
-          <%= content_tag :div, id: "flash-alert", role:"alert" do %>
-            <%= msg %>
+      <% if flash.any? %>
+      <!-- ERROR messages -->
+      <div class="small alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" ><%= icon("fas", "times", class: 'fa-sm float-right', id: 'alert-close' ) %></button>
+        <% flash.each do |name,msg| %>
+          <% unless name == "timedout" %>
+            <%= content_tag :div, id: "flash-alert", role:"alert" do %>
+              <%= msg %>
+            <% end %>
           <% end %>
         <% end %>
+      </div>
       <% end %>
-    </div>
-    <% end %>
-    <% current_user ? user_session["last_request_at"] : "not-logged-in" %>
+      <% current_user ? user_session["last_request_at"] : "not-logged-in" %>
       <%= yield %>
     </div>
   </body>

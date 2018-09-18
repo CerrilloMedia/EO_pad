@@ -7,6 +7,7 @@
           <%= tag.div time_ago_in_words(request.created_at) + " ago ", class: 'small mr-2' %>
 
       </div>
+
       <div id="request_<%= request.id %>_tools" class="d-flex">
         <%= link_to request_path(request), class: 'btn p-2 p-sm-0 px-sm-1 text-dark btn-lg' do %>
           <%= icon('far', 'comments') %>
@@ -18,6 +19,7 @@
           <%= icon('fas', 'chevron-down', class: 'bs-toggle') %>
         </a>
       </div>
+
     </div>
     <div class="flex-column collapse" id="request_body_<%= request.id %>" aria-expanded="false">
 
@@ -57,38 +59,36 @@
             <% end %>
 
 
-        <div class="d-flex mt-2 pt-2">
-          <% if request.completed? %>
-          <div class="">
-            <span class="d-none d-md-block small p-1 rounded border-0 bg-success text-light">
-              status: completed
-            </span>
-            <span class="d-flex d-md-none align-items-center" title="status: completed">
-              <%= icon('fas', 'flag-checkered', class: 'text-success') %>
-              <span class="small pl-2">complete</span>
-            </span>
-          </div>
-          <% else %>
-          <div class="">
-            <span class="d-none d-md-block small p-1 rounded border-0 bg-warning">
-              status: pending
-            </span>
-            <span class="d-flex d-md-none align-items-center" title="status: pending">
-              <%= icon('fas', 'flag', class: 'text-warning') %>
-              <span class="small pl-2">pending</span>
-            </span>
-          </div>
-          <% end %>
-        </div>
-        <div class="d-flex mt-2">
-          <div class="small text-muted" >
-            <% if task %>
-              <span>assigned to <%= tag.span request.recipient.display_name, class: "text-dark" %> by <%= tag.span request.user.display_name, class: "text-dark" %></span>
+      <%= request_footer(request) %>
+
+      <div class="d-flex mt-2 justify-content-end request-footer">
+        <div class="w-50 text-left">
+          <div class="d-flex">
+            <% if request.completed? %>
+              <span class="d-flex align-items-center" title="status: completed">
+                <%= icon('fas', 'flag-checkered', class: 'text-success') %>
+                <span class="small pl-2">complete</span>
+              </span>
             <% else %>
-              <span>assigned to <%= tag.span request.user.display_name, class: "text-dark" %> by <%= tag.span request.recipient.display_name, class: "text-dark" %></span>
+              <span class="d-flex align-items-center" title="status: pending">
+                <%= icon('fas', 'flag', class: 'text-warning') %>
+                <span class="small pl-2">pending</span>
+              </span>
             <% end %>
           </div>
         </div>
+        <div class="w-50 text-right">
+          <div class="small text-muted" >
+
+              <% if request.user == request.recipient %>
+                <span><%= icon('far', 'clipboard')%></span>
+              <% else %>
+                <span>assigned to <%= tag.span request.recipient.display_name, class: "text-dark" %> by <%= tag.span request.user.display_name, class: "text-dark" %></span>
+              <% end %>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
