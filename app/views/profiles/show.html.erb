@@ -19,51 +19,51 @@
             <% end %>
           </ul>
         </div>
-          <div class="d-block col-sm-8 col-md-7 px-1 ml-auto ">
+          <div class="d-block col-sm-8 col-md-8 px-1 ml-auto ">
+            <div class="">
+              <ul class="nav nav-tabs nav-justified mb-1" id="taskTab" role="tablist">
 
-          <ul class="nav nav-tabs nav-justified mb-1" id="taskTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link text-dark px-1 py-1 active" id="active-tasks-tab" data-toggle="tab" href="#activeTasks" role="tab" aria-controls="activetasks" aria-selected="true">
+                      <div class="">
+                        <% if @user.tasks.assigned.active.any? %>
+                        <% end %>
+                        <span class="d-block">ACTIVE</span>
+                        <span class="badge badge-pill badge-dark">
+                          <%= @user.tasks.assigned.active.length %>
+                        </span>
+                      </div>
+                  </a>
+                </li>
 
-            <li class="nav-item">
-              <a class="nav-link text-dark px-1 py-1 px-sm-2 active" id="active-tasks-tab" data-toggle="tab" href="#activeTasks" role="tab" aria-controls="activetasks" aria-selected="true">
-                  <div class="">
-                    <% if @user.tasks.assigned.active.any? %>
-                    <% end %>
-                    <span class="d-block">ACTIVE</span>
-                    <span class="badge badge-pill badge-dark">
-                      <%= @user.tasks.assigned.active.length %>
-                    </span>
-                  </div>
-              </a>
-            </li>
+                <li class="nav-item">
+                  <a class="nav-link text-dark px-1 py-1" id="completed-tasks-tab" data-toggle="tab" href="#completedTasks" role="tab" aria-controls="completedtasks" aria-selected="false">
+                    <div class="">
+                      <% if @user.tasks.assigned.completed.any? %>
+                      <% end %>
+                      <span class="d-block">COMPLETE</span>
+                      <span class="badge badge-pill badge-dark">
+                        <%= @user.tasks.assigned.completed.length %>
+                      </span>
+                    </div>
+                  </a>
+                </li>
 
-            <li class="nav-item">
-              <a class="nav-link text-dark px-1 py-1 px-sm-2" id="completed-tasks-tab" data-toggle="tab" href="#completedTasks" role="tab" aria-controls="completedtasks" aria-selected="false">
-                <div class="">
-                  <% if @user.tasks.assigned.completed.any? %>
-                  <% end %>
-                  <span class="d-block">COMPLETE</span>
-                  <span class="badge badge-pill badge-dark">
-                    <%= @user.tasks.assigned.completed.length %>
-                  </span>
-                </div>
-              </a>
-            </li>
+                <li class="nav-item">
+                  <a class="nav-link text-dark px-1 py-1" id="completed-todos-tab" data-toggle="tab" href="#allTodos" role="tab" aria-controls="completedtodos" aria-selected="false">
+                    <div class="">
+                      <% if @user.tasks.my.any? %>
+                      <% end %>
+                      <span class="d-block">ToDo's</span>
+                      <span class="badge badge-pill badge-dark">
+                        <%= @user.tasks.my.length %>
+                      </span>
+                    </div>
+                  </a>
+                </li>
 
-            <li class="nav-item">
-              <a class="nav-link text-dark px-1 py-1 px-sm-2" id="completed-todos-tab" data-toggle="tab" href="#allTodos" role="tab" aria-controls="completedtodos" aria-selected="false">
-                <div class="">
-                  <% if @user.tasks.my.any? %>
-                  <% end %>
-                  <span class="d-block">ToDo's</span>
-                  <span class="badge badge-pill badge-dark">
-                    <%= @user.tasks.my.length %>
-                  </span>
-                </div>
-              </a>
-            </li>
-
-          </ul>
-
+              </ul>
+            </div>
         </div>
 
         <div class="tab-content" id="taskTabContent">
@@ -118,27 +118,29 @@
   </div>
 
   <div class="d-none d-sm-block d-md-inline col-md-4 px-1 mt-5">
-    <div id="profile_sidebar" class="sidebar border border-warning card">
-      <div class="card-header p-2 p-md-3">
-        <div class="card-title mb-sm-1">
-          <%= @user.display_name %>
+    <div id="profile_sidebar" class="sidebar sticky-top pt-2">
+      <div class="card border border-warning">
+        <div class="card-header p-2 p-md-3">
+          <div class="card-title mb-sm-1">
+            <%= @user.display_name %>
+          </div>
         </div>
-      </div>
-      <div class="p-2 p-lg-3">
-        <div class="col-6 col-md-12 d-dm-block float-sm-left float-md-none px-0">
-            <%= link_to new_request_path(:recipient_id => params[:id]), class: "rounded-0 btn text-success text-center text-md-left d-block" do %>
-              <%= icon('fas', 'plus') %><span class="ml-2"><%= current_user.is_self(@user) ? 'Create a task' : 'Send a request' %></span>
+        <div class="p-2 p-lg-3">
+          <div class="col-6 col-md-12 d-dm-block float-sm-left float-md-none px-0">
+              <%= link_to new_request_path(:recipient_id => params[:id]), class: "rounded-0 btn text-success text-center text-md-left d-block" do %>
+                <%= icon('fas', 'plus') %><span class="ml-2"><%= current_user.is_self(@user) ? 'Create a task' : 'Send a request' %></span>
+              <% end %>
+          </div>
+          <div class="col-6 col-md-12 d-dm-block float-sm-left float-md-none px-0">
+            <% if self_ %>
+              <%= link_to edit_user_registration_path, class: 'rounded-0 btn text-success text-sm-center text-md-left d-block' do %>
+                <%= icon('fas', 'user-cog') %><span class="ml-2">Account Settings</span>
+              <% end %>
             <% end %>
-        </div>
-        <div class="col-6 col-md-12 d-dm-block float-sm-left float-md-none px-0">
-          <% if self_ %>
-            <%= link_to edit_user_registration_path, class: 'rounded-0 btn text-success text-sm-center text-md-left d-block' do %>
-              <%= icon('fas', 'user-cog') %><span class="ml-2">Account Settings</span>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="d-flex border-top pt-2 mt-2 w-100">
-          <span class="small text-muted d-block"><i>Last logged in: <%= format_date(current_user.last_sign_in_at) + " at " + format_time(current_user.last_sign_in_at) %></i></span>
+          </div>
+          <div class="d-flex border-top pt-2 mt-2 w-100">
+            <span class="small text-muted d-block"><i>Last logged in: <%= format_date(current_user.last_sign_in_at) + " at " + format_time(current_user.last_sign_in_at) %></i></span>
+          </div>
         </div>
       </div>
     </div>
