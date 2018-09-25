@@ -15,9 +15,9 @@
     <div class="container-fluid px-0 px-sm-3 col-sm-12 border-bottom">
       <!-- NAVIGATION -->
       <nav class="navbar navbar-expand-sm d-flex px-2 py-0">
-        <a href="/" class="navbar-brand abs">
-          E<span class="d-none d-sm-inline">xploring</span>
-          O<span class="d-none d-sm-inline">ptions</span>
+        <a href="/" class="navbar-brand abs text-link">
+          <span class="d-none d-sm-inline">Exploring Options</span>
+          <span class="d-inline d-sm-none">EO</span>
           </a>
         <a class="navbar-toggler px-1 px-sm-2 py-2" type="" data-toggle="collapse" data-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle Navigation" title="menu">
           <%= icon('fas', 'ellipsis-h') %>
@@ -35,13 +35,13 @@
               <li class="nav-item px-3 px-sm-1 py-1">
                 <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-dark', title: 'sign-out' do %>
                   <%= icon('fas', 'sign-out-alt') %>
-                  <span class="d-none d-sm-inline">Sign Out</span>
+                  <span class="d-inline d-sm-none d-md-inline">Sign Out</span>
                 <% end %>
               </li>
               <li class="nav-item px-3 px-sm-1 py-1">
                 <%= link_to profiles_path(current_user), class: "nav-link text-dark" do %>
                   <%= icon('fas', 'home', class: 'p-0 m-0') %>
-                  <span class="d-inline-block d-md-none d-lg-inline-block">Dashbaord</span>
+                  <span class="d-inline d-sm-none d-md-inline">Dashbaord</span>
                 <% end %>
               </li>
             <% else %>

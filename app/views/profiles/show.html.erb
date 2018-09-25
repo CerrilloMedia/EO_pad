@@ -99,10 +99,10 @@
           </div>
 
           <div class="tab-pane fade" id="allTodos" role="tabpanel">
-            <% @user.tasks.my.each do |request| %>
-              <%= render partial: 'requests/request', locals: { request: request, task: true } %>
+            <% @user.tasks.my.each do |task| %>
+              <%= render partial: 'requests/request', locals: { request: task, task: true } %>
             <% end %>
-            <% unless @user.tasks.my.completed.any? %>
+            <% unless @user.tasks.my.any? %>
               <div class="text-dark card-body p-0 p-sm-1 mb-2 mb-sm-2">
                 <div class="card col bg-white rounded-0">
                   <div class="rounded-0 row p-5">

@@ -45,6 +45,12 @@
           <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control #{ pwc ? 'border border-danger':' '} " %>
         </div>
 
+        <div class="form-group mb-1">
+          <% pwc = resource.errors.messages.include? :current_password %>
+          <%= f.label :current_password, class: "small #{ pwc ? 'text-danger':' '} "%>
+          <%= f.password_field :current_password, autocomplete: "off", class: "form-control #{ pwc ? 'border border-danger':' '} " %>
+        </div>
+
         <div class="form-group my-3">
           <%= f.submit "Update", class: 'btn btn-dark w-100' %>
         </div>

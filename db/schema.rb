@@ -12,12 +12,15 @@
 
 ActiveRecord::Schema.define(version: 2018_09_07_061904) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "availabilities", force: :cascade do |t|
     t.date "date"
     t.time "startTime"
     t.time "endTime"
     t.date "endDate"
-    t.integer "request_id"
+    t.bigint "request_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["request_id"], name: "index_availabilities_on_request_id"
@@ -30,8 +33,8 @@ ActiveRecord::Schema.define(version: 2018_09_07_061904) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "client_name"
-    t.integer "user_id"
-    t.integer "recipient_id"
+    t.bigint "user_id"
+    t.bigint "recipient_id"
     t.index ["recipient_id"], name: "index_requests_on_recipient_id"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
@@ -59,4 +62,7 @@ ActiveRecord::Schema.define(version: 2018_09_07_061904) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "availabilities", "requests"
+  add_foreign_key "requests", "users"
+  add_foreign_key "requests", "users", column: "recipient_id"
 end
