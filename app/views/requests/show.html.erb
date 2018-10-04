@@ -1,61 +1,173 @@
-<div class="card bg-white">
-  <div class="p-2 p-sm-3 p-md-4">
-    <div class="col">
-      <div class="row">
-        <%= tag.div @request.subject, class: 'col p-0 h5' %>
-        <%= tag.div class:'col-12 p-0 card-title' do %>
-          <%= @request.client_name %>
+<div class="container-fluid px-0">
+  <div class="request-container d-flex flex-wrap">
+<!-- LEFT COLUMN -->
+    <div class="request-left-column col-12 col-sm-4 col-md-3 p-0">
+      <div class="col-12 col-sm-4 col-md-3 p-0 bg-light">
+        <div class="request-card pt-2 border-bottom p-2">
+          <div class="p-0 flex-grow-1">
+            <div class="request-header d-flex">
+              <span class="request-subject d-inline-flex mr-auto h5"><%= @request.subject %></span>
+              <% if current_user == @request.user || @request.recipient %>
+              <div class="">
+                  <%= link_to edit_request_path(@request), class: 'btn btn-outline-dark btn-sm border-0', title: 'edit request' do %>
+                    <%= icon('fas', 'edit') %>
+                  <% end %>
+                </div>
+              <% end %>
+
+            </div>
+            <%= tag.div @request.client_name, class:'request-name col-12 p-0' %>
+            <div class="request-body">
+              <%= tag.div @request.body, class: 'mb-2' %>
+            </div>
+          <% if @request.availabilities.any? %>
+            <!-- availabilities -->
+            <div class="col px-0 px-sm-1">
+              <div class="row m-0 mb-1">
+                <div class="col-2 col-sm-1 pt-1 pl-0 pr-sm-1">
+                  <hr class="my-2 mb-0 border-top-warning">
+                </div>
+                <div class="small text-center">
+                  <span class="">requests</span>
+                </div>
+                <div class="col pt-1 pr-1 pl-sm-1">
+                  <hr class="my-2 border-top-warning">
+                </div>
+              </div>
+            </div>
+            <div class="d-block d-md-flex">
+              <div class="col p-0 small">
+                <div class="">
+                  <% @request.availabilities.each_with_index do |a, i| %>
+                    <div class="col mb-2 px-0 px-sm-1">
+                      <%= tag.div class: 'card p-1 p-sm-2 text-center' do %>
+                        <%= format_availability(a) %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          </div>
+          <!-- request footer -->
+          <div class="request-card-footer">
+            <div class="mb-2">
+
+              <% if @request.completed? %>
+                <span class="d-flex align-items-center" title="status: completed">
+                  <%= icon('fas', 'flag-checkered', class: 'text-success') %>
+                  <span class="small pl-2">complete</span>
+                </span>
+              <% else %>
+                <span class="d-flex align-items-center" title="status: pending">
+                  <%= icon('fas', 'flag', class: 'text-warning') %>
+                  <span class="small pl-2">pending</span>
+                </span>
+              <% end %>
+
+            </div>
+          </div>
+          <!-- request footer end -->
+
+        </div>
+      </div>
+    </div>
+<!-- MIDDLE COLUMN -->
+    <div class="request-middle-column col-12 col-sm-8 col-md-6 p-0 mb-0 flex-column d-flex border-right border-left">
+      <div class="mb-auto"></div>
+
+      <div class="scrollable-content">
+        <% if @request.comments.any? %>
+        <div class="list-group" id="request_<%= @request.id %>_comments" >
+          <% @request.comments.each do |comment| %>
+            <div class="list-group-item p-0" id="comment_<%= comment.id %>" href="Comment_<%= comment.id %>">
+              <div class="input-group">
+                <div class="form-control border-0 <%= 'user-comment' if current_user==comment.user %>">
+                  <%= comment.content %>
+                </div>
+                <div class="input-group-append p-0 ml-auto flex-shrink-1">
+                <% if comment.user == current_user %>
+                    <%= link_to request_comment_path(@request, comment), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn m-0', title: "delete?" do %>
+                      <%= icon('fas', 'times', class: 'text-danger')  %>
+                    <% end %>
+                <% else %>
+                    <div class="btn px-1 text-muted" title="sent on <%= format_date(comment.created_at) + " at " + format_time(comment.created_at)%>"><%= comment.user.display_name(false) %></div>
+                <% end %>
+              </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <% else %>
+         <div class="empty-comments m-3 text-center">Add a message below to start the conversation!</div>
+        <% end %>
+      </div>
+
+      <div class="comment-input p-1 bg-dark">
+        <%= form_with(model: [@request, Comment.new]) do |f| %>
+        <div class="input-group">
+          <%= f.text_field :content, placeholder: 'add-comment', class: 'form-control rounded-0 flex-grow-1', autofocus: true, autocomplete: :off %>
+          <div class="input-group-append p-0 ml-auto flex-shrink-1">
+            <%= f.button :button, type: :submit, class: 'btn btn-success rounded-0' do %>
+            <%= icon('fas', 'comment') %>
+            <% end %>
+          </div>
+        </div>
         <% end %>
       </div>
     </div>
 
-    <%= tag.div @request.body, class: 'mb-2' %>
+<!-- RIGHT COLUMN -->
+    <div class="d-none d-md-block col-md-3 p-0">
 
-      <% if @request.availabilities.any? %>
+      <div class="position-fixed d-none col-md-3 d-block p-0">
+        <div class="user-mini-dash d-inline-flex w-100">
 
-      <div class="col px-0 px-sm-1">
-        <div class="row">
-          <div class="col-2 col-sm-1 pt-1">
-            <hr class="mt-1 border-top-warning">
-          </div>
-          <div class="small text-center">
-            <span class="">requests</span>
-          </div>
-          <div class="col pt-1">
-            <hr class="my-1 border-top-warning">
-          </div>
+            <div class="border-bottom border-warning flex-column w-100">
+              <div class="card-header p-2 p-md-3">
+                <div class="card-title mb-sm-1">
+                  <%= @recipient.display_name %>
+                </div>
+              </div>
+              <div class="p-2 p-lg-3">
+                <div class="col-6 col-md-12 d-dm-block float-sm-left float-md-none px-0">
+                    <%= link_to new_request_path(@recipient), class: "rounded-0 btn text-success text-center text-md-left d-block" do %>
+                      <%= icon('fas', 'plus') %><span class="ml-2"><%= current_user.is_self(@recipient) ? 'Create a task' : 'Send a request' %></span>
+                    <% end %>
+                </div>
+                <div class="col-6 col-md-12 d-dm-block float-sm-left float-md-none px-0">
+                  <% if current_user == @recipient %>
+                    <%= link_to edit_user_registration_path, class: 'rounded-0 btn text-success text-sm-center text-md-left d-block' do %>
+                      <%= icon('fas', 'user-cog') %><span class="ml-2">Account<span class="d-none d-lg-inline"> Settings</span></span>
+                    <% end %>
+                  <% end %>
+                </div>
+                <div class="d-flex border-top pt-2 mt-2 w-100">
+                  <span class="small text-muted d-block"><i>Last logged in: <%= format_date(current_user.last_sign_in_at) + " at " + format_time(current_user.last_sign_in_at) %></i></span>
+                </div>
+              </div>
+            </div>
+
         </div>
       </div>
-        <div class="d-block d-md-flex">
-          <div class="col p-0">
-            <div class="d-inline">
-              <% @request.availabilities.each_with_index do |a, i| %>
-                <%= render partial: 'datetime_request', locals: { availability: a, index: i } %>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      <% end %>
-  </div>
-  <div class="p-2 p-sm-3 p-md-4 text-right">
-  <div class="d-flex justify-content-between mb-2">
-    <div id="request_<%= @request.id %>_status" class="w-50 text-left">
-      <span class="small p-1 rounded border <%= @request.completed? ? 'bg-success text-white' : 'bg-warning' %>">
-        status: <%= @request.completed? ? "completed" : "pending" %>
-      </span>
-    </div>
-    <div class="w-50 small text-muted">
-      <span>assigned </span><%= tag.span "#{time_ago_in_words(@request.created_at)}" + " ago " %> to <%= tag.span @recipient.display_name, class: "text-dark" %> by <%= tag.span @user.display_name, class: "text-dark" %></span>
-    </div>
-  </div>
-  <div class="">
-    <% if current_user == @request.user || @request.recipient %>
-      <%= link_to edit_request_path(@request), class: 'btn btn-outline-primary btn-sm' do %>
-        <%= icon('fas', 'edit') %> Edit
-      <% end %>
-    <% end %>
 
+    </div>
   </div>
+
+  <div class="request-footer d-none d-sm-flex text-light p-1 fixed-bottom bg-dark">
+    <div class="col-12 col-sm-4 col-md-3 px-1">
+      <!-- left footer -->
+      left column
+    </div>
+    <div class="col-12 col-sm-8 col-md-6 px-1 px-sm-0">
+      <!-- center footer -->
+      center column
+    </div>
+    <div class="d-none d-md-block col-md-3 px-1">
+      <!-- right footer -->
+      right column
+    </div>
   </div>
 
 </div>

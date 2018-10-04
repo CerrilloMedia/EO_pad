@@ -38,9 +38,5 @@ module RequestsHelper
     [date,["<br>"],time].flatten.join(" ").html_safe
   end
 
-  def request_footer(request)
-
-    "hi".html_safe
-  end
 
 end

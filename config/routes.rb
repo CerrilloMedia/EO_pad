@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :requests do
     resources :availabilities, only: [:new, :update, :destroy]
+    resources :comments, only: [:create, :destroy]
   end
 
   get '/profile/:id', to: "profiles#show", as: 'profiles'

@@ -15,17 +15,32 @@ class User < ApplicationRecord
     end
   end
 
-  def display_name
+  def display_name(full=true)
     if self.firstname.present?
-      self.firstname + ( self.lastname.present? ? " " + self.lastname[0].concat(".") : "" )
+      # full name
+      name = self.firstname + ( self.lastname.present? ? " " + self.lastname[0].concat(".") : "" )
+      return name if full
+      # initials
+      name.split(" ").collect { |n|
+        puts n[0]
+        n[0]
+      }.join("")
     else
       self.email
     end
   end
 
+  def user_initials
+    puts self
+    # self.split(" ").each { |word|
+    #   word[0]
+    # }.join(". ")
+  end
+
   def is_self(user)
     user.id == self.id
   end
+
 
 
 end

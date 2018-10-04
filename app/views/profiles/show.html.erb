@@ -1,5 +1,5 @@
 <% self_ = current_user.is_self(@user) %>
-
+<div class="container">
   <%= labeled_divider(label = self_ ? 'Your' : @user.display_name.concat("'s")) %>
 
   <div class="d-md-flex mb-sm-2 mb-md-3">
@@ -192,4 +192,5 @@
   <% end %>
 
   </div>
+</div>
 </div>

@@ -8,6 +8,8 @@ class WelcomeController < ApplicationController
     end
   end
 
+  private
+
   def get_user
     @user = current_user
   end

@@ -9,8 +9,8 @@ class RequestsController < ApplicationController
   end
 
   def show
-    @recipient = User.find(@request.recipient.id)
-    @user = User.find(@request.user_id)
+    @recipient = @request.recipient
+    @user = @request.user
   end
 
   def new
@@ -43,8 +43,11 @@ class RequestsController < ApplicationController
   end
 
   def update
+    puts "*******"
+    puts params
+
     begin
-      if @request.update(request_params)
+      if @request.update_attributes(request_params)
         flash[:notice] = "request updated"
         redirect_to @request
       else

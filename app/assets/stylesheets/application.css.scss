@@ -61,6 +61,10 @@ body {
   box-shadow: -4px 0px $success inset !important;
 }
 
+nav {
+  height: 3em;
+}
+
 .nav-tabs {
   border-bottom: transparent;
 }
@@ -166,6 +170,64 @@ body {
   box-shadow: none;
 }
 
+.transform-x-flip {
+  transform: scaleX(-1);
+}
+
+.user-comment {
+  box-shadow: inset -4px 0px #ffc107;
+}
+
+// request#show view
+
+.request-footer {
+  height: 3em;
+}
+
+
+// this is going to be deleted or adjusted at some point
+.request-container {
+  flex-direction: row;
+}
+
+.request-left-column > div {
+  position: fixed;
+}
+
+.comment-input {
+  height: 3em;
+}
+
+// .list-group-item > .input-group > .input-group-append {
+//   width: 0;
+//   opacity: 0;
+//   overflow: hidden;
+//
+//   .btn {
+//     border: none;
+//   }
+// }
+//
+// .list-group-item:hover > .input-group > .input-group-append {
+//   width: initial;
+//
+//   opacity: 1;
+//    transition: opacity .2s ease-in;
+//    -moz-transition: opacity .2s ease-in;
+//    -webkit-transition: opacity .2s ease-in;
+//
+//   .btn:hover {
+//     border: none;
+//   }
+// }
+
+.empty-comments {
+  text-shadow: 0 1px white;
+  opacity: .7;
+}
+
+
+
 // mobile zoom override & empty input min-height
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   select,
@@ -216,6 +278,35 @@ body {
 
   #taskTab {
     font-size: .8em;
+  }
+
+// REQUEST SHOW MODIFICATIONS
+
+  .request-container {
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .request-left-column {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    z-index: 10;
+    div {
+      position: relative;
+      flex: 0 1 auto;
+    }
+  }
+
+  .request-middle-column {
+    flex: 1 1 auto;
+    overflow-y: scroll;
+    .scrollable-content {
+
+    }
+    -webkit-overflow-scrolling: touch;
+  }
+  .list-group-item > .input-group > .input-group-append {
+    opacity: 1;
+    width: initial;
   }
 
 }

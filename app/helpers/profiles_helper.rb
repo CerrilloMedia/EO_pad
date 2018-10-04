@@ -1,6 +1,6 @@
 module ProfilesHelper
 
-def labeled_divider(label)
+def labeled_divider(label, dashboard=true)
 
   ('<div class="col px-0 px-sm-1">
     <div class="d-flex my-2">
@@ -10,8 +10,9 @@ def labeled_divider(label)
       <div class="text-center">
         <span class="">
         ' + label + '
-        </span>Dashboard
-      </div>
+        </span>' +
+        ( dashboard ? "Dashboard" : '' ) +
+      '</div>
       <div class="col pt-2 pr-0">
         <hr class="my-1 hr-divider border border-warning">
       </div>

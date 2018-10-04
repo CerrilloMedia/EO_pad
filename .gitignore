@@ -11,6 +11,9 @@
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
+# Ignore any old seed files
+/db/*ignore*
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
