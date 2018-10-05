@@ -29,7 +29,6 @@ class RequestsController < ApplicationController
         redirect_to @request
       else
         flash[:alert] = "unable to process request, please try again"
-        puts @request.errors.full_messages
         render :new
       end
     rescue ActiveRecord::NestedAttributes::TooManyRecords
@@ -43,8 +42,6 @@ class RequestsController < ApplicationController
   end
 
   def update
-    puts "*******"
-    puts params
 
     begin
       if @request.update_attributes(request_params)

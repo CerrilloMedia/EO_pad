@@ -4,7 +4,7 @@
     <div class="request-left-column col-12 col-sm-4 col-md-3 p-0">
       <div class="col-12 col-sm-4 col-md-3 p-0 bg-light">
         <div class="request-card pt-2 border-bottom p-2">
-          <div class="p-0 flex-grow-1">
+          <div class="">
             <div class="request-header d-flex">
               <span class="request-subject d-inline-flex mr-auto h5"><%= @request.subject %></span>
               <% if current_user == @request.user || @request.recipient %>
@@ -17,24 +17,20 @@
 
             </div>
             <%= tag.div @request.client_name, class:'request-name col-12 p-0' %>
-            <div class="request-body">
+            <div class="request-body border border-warning p-2 mb-2 mt-1">
               <%= tag.div @request.body, class: 'mb-2' %>
             </div>
           <% if @request.availabilities.any? %>
             <!-- availabilities -->
-            <div class="col px-0 px-sm-1">
-              <div class="row m-0 mb-1">
-                <div class="col-2 col-sm-1 pt-1 pl-0 pr-sm-1">
-                  <hr class="my-2 mb-0 border-top-warning">
-                </div>
-                <div class="small text-center">
-                  <span class="">requests</span>
-                </div>
-                <div class="col pt-1 pr-1 pl-sm-1">
-                  <hr class="my-2 border-top-warning">
-                </div>
+
+
+            <div class="row d-flex align-items-center my-1 mx-0">
+              <div class="offset-2 small text-center position-absolute bg-light px-2">
+                requests
               </div>
+              <hr class="hr-divider">
             </div>
+
             <div class="d-block d-md-flex">
               <div class="col p-0 small">
                 <div class="">

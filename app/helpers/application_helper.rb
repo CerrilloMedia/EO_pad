@@ -24,4 +24,5 @@ module ApplicationHelper
     }[flash_type.to_sym] || flash_type.to_s
   end
 
+
 end

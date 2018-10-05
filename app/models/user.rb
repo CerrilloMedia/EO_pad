@@ -22,7 +22,6 @@ class User < ApplicationRecord
       return name if full
       # initials
       name.split(" ").collect { |n|
-        puts n[0]
         n[0]
       }.join("")
     else
@@ -31,7 +30,7 @@ class User < ApplicationRecord
   end
 
   def user_initials
-    puts self
+    # puts self
     # self.split(" ").each { |word|
     #   word[0]
     # }.join(". ")

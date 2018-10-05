@@ -1,55 +1,57 @@
-<div class="d-flex">
-  Editing request to <%= @request.recipient.display_name %>
-</div>
-<%= form_with(model: @request, local: true) do |f| %>
+<div class="col col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 px-2 py-3">
+  <div class="d-flex">
+    Editing request to <%= @request.recipient.display_name %>
+  </div>
+  <%= form_with(model: @request, local: true) do |f| %>
 
-<% if @request.errors.any? %>
-<div class="alert text-italics text-danger small">
-  <%= @request.errors.full_messages.collect{|m| "- " + m }.join("<br>").html_safe %>
-</div>
-<% end %>
-
-
-  <div class="form-group">
-    <% cn = @request.errors[:subject].present? %>
-    <%= tag.small "client name", class: "ml-2 form-text #{ cn ? 'text-danger strong' : '' }" %>
-    <%= f.text_field :client_name, class: "form-control col-md-6 #{ cn ? 'border-danger' : '' }" %>
+  <% if @request.errors.any? %>
+  <div class="alert text-italics text-danger small">
+    <%= @request.errors.full_messages.collect{|m| "- " + m }.join("<br>").html_safe %>
   </div>
-  <div id="availabilities" class="form-group">
-      <%= f.fields_for :availabilities do |a| %>
-        <%= render 'availability_form_fields', :f => a %>
-      <% end %>
-      <div class="add-availabilities px-1">
-        <%= link_to_add_association f, :availabilities, html_options = { class: 'btn btn-sm btn-outline-dark d-block d-sm-inline-flex border-0 border-sm-1', partial: 'requests/availability_form_fields'} do %>
-          <div class="align-items-center text-center d-sm-flex">
-            <%= icon('fas', 'plus', class: 'p-1') %>
-            <span class="d-none d-sm-block"> add date & time </span> availability
-          </div>
-        <% end %>
-      </div>
-  </div>
-  <div class="form-group">
-    <% s = @request.errors[:subject].present? %>
-    <%= tag.small "subject", class: "ml-2 form-text #{ s ? 'text-danger strong' : '' }" %>
-    <%= f.text_field :subject, class: "form-control #{ s ? 'border-danger' : '' }" %>
-  </div>
-  <div class="form-group">
-    <% m = @request.errors[:body].present? %>
-    <%= tag.small "message", class: "form-text ml-2 #{ m ? 'text-danger strong' : '' }"%>
-    <%= f.text_area :body, class: "form-control #{ m ? 'border-danger' : '' }" %>
-    <small class="form-text text-dark ml-2">message must be between 3 and 300 characters</small>
-  </div>
-  <!--  -->
-  <% if f.object.persisted? %>
-    <div class="form-group">
-      <%= f.check_box :status, {}, "completed", "active" %> Completed?
-    </div>
   <% end %>
-  <div class="form-group">
-    <%= f.submit class: 'btn btn-success' %>
-    <%= link_to "delete", @request, method: :delete, class: 'btn btn-danger', data: {confirm: "are you sure?"} %>
-    <%= link_to "Cancel", (:back|| root_path), class: 'btn btn-warning' %>
-  </div>
 
+
+    <div class="form-group">
+      <% cn = @request.errors[:subject].present? %>
+      <%= tag.small "client name", class: "ml-2 form-text #{ cn ? 'text-danger strong' : '' }" %>
+      <%= f.text_field :client_name, class: "form-control col-md-6 #{ cn ? 'border-danger' : '' }" %>
+    </div>
+    <div id="availabilities" class="form-group">
+        <%= f.fields_for :availabilities do |a| %>
+          <%= render 'availability_form_fields', :f => a %>
+        <% end %>
+        <div class="add-availabilities px-1">
+          <%= link_to_add_association f, :availabilities, html_options = { class: 'btn btn-sm btn-outline-dark d-block d-sm-inline-flex border-0 border-sm-1', partial: 'requests/availability_form_fields'} do %>
+            <div class="align-items-center text-center d-sm-flex">
+              <%= icon('fas', 'plus', class: 'p-1') %>
+              <span class="d-none d-sm-block"> add date & time </span> availability
+            </div>
+          <% end %>
+        </div>
+    </div>
+    <div class="form-group">
+      <% s = @request.errors[:subject].present? %>
+      <%= tag.small "subject", class: "ml-2 form-text #{ s ? 'text-danger strong' : '' }" %>
+      <%= f.text_field :subject, class: "form-control #{ s ? 'border-danger' : '' }" %>
+    </div>
+    <div class="form-group">
+      <% m = @request.errors[:body].present? %>
+      <%= tag.small "message", class: "form-text ml-2 #{ m ? 'text-danger strong' : '' }"%>
+      <%= f.text_area :body, class: "form-control #{ m ? 'border-danger' : '' }" %>
+      <small class="form-text text-dark ml-2">message must be between 3 and 300 characters</small>
+    </div>
+    <!--  -->
+    <% if f.object.persisted? %>
+      <div class="form-group">
+        <%= f.check_box :status, {}, "completed", "active" %> Completed?
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= f.submit class: 'btn btn-success' %>
+      <%= link_to "delete", @request, method: :delete, class: 'btn btn-danger', data: {confirm: "are you sure?"} %>
+      <%= link_to "Cancel", (:back|| root_path), class: 'btn btn-warning' %>
+    </div>
+
+  </div>
+  <% end %>
 </div>
-<% end %>

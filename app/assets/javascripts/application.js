@@ -59,4 +59,14 @@ $( document ).on('turbolinks:load', function() {
   });
 
 
+  $('#navToggle').on('click', function() {
+    $('#overlay').fadeToggle('fast',function() {
+      console.log("finished");
+    });
+  });
+
+  $('#overlay').on('click', function() {
+    $('#navToggle').click();
+  });
+
 });

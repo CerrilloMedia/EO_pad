@@ -13,6 +13,7 @@ class Request < ApplicationRecord
   validates_presence_of :client_name, :unless => :subject?, message: "%{value} required if no subject supplied"
   validates_presence_of :subject, :unless => :client_name?, message: "%{value} required if no client name supplied"
   validates_length_of :body, within: 10..300, message: "message body must be between 10 and 300 characters"
+  validates_length_of :subject, within: 10..300, message: "message subject must be between 10 and 300 characters"
   validates_length_of :client_name, within: 4..40, :unless => :subject?, message: "must be longer than 2 characters"
 
   enum status: [:active, :completed]
