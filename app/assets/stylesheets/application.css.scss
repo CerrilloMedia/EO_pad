@@ -24,7 +24,8 @@ $zindex: (
     header : 100,
     footer : 90,
     body : 50,
-    card : 60
+    card : 60,
+    alert: 80
 );
 
 html, body {
@@ -62,6 +63,10 @@ body {
   top: -2px !important;
 }
 
+#sitewide-alert {
+  z-index: 110;
+}
+
 .availabilities-ul li:even {
   background: blue !important;
 }
@@ -86,12 +91,16 @@ nav {
 .overlay {
   position: fixed;
   background-color: black;
-  z-index: 99;
+  z-index: 110;
   opacity: .3;
   left: 0;
   right: 0;
   top: 0;
   bottom:0;
+}
+
+.mobile-overlay {
+
 }
 
 .btn-new {
@@ -206,6 +215,10 @@ nav {
   box-shadow: inset -4px 0px #ffc107;
 }
 
+div[id^='request_header_'] {
+  cursor: pointer;
+}
+
 // request#show view
 
 .request-footer {
@@ -302,6 +315,7 @@ nav {
       .request-body {
         max-height: 5em;
         overflow-y: scroll;
+        background-color: rgba(255,255,255,.8) !important;
       }
     }
   }

@@ -1,17 +1,20 @@
 <div class="text-dark card-body p-0 p-sm-1 mb-2 mb-sm-2" id="request_<%= request.id %>">
   <div class="flex-column position-relative bg-white rounded-0 p-2 p-md-3 border">
     <div class=" bg-white rounded-0 d-flex justify-content-between">
-      <div class="d-block flex-sm-grow-1 d-sm-flex justify-content-sm-between align-items-center">
-
+      <div id="request_header_<%= request.id %>" class="d-block flex-sm-grow-1 d-sm-flex justify-content-sm-between align-items-center w-100">
           <%= tag.div request.subject, class: '' %>
           <%= tag.div time_ago_in_words(request.created_at) + " ago ", class: 'small mr-2' %>
-
       </div>
 
       <div id="request_<%= request.id %>_tools" class="d-flex">
         <%= link_to request_path(request), class: 'btn p-2 p-sm-0 px-sm-1 text-dark btn-lg' do %>
+        <% if request.comments.any? %>
+          <%= icon('fas', 'comments', class: 'text-success') %>
+        <% else %>
           <%= icon('far', 'comments') %>
         <% end %>
+        <% end %>
+
         <%= link_to edit_request_path(request), class: 'btn p-2 p-sm-0 px-sm-1 text-dark btn-lg' do %>
           <%= icon('fas', 'edit') %>
         <% end %>
@@ -61,7 +64,7 @@
 
       <div class="d-flex mt-2 justify-content-end request-footer">
         <div class="w-50 text-left">
-          <div class="d-flex">
+          <div id="request_status_<%= request.id %>" class="d-flex">
             <% if request.completed? %>
               <span class="d-flex align-items-center" title="status: completed">
                 <%= icon('fas', 'flag-checkered', class: 'text-success') %>

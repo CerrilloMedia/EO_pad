@@ -63,7 +63,8 @@
 
       <% if flash.any? %>
       <!-- ERROR messages -->
-      <div id="sitewide-alert" class="small alert alert-warning alert-dismissible fade show" role="alert">
+
+      <div id="sitewide-alert" class="shadow my-2 small alert alert-warning alert-dismissible fade show">
         <button type="button" class="close" data-dismiss="alert" ><%= icon("fas", "times", class: 'fa-sm float-right', id: 'alert-close' ) %></button>
         <% flash.each do |name,msg| %>
           <% unless name == "timedout" %>
@@ -72,6 +73,7 @@
             <% end %>
           <% end %>
         <% end %>
+
       </div>
       <% end %>
 

@@ -48,7 +48,6 @@ $( document ).on('turbolinks:load', function() {
 
   $('.scrollable-content').show(function() {
 
-
     var midCol = $(this).parent(); // .request-middle-column
     var parentContainer = $('.request-container');
     var leftCol = $('.request-left-column');
@@ -64,7 +63,8 @@ $( document ).on('turbolinks:load', function() {
         $(midCol).css({
           'position':'absolute',
           'top': leftColHeight,
-          'bottom': 0
+          'bottom': 0,
+          'height': 'initial'
         });
         $('.scrollable-content').addClass('mb-5');
         $('.comment-input').addClass('fixed-bottom');
@@ -75,7 +75,7 @@ $( document ).on('turbolinks:load', function() {
           'position':'relative',
           'top': 'initial',
           'bottom': 0,
-          'height' : 'initial'
+          'height' : '100%'
         });
         $('.scrollable-content').removeClass('mb-5');
         $('.comment-input').removeClass('fixed-bottom');
@@ -88,5 +88,8 @@ $( document ).on('turbolinks:load', function() {
     });
 
   });
+
+// ADD RESPONSE TO UPDATING STATUS
+  
 
 });

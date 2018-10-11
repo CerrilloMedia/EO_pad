@@ -59,7 +59,12 @@ class RequestsController < ApplicationController
   end
 
   def destroy
-    if @request.destroy && current_user.id == @request.user_id
+
+    if current_user.id != @request.user_id
+      flash[:alert] = "access denied"
+      redirect_to @request
+    end
+    if @request.destroy
         flash[:notice] = "request removed"
         redirect_to root_path
     else

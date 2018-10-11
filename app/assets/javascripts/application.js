@@ -58,15 +58,19 @@ $( document ).on('turbolinks:load', function() {
     timedown();
   });
 
-
+  // Navigation toggle
   $('#navToggle').on('click', function() {
     $('#overlay').fadeToggle('fast',function() {
-      console.log("finished");
     });
   });
 
   $('#overlay').on('click', function() {
     $('#navToggle').click();
   });
+
+  // Alert close modal
+  
+
+
 
 });

@@ -1,8 +1,8 @@
 <div class="container-fluid px-0">
   <div class="request-container d-flex flex-wrap">
 <!-- LEFT COLUMN -->
-    <div class="request-left-column col-12 col-sm-4 col-md-3 p-0">
-      <div class="col-12 col-sm-4 col-md-3 p-0 bg-light">
+    <div class="request-left-column col-12 col-sm-4 col-lg-3 p-0">
+      <div class="col-12 col-sm-4 col-lg-3 p-0 bg-light">
         <div class="request-card pt-2 border-bottom p-2">
           <div class="">
             <div class="request-header d-flex">
@@ -18,7 +18,7 @@
             </div>
             <%= tag.div @request.client_name, class:'request-name col-12 p-0' %>
             <div class="request-body border border-warning p-2 mb-2 mt-1">
-              <%= tag.div @request.body, class: 'mb-2' %>
+              <div class="mb-2"><%= simple_format @request.body %></div>
             </div>
           <% if @request.availabilities.any? %>
             <!-- availabilities -->
@@ -70,7 +70,7 @@
       </div>
     </div>
 <!-- MIDDLE COLUMN -->
-    <div class="request-middle-column col-12 col-sm-8 col-md-6 p-0 mb-0 flex-column d-flex border-right border-left">
+    <div class="request-middle-column col-12 col-sm-8 col-md-5 col-lg-6 p-0 mb-0 flex-column d-flex border-right border-left">
       <div class="mb-auto"></div>
 
       <div class="scrollable-content">
