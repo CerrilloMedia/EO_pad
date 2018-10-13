@@ -90,6 +90,6 @@ $( document ).on('turbolinks:load', function() {
   });
 
 // ADD RESPONSE TO UPDATING STATUS
-  
+
 
 });

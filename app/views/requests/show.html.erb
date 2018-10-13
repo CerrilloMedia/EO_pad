@@ -50,17 +50,28 @@
           <div class="request-card-footer">
             <div class="mb-2">
 
-              <% if @request.completed? %>
-                <span class="d-flex align-items-center" title="status: completed">
-                  <%= icon('fas', 'flag-checkered', class: 'text-success') %>
-                  <span class="small pl-2">complete</span>
-                </span>
-              <% else %>
-                <span class="d-flex align-items-center" title="status: pending">
-                  <%= icon('fas', 'flag', class: 'text-warning') %>
-                  <span class="small pl-2">pending</span>
-                </span>
-              <% end %>
+              <div id="request_status_<%= @request.id %>" class="d-flex" data-request-status="<%= @request.status %>">
+                <%= link_to update_status_request_path(@request), remote: true, method: :patch, class: 'text-dark nav-link p-0' do %>
+                  <% if @request.completed? %>
+
+                    <span class="d-flex align-items-center" title="status: completed">
+
+                      <div class="toggle-holder bg-success">
+                        <span class="toggle-circle toggle-circle-on"></span>
+                      </div>
+                      <span class="request-label small pl-2"><%= @request.status %></span>
+                    </span>
+
+                  <% else %>
+                    <span class="d-flex align-items-center" title="status: pending">
+                      <div class="toggle-holder bg-warning">
+                        <span class="toggle-circle"></span>
+                      </div>
+                      <span class="request-label small pl-2"><%= @request.status %></span>
+                    </span>
+                  <% end %>
+                <% end %>
+              </div>
 
             </div>
           </div>

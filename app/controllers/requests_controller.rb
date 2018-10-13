@@ -1,7 +1,7 @@
 class RequestsController < ApplicationController
   before_action :authenticate_user!
 
-  before_action :get_request, only: [:show, :edit, :update, :destroy]
+  before_action :get_request, only: [:show, :edit, :update, :destroy, :update_status]
   before_action :set_user, only: [:new,:create, :update]
 
   def index
@@ -71,6 +71,24 @@ class RequestsController < ApplicationController
       flash[:alert] = "unable to delete request"
       render :edit
     end
+  end
+
+  def update_status
+    @request.active? ? @request.completed! : @request.active!
+
+    respond_to do |format|
+        puts "responding to request"
+        if @request.save
+          format.js { render layout: false }
+          format.html {
+            flash[:notice] = "Request status updated"
+          }
+        else
+          format.html {
+            flash[:notice] = "Error with request update"
+          }
+        end
+      end
   end
 
   private

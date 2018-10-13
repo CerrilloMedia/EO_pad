@@ -219,6 +219,38 @@ div[id^='request_header_'] {
   cursor: pointer;
 }
 
+.toggle-holder {
+  height: 1em;
+  width: 2em;
+  border-radius: 1em;
+  border: .25em solid transparent;
+  box-sizing: content-box;
+  span {
+    display: block;
+    background: white;
+    width: 1em;
+    height: 1em;
+    border-radius: 1em;
+    position: relative;
+  }
+}
+
+.toggle-circle {
+  left: 0em;
+  -webkit-transition: left 0.2s ease;
+  -moz-transition: left 0.2s ease;
+  -o-transition: left 0.2s ease;
+  transition: left 0.2s ease;
+}
+
+.toggle-circle-on {
+  left: 1em;
+  -webkit-transition: left 0.2s ease;
+  -moz-transition: left 0.2s ease;
+  -o-transition: left 0.2s ease;
+  transition: left 0.2s ease;
+}
+
 // request#show view
 
 .request-footer {
