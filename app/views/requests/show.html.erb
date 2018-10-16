@@ -84,7 +84,7 @@
     <div class="request-middle-column col-12 col-sm-8 col-md-5 col-lg-6 p-0 mb-0 flex-column d-flex border-right border-left">
       <div class="mb-auto"></div>
 
-      <div class="scrollable-content">
+      <div class="scrollable-content pb-5">
         <% if @request.comments.any? %>
         <div class="list-group" id="request_<%= @request.id %>_comments" >
           <% @request.comments.each do |comment| %>
@@ -111,7 +111,7 @@
         <% end %>
       </div>
 
-      <div class="comment-input p-1 bg-dark">
+      <div class="comment-input p-1 bg-dark col-sm-8 offset-sm-4 col-md-5 offset-md-4 col-lg-6 offset-lg-3 fixed-bottom">
         <%= form_with(model: [@request, Comment.new]) do |f| %>
         <div class="input-group">
           <%= f.text_field :content, placeholder: 'add-comment', class: 'form-control rounded-0 flex-grow-1', autofocus: true, autocomplete: :off %>
@@ -162,19 +162,7 @@
     </div>
   </div>
 
-  <div class="request-footer d-none d-sm-flex text-light p-1 fixed-bottom bg-dark">
-    <div class="col-12 col-sm-4 col-md-3 px-1">
-      <!-- left footer -->
-      left column
-    </div>
-    <div class="col-12 col-sm-8 col-md-6 px-1 px-sm-0">
-      <!-- center footer -->
-      center column
-    </div>
-    <div class="d-none d-md-block col-md-3 px-1">
-      <!-- right footer -->
-      right column
-    </div>
+  <div class="request-footer">
   </div>
 
 </div>

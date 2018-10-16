@@ -254,7 +254,9 @@ div[id^='request_header_'] {
 // request#show view
 
 .request-footer {
-  height: 3em;
+  height: 0;
+  position: fixed;
+  bottom: 0;
 }
 
 
@@ -354,8 +356,11 @@ div[id^='request_header_'] {
 
   .request-middle-column {
     flex: 1 1 auto;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+  }
+  .scrollable-content {
+    overflow-y: scroll;
   }
   .list-group-item > .input-group > .input-group-append {
     opacity: 1;
