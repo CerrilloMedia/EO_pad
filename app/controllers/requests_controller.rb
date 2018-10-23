@@ -77,18 +77,18 @@ class RequestsController < ApplicationController
     @request.active? ? @request.completed! : @request.active!
 
     respond_to do |format|
-        puts "responding to request"
-        if @request.save
-          format.js { render layout: false }
-          format.html {
-            flash[:notice] = "Request status updated"
-          }
-        else
-          format.html {
-            flash[:notice] = "Error with request update"
-          }
-        end
+      puts "responding to request"
+      if @request.save
+        format.js { render layout: false }
+        format.html {
+          flash[:notice] = "Request status updated"
+        }
+      else
+        format.html {
+          flash[:notice] = "Error with request update"
+        }
       end
+    end
   end
 
   private

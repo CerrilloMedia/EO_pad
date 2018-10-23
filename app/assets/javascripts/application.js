@@ -54,7 +54,6 @@ $( document ).on('turbolinks:load', function() {
       };
     };
 
-
     timedown();
   });
 
@@ -67,10 +66,6 @@ $( document ).on('turbolinks:load', function() {
   $('#overlay').on('click', function() {
     $('#navToggle').click();
   });
-
-  // Alert close modal
-  
-
 
 
 });

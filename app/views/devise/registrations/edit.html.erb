@@ -1,4 +1,4 @@
-<div class="col-sm-8 col-md-6 offset-sm-2 offset-md-3 col-lg-4 offset-lg-4 mobile-expand pt-sm-4">
+<div class="col-sm-8 col-md-6 offset-sm-2 offset-md-3 mobile-expand pt-sm-4">
   <div class="">
     <div class="text-center text-sm-left">
       <h2>Edit <%= resource_name.to_s.humanize %></h2>
@@ -11,19 +11,22 @@
         <div class="form-group mb-1">
           <% firstname = resource.errors.messages.include? :firstname %>
           <%= f.label :firstname, class: "small #{ firstname ? 'text-danger':' '} "%>
-          <%= f.text_field :firstname, autocomplete: "firstname", class: "form-control #{ firstname ? 'border border-danger':' '} " %>
+          <%= f.text_field :firstname, autocomplete: "firstname", class: "form-control px-2 py-1 no-bg border-0 box-shadow-none border-bottom-light rounded-0 #{ firstname ? 'border border-danger':' '} " %>
+          <hr class="input-hr" />
         </div>
 
         <div class="form-group mb-1">
           <% lastname = resource.errors.messages.include? :lastname %>
           <%= f.label :lastname, class: "small #{ lastname ? 'text-danger':' '} "%>
-          <%= f.text_field :lastname, autocomplete: "lastname", class: "form-control #{ lastname ? 'border border-danger':' '} " %>
+          <%= f.text_field :lastname, autocomplete: "lastname", class: "form-control px-2 py-1 no-bg border-0 box-shadow-none border-bottom-light rounded-0 #{ lastname ? 'border border-danger':' '} " %>
+          <hr class="input-hr" />
         </div>
 
         <div class="form-group mb-1">
           <% email = resource.errors.messages.include? :email %>
           <%= f.label :email, class: "small #{ email ? 'text-danger':' '} "%>
-          <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "form-control #{ email ? 'border border-danger':' '} " %>
+          <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "form-control px-2 py-1 no-bg border-0 box-shadow-none border-bottom-light rounded-0 #{ email ? 'border border-danger':' '} " %>
+          <hr class='input-hr' />
         </div>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -36,19 +39,22 @@
           <% if @minimum_password_length %>
           <em class="small">(<%= @minimum_password_length %> characters minimum)</em>
           <% end %><br />
-          <%= f.password_field :password, autocomplete: "off", class: "form-control #{ pw ? 'border border-danger':' '} " %>
+          <%= f.password_field :password, autocomplete: "off", class: "form-control px-2 py-1 no-bg border-0 box-shadow-none border-bottom-light rounded-0 #{ pw ? 'border border-danger':' '} " %>
+          <hr class='input-hr' />
         </div>
 
         <div class="form-group mb-1">
           <% pwc = resource.errors.messages.include? :password_confirmation %>
           <%= f.label :password_confirmation, class: "small #{ pwc ? 'text-danger':' '} "%>
-          <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control #{ pwc ? 'border border-danger':' '} " %>
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control px-2 py-1 no-bg border-0 box-shadow-none border-bottom-light rounded-0 #{ pwc ? 'border border-danger':' '} " %>
+          <hr class='input-hr' />
         </div>
 
         <div class="form-group mb-1">
           <% pwc = resource.errors.messages.include? :current_password %>
           <%= f.label :current_password, class: "small #{ pwc ? 'text-danger':' '} "%>
-          <%= f.password_field :current_password, autocomplete: "off", class: "form-control #{ pwc ? 'border border-danger':' '} " %>
+          <%= f.password_field :current_password, placeholder: 'required for update', autocomplete: "off", class: "form-control px-2 py-1 no-bg border-0 box-shadow-none border-bottom-light rounded-0 #{ pwc ? 'border border-danger':' '} " %>
+          <hr class='input-hr' />
         </div>
 
         <div class="form-group my-3">

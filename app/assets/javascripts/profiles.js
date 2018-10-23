@@ -17,4 +17,6 @@ $( document ).on('turbolinks:load', function() {
     	$(requestTarget).click();
     });
 
+    
+
 });

@@ -1,4 +1,4 @@
-<div class="container-fluid px-0">
+<div class="container-fluid px-0 mb-5">
   <div class="request-container d-flex flex-wrap">
 <!-- LEFT COLUMN -->
     <div class="request-left-column col-12 col-sm-4 col-lg-3 p-0">
@@ -81,46 +81,22 @@
       </div>
     </div>
 <!-- MIDDLE COLUMN -->
-    <div class="request-middle-column col-12 col-sm-8 col-md-5 col-lg-6 p-0 mb-0 flex-column d-flex border-right border-left">
+    <div class="request-middle-column col-12 col-sm-8 col-md-5 col-lg-6 p-0 flex-column d-flex border-right border-left">
       <div class="mb-auto"></div>
-
-      <div class="scrollable-content pb-5">
-        <% if @request.comments.any? %>
-        <div class="list-group" id="request_<%= @request.id %>_comments" >
-          <% @request.comments.each do |comment| %>
-            <div class="list-group-item p-0" id="comment_<%= comment.id %>" href="Comment_<%= comment.id %>">
-              <div class="input-group">
-                <div class="form-control border-0 <%= 'user-comment' if current_user==comment.user %>">
-                  <%= comment.content %>
-                </div>
-                <div class="input-group-append p-0 ml-auto flex-shrink-1">
-                <% if comment.user == current_user %>
-                    <%= link_to request_comment_path(@request, comment), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn m-0', title: "delete?" do %>
-                      <%= icon('fas', 'times', class: 'text-danger')  %>
-                    <% end %>
-                <% else %>
-                    <div class="btn px-1 text-muted" title="sent on <%= format_date(comment.created_at) + " at " + format_time(comment.created_at)%>"><%= comment.user.display_name(false) %></div>
-                <% end %>
-              </div>
-              </div>
-            </div>
-          <% end %>
-        </div>
-        <% else %>
-         <div class="empty-comments m-3 text-center">Add a message below to start the conversation!</div>
-        <% end %>
+      <div class="scrollable-content">
+        <%= render partial: 'comments/comments', locals: {request: @request }%>
       </div>
 
       <div class="comment-input p-1 bg-dark col-sm-8 offset-sm-4 col-md-5 offset-md-4 col-lg-6 offset-lg-3 fixed-bottom">
         <%= form_with(model: [@request, Comment.new]) do |f| %>
-        <div class="input-group">
-          <%= f.text_field :content, placeholder: 'add-comment', class: 'form-control rounded-0 flex-grow-1', autofocus: true, autocomplete: :off %>
-          <div class="input-group-append p-0 ml-auto flex-shrink-1">
-            <%= f.button :button, type: :submit, class: 'btn btn-success rounded-0' do %>
-            <%= icon('fas', 'comment') %>
-            <% end %>
+          <div class="input-group">
+            <%= f.text_field :content, placeholder: 'add-comment', class: 'form-control rounded-0 flex-grow-1', autofocus: true, autocomplete: :off %>
+            <div class="input-group-append p-0 ml-auto flex-shrink-1">
+              <%= f.button :button, type: :submit, class: 'btn btn-success rounded-0', id: "comment_submit" do %>
+              <%= icon('fas', 'comment') %>
+              <% end %>
+            </div>
           </div>
-        </div>
         <% end %>
       </div>
     </div>

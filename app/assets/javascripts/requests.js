@@ -48,35 +48,49 @@ $( document ).on('turbolinks:load', function() {
 
   $('.scrollable-content').show(function() {
 
-    var midCol = $(this).parent(); // .request-middle-column
-    var parentContainer = $('.request-container');
+    var fullContainer = $('.request-container');
+    var midCol =  $('.request-middle-column'); // .request-middle-column
     var leftCol = $('.request-left-column');
-    var footer = $('.request-footer');
+
     $('.body-element').css('height',0);
 
-    $(window).on('resize', function() {
+    $(window).on('resize.scrollableContent', function() {
+
+      // if .scrollable-content div does not exist in the DOM, remove listener
+      if ($('.scrollable-content').length == 0) {
+        $(window).off('resize.scrollableContent');
+        return;
+      }
 
       var leftColHeight = $('.request-card')[0].scrollHeight + $('.navbar')[0].scrollHeight;
 
       if ( $('.scrollable-content').css('overflow-y') == 'scroll' ) {
-        $(parentContainer).css({'height': 'inherit'});
-        $(midCol).css({
-          'position':'absolute',
-          'top': leftColHeight,
-          'bottom': 0,
-          'height': 'initial'
+        $(fullContainer).css({
+          'height': 'inherit'
         });
-        $('.comment-input').addClass('fixed-bottom');
-      } else {
-        $(parentContainer).css({'height': $(footer)[0].offsetTop - $('.navbar')[0].scrollHeight});
         $(midCol).css({
-          'position':'relative',
-          'top': 'initial',
-          'bottom': 0,
-          'height' : '100%'
+          'top': leftColHeight // adjust top of div to right below .request-card
+        });
+        $('.scrollable-content').css({
+          'margin-bottom': '3em'
+        })
+      } else {
+        $(fullContainer).css({
+          'height': $('.comment-input')[0].offsetTop - $('.navbar')[0].scrollHeight}
+        );
+        $(midCol).css({
+          'overflow': 'scroll',
+          'top': '0' // reset to top of parent div in
+        });
+        $('.scrollable-content').css({
+          'margin-bottom': 0
         });
       };
+
+      $('.scrollable-content')[0].scrollTop = $('.comment-input')[0].offsetTop;
     }).resize();
+    // ADD RESPONSE TO UPDATING STATUS
+    $('.request-middle-column')[0].scrollTop = $('.comment-input')[0].offsetTop;
 
     // resize after closing alert box
     $('#sitewide-alert').on('closed.bs.alert', function() {
@@ -85,7 +99,14 @@ $( document ).on('turbolinks:load', function() {
 
   });
 
-// ADD RESPONSE TO UPDATING STATUS
 
+  $('.input-hr').show(function() {
+    console.log($(this));
+  	$($(this)[0].previousElementSibling).focus(function(e) {
+      	$($(this)[0].nextElementSibling).addClass('input-hr-focus');
+      }).focusout(function(e) {
+      	$($(this)[0].nextElementSibling).removeClass('input-hr-focus');
+      });
+  });
 
 });

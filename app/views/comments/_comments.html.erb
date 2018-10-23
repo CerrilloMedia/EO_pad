@@ -1,0 +1,9 @@
+<div class="list-group" id="request_<%= request.id %>_comments" >
+  <% if request.comments.any? %>
+    <% request.comments.each do |comment| %>
+      <%= render partial: 'comments/comment', locals: {comment: comment}%>
+    <% end %>
+  <% else %>
+   <div class="empty-comments m-3 text-center">Add a message below to start the conversation!</div>
+  <% end %>
+</div>

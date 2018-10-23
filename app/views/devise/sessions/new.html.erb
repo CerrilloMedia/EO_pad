@@ -10,13 +10,13 @@
       <div class="form-group mb-1">
         <% email = resource.errors.messages.include? :email %>
         <%= f.label :email, class: "small #{ email ? 'text-danger':' '} "%>
-        <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "form-control #{ email ? 'border border-danger':' '} " %>
+        <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "form-control  #{ email ? 'border border-danger':' '} " %>
       </div>
 
       <div class="form-group mb-1">
         <% pw = resource.errors.messages.include? :password %>
         <%= f.label :password, class: "small #{ pw ? 'text-danger':' '} "%>
-        <%= f.password_field :password, autocomplete: "off", class: "form-control #{ pw ? 'border border-danger':' '} " %>
+        <%= f.password_field :password, autocomplete: "off", class: "form-control  #{ pw ? 'border border-danger':' '} " %>
       </div>
 
       <% if devise_mapping.rememberable? -%>

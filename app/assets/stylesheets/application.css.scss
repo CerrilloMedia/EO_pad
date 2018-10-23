@@ -63,6 +63,10 @@ body {
   top: -2px !important;
 }
 
+.sticky-top-5 {
+  top: 3em;
+}
+
 #sitewide-alert {
   z-index: 110;
 }
@@ -99,10 +103,41 @@ nav {
   bottom:0;
 }
 
-.mobile-overlay {
-
+.form-control::placeholder {
+  color: $dark;
+  opacity: .5;
+  font-size: .8em;
+  margin-bottom: 0;
 }
 
+// Bootstrap input fields override and animation
+.form-control:focus {
+    border-color: $warning;
+    box-shadow: 0 0 0 0.2rem rgba(248, 194, 70, .125);
+}
+.custom-select {
+  border: none;
+}
+
+.border-bottom-light {
+  border-bottom: 1px solid #ffc1073d !important;
+}
+
+.input-hr {
+  width: 0;
+  border-top: 2px solid $warning;
+  transition: width .15s ease-in-out;
+  margin: 0;
+}
+.input-hr-focus {
+  width: 100%;
+}
+
+.box-shadow-none:focus {
+  box-shadow: none !important;
+}
+
+// bootstrap btn adjustments
 .btn-new {
   font-size: 2rem;
   padding: 0;
@@ -168,7 +203,7 @@ nav {
 }
 
 .bg-dark {
-  background: #343a40cc !important;
+  background: #5c6064fa !important;
 }
 
 .nav-tabs .nav-link {
@@ -198,15 +233,6 @@ nav {
   font-size: 1.5em;
 }
 
-.form-control:focus { // Bootstrap override
-    border-color: #fbf700;
-    box-shadow: 0 0 0 0.2rem rgba(248, 194, 70, .125);
-}
-.custom-select:focus {
-  border-color: #fbf700;
-  box-shadow: none;
-}
-
 .transform-x-flip {
   transform: scaleX(-1);
 }
@@ -218,6 +244,8 @@ nav {
 div[id^='request_header_'] {
   cursor: pointer;
 }
+
+// active/completed toggle for request
 
 .toggle-holder {
   height: 1em;
@@ -251,6 +279,7 @@ div[id^='request_header_'] {
   transition: left 0.2s ease;
 }
 
+
 // request#show view
 
 .request-footer {
@@ -269,16 +298,24 @@ div[id^='request_header_'] {
   position: fixed;
 }
 
+// request#show
+.request-middle-column {
+  position: relative;
+  bottom: 0;
+  // height: 100%;
+}
+
 .comment-input {
   height: 3em;
+  bottom: 0;
 }
 
 .empty-comments {
   text-shadow: 0 1px white;
   opacity: .7;
+  left: 0;
+  right: 0;
 }
-
-
 
 // mobile zoom override & empty input min-height
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -286,7 +323,6 @@ div[id^='request_header_'] {
   textarea,
   input {
     font-size: 16px !important;
-    // min-height: 36px;
   }
 }
 
@@ -331,6 +367,22 @@ div[id^='request_header_'] {
     font-size: .8em;
   }
 
+
+// User Dashboard MODIFICATIONS
+.sticky-top {
+  position: inherit;
+}
+
+.btn-circle {
+  border: 1px solid #5c6064fa;
+  width: 16vw;
+  height: 16vw;
+  position: relative;
+  margin-top: -5vw;
+  border-radius: 10vw;
+  font-size: 2.25em;
+}
+
 // REQUEST SHOW MODIFICATIONS
 
   .request-container {
@@ -356,11 +408,16 @@ div[id^='request_header_'] {
 
   .request-middle-column {
     flex: 1 1 auto;
-    // overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-  }
-  .scrollable-content {
-    overflow-y: scroll;
+    position: absolute;
+    height: initial;
+    .scrollable-content {
+      overflow-y: scroll;
+      .list-group {
+        margin-bottom: 0;
+      }
+    }
+
   }
   .list-group-item > .input-group > .input-group-append {
     opacity: 1;

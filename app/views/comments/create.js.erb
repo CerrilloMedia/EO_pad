@@ -1,0 +1,7 @@
+var comments = $('#request_<%= @request.id %>_comments')[0].parentElement;
+comments.innerHTML = ("<%= j render( partial: 'comments/comments', locals: {request: @request}) %>");
+if ($('.empty-comments').length) {
+  comments.find('.empty-comments').remove();
+};
+$('#comment_content').val('');
+$('.scrollable-content')[0].scrollTop = $('.request-middle-column')[0].scrollTop = $('.comment-input')[0].offsetTop;
