@@ -216,6 +216,7 @@ nav {
 .nav-tabs .nav-link:hover {
   border-bottom: 1px solid $warning;
   border-top: 1px solid transparent;
+  cursor: pointer;
 }
 
 .nav-tabs .nav-link.active {

@@ -2,7 +2,7 @@ class RequestsController < ApplicationController
   before_action :authenticate_user!
 
   before_action :get_request, only: [:show, :edit, :update, :destroy, :update_status]
-  before_action :set_user, only: [:new,:create, :update]
+  before_action :set_user, only: [:new,:create,:update]
 
   def index
     @user = current_user
@@ -11,6 +11,12 @@ class RequestsController < ApplicationController
   def show
     @recipient = @request.recipient
     @user = @request.user
+    respond_to do |format|
+      format.json { render json: @request }
+      format.html {
+          render layout: 'application'
+      }
+    end
   end
 
   def new
@@ -65,30 +71,43 @@ class RequestsController < ApplicationController
       redirect_to @request
     end
     if @request.destroy
-        flash[:notice] = "request removed"
-        redirect_to root_path
+        respond_to do |format|
+          format.js
+          fortmat.html {
+            flash[:notice] = "request removed"
+            redirect_to root_path
+          }
+        end
     else
-      flash[:alert] = "unable to delete request"
-      render :edit
+        respond_to do |format|
+          format.js
+          format.html {
+            flash[:alert] = "unable to delete request"
+            render :edit
+          }
+        end
     end
   end
 
   def update_status
     @request.active? ? @request.completed! : @request.active!
 
-    respond_to do |format|
-      puts "responding to request"
       if @request.save
-        format.js { render layout: false }
-        format.html {
-          flash[:notice] = "Request status updated"
-        }
+        respond_to do |format|
+          format.js
+          format.html {
+            flash[:notice] = "Request status updated"
+          }
+        end
       else
-        format.html {
-          flash[:notice] = "Error with request update"
-        }
+        respond_to do |format|
+          format.js
+          format.html {
+            flash[:alert] = "Error with request update"
+          }
+        end
       end
-    end
+
   end
 
   private

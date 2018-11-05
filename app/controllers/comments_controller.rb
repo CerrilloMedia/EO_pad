@@ -7,34 +7,43 @@ class CommentsController < ApplicationController
 
       if @comment.save
         respond_to do |format|
-          format.js {
-            render layout: false
-          }
+          format.js
           format.html {
             redirect_to @request
           }
         end
       else
-        @comment.errors.full_messages
-        flash[:notice] = "Something went wrong, please try again."
-        redirect_to @request
+        respond_to do |format|
+          format.js
+          format.html {
+            @comment.errors.full_messages
+            flash[:notice] = "Something went wrong, please try again."
+            redirect_to @request
+          }
+        end
       end
   end
 
   def destroy
-    @comment = @request.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
+
+    puts "destroy: "
+    puts params[:id]
 
     if current_user == @comment.user && @comment.destroy
       respond_to do |format|
-        format.js {
-          render layout: false
-        }
+        format.js
         format.html {
           redirect_to @request
         }
       end
     else
-      flash[:alert] = "There was an error, please try again"
+      respond_to do |format|
+        format.js
+        format.html {
+          flash[:alert] = "There was an error, please try again"
+        }
+      end
     end
   end
 

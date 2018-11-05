@@ -57,7 +57,16 @@ $( document ).on('turbolinks:load', function() {
     timedown();
   });
 
-  // Navigation toggle
+  var activeTab = function() {
+    // bootstrap tab post load should fire a storage after first checking session storage for State.
+
+    // $("#taskTab").on('show', function() {
+    //
+    // });
+    // window.sessionStorage.setItem("activeTab",
+  };
+
+  // Navigation mobile-menu toggle
   $('#navToggle').on('click', function() {
     $('#overlay').fadeToggle('fast',function() {
     });

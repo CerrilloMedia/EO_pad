@@ -99,14 +99,49 @@ $( document ).on('turbolinks:load', function() {
 
   });
 
-
+  // ADD FORM INPUT ANIMATION
   $('.input-hr').show(function() {
-    console.log($(this));
+    // find sibling input div above and add/remove class to alter 'underline'
   	$($(this)[0].previousElementSibling).focus(function(e) {
       	$($(this)[0].nextElementSibling).addClass('input-hr-focus');
       }).focusout(function(e) {
       	$($(this)[0].nextElementSibling).removeClass('input-hr-focus');
       });
+  });
+
+  // INCLUDE SECONDARY SUPPORT TO PROCESSED JS COMMENT INPUT
+  $("#request_comment").on('ajax:success', function(data) {
+    console.log(data);
+    if ($('.empty-comments').length) {
+      comments.find('.empty-comments').remove();
+    };
+    $('#comment_content').val('');
+    $('.scrollable-content')[0].scrollTop = $('.request-middle-column')[0].scrollTop = $('.comment-input')[0].offsetTop;
+  }).on('ajax:error', function(data) {
+    alert("comment did not post");
+  });
+
+  // REMOVE COMMENT
+  $('a[data-comment-id]').on('ajax:success', function(data) {
+    console.log('removing comment #' + commentId);
+  }).on('ajax:error', function() {
+    console.log("error removing comment, please try again")
+  });
+
+  // UPDATE REQUEST STATUS
+  $('div[id^="request_status_"] a').on('ajax:success', function(data) {
+    var t = $(data.target);
+    t.attr('data-status', status);
+    // status variable is rendered by update_status.js upon successful patch
+    if (status == 'active') {
+        $(t.find('.toggle-holder')).removeClass('bg-success').addClass('bg-warning').find('.toggle-circle').removeClass('toggle-circle-on');
+      } else {
+        $(t.find('.toggle-holder')).removeClass('bg-warning').addClass('bg-success').find('.toggle-circle').addClass('toggle-circle-on');
+      }
+    t.find('span[title^="status"]').attr('title', "status: " + status)
+    t.find('.request-label').text(status);
+  }).on('ajax:error', function(data) {
+    console.log("error updating request status");
   });
 
 });

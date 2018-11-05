@@ -12,11 +12,28 @@ $( document ).on('turbolinks:load', function() {
     // });
 
     $('div[id^="request_header"]').click(function(e) {
-      var requestID = e.currentTarget.id.match(/\d+/g);
-    	var requestTarget = 'a[href="#request_body_' + requestID + '"]';
-    	$(requestTarget).click();
+      console.log(e);
+      var requestID = e.currentTarget.id.match(/\d+/g)[0];
+      var requestTargetBody = 'a[href="#request_body_' + requestID + '"]';
+    	$(requestTargetBody).click();
     });
 
-    
+    // Utilize session storage for profile#show tab selection persistence
+
+      $('a[data-toggle="tab"]').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+      });
+
+      $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+        var id = $(e.target)[0].dataset.target;
+        sessionStorage.setItem('selectedTab', id)
+      });
+
+      var selectedTab = sessionStorage.getItem('selectedTab');
+      if (selectedTab != null) {
+        $('a[data-toggle="tab"][data-target="' + selectedTab + '"]').tab('show');
+      };
+
 
 });

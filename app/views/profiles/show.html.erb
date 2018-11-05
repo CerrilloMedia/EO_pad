@@ -22,10 +22,11 @@
               </ul>
             </div>
             <div class="d-block col-sm-6 col-md-8 col-lg-6 px-1 ml-auto ">
+              <!-- tab headers -->
               <ul class="nav nav-tabs nav-justified mb-1" id="taskTab" role="tablist">
 
                 <li class="nav-item">
-                  <a class="nav-link text-dark px-1 py-1 active" id="active-tasks-tab" data-toggle="tab" href="#activeTasks" role="tab" aria-controls="activetasks" aria-selected="true">
+                  <a class="nav-link text-dark px-1 py-1 active" id="active-tasks-tab" data-toggle="tab" data-target="#activeTasks" role="tab" aria-controls="activetasks" aria-selected="true">
                       <div class="">
                         <% if @user.tasks.assigned.active.any? %>
                         <% end %>
@@ -38,7 +39,7 @@
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link text-dark px-1 py-1" id="completed-tasks-tab" data-toggle="tab" href="#completedTasks" role="tab" aria-controls="completedtasks" aria-selected="false">
+                  <a class="nav-link text-dark px-1 py-1" id="completed-tasks-tab" data-toggle="tab" data-target="#completedTasks" role="tab" aria-controls="completedtasks" aria-selected="false">
                     <div class="">
                       <% if @user.tasks.assigned.completed.any? %>
                       <% end %>
@@ -51,7 +52,7 @@
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link text-dark px-1 py-1" id="completed-todos-tab" data-toggle="tab" href="#allTodos" role="tab" aria-controls="completedtodos" aria-selected="false">
+                  <a class="nav-link text-dark px-1 py-1" id="completed-todos-tab" data-toggle="tab" data-target="#allTodos" role="tab" aria-controls="completedtodos" aria-selected="false">
                     <div class="">
                       <% if @user.tasks.my.any? %>
                       <% end %>
@@ -65,10 +66,11 @@
 
               </ul>
             </div>
+
         </div>
 
         <div class="tab-content" id="taskTabContent">
-
+          <!-- tab content -->
           <div class="tab-pane fade show active" id="activeTasks" role="tabpanel">
             <% @user.tasks.assigned.active.each do |request| %>
               <%= render partial: 'requests/request', locals: { request: request, task: true } %>

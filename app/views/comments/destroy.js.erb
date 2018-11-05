@@ -1,1 +1,3 @@
-$(".comment_<%= @comment.id %>").remove();
+var commentId = "<%= @comment.id %>";
+var comments = $('#request_<%= @request.id %>_comments')[0].parentElement;
+comments.innerHTML = ("<%= j render( partial: 'comments/comments', locals: {request: @request}) %>");

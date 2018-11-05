@@ -1,16 +1,16 @@
-<div class="list-group-item p-0" id="comment_<%= comment.id %>" href="Comment_<%= comment.id %>">
+<div class="list-group-item p-0" id="comment_<%= comment.id %>" >
   <div class="input-group">
     <div class="form-control border-0 <%= 'user-comment' if current_user==comment.user %>">
       <%= comment.content %>
     </div>
     <div class="input-group-append p-0 ml-auto flex-shrink-1">
     <% if comment.user == current_user %>
-        <%= link_to request_comment_path(comment.request, comment), method: :delete, data: { confirm: "Are you sure?" }, class: 'btn m-0', title: "delete?" do %>
+        <%= link_to request_comment_path(comment.request, comment), method: :delete, data: { confirm: "Are you sure?", comment_id: "#{comment.id}" }, class: 'btn m-0', title: "delete?", remote: true do %>
           <%= icon('fas', 'times', class: 'text-danger')  %>
         <% end %>
     <% else %>
         <div class="btn px-1 text-muted" title="sent on <%= format_date(comment.created_at) + " at " + format_time(comment.created_at)%>"><%= comment.user.display_name(false) %></div>
     <% end %>
-  </div>
+    </div>
   </div>
 </div>

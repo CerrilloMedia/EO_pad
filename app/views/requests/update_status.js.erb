@@ -1,11 +1,1 @@
-  var id = '<%= @request.id %>';
-  var status = '<%= @request.status %>';
-  var el = $('#request_status_' + id);
-
-  if (status == 'active') {
-    $(el).find('.toggle-holder').removeClass('bg-success').addClass('bg-warning').find('.toggle-circle').removeClass('toggle-circle-on');
-  } else {
-    $(el).find('.toggle-holder').removeClass('bg-warning').addClass('bg-success').find('.toggle-circle').addClass('toggle-circle-on');
-  }
-  $(el).attr('data-request-status', status);
-  $(el).find('.request-label').text(status);
+var status = '<%= @request.status %>';
