@@ -1,156 +1,154 @@
 <% self_ = current_user.is_self(@user) %>
-<div class="container pb-5 pb-sm-0">
+<div class="container-fluid pb-5 pb-sm-0 px-1 px-sm-2">
   <%= labeled_divider(label = self_ ? 'Your' : @user.display_name.concat("'s")) %>
 
-  <div class="d-md-flex mb-sm-2 mb-md-3">
-    <div class="p-0 col-12 col-md-8">
-      <div id="requests-window">
+  <div class="d-md-flex mb-sm-2 mb-md-3 ht-inherit">
 
+    <div class="left-sidebar col-12 col-md-4 col-lg-3 d-block px-1">
+      <div class="sticky-top pt-2">
 
-          <div class="">
-            <div class="d-none d-lg-inline col-6 position-absolute">
-              <ul class="nav nav-tabs">
-                <% if self_ %>
-                <li>
-                    <span class="">Your Tasks</span>
-                </li>
-                <% else %>
-                <li>
-                  <span class="">Tasks You've assigned to this member</span>
-                </li>
-                <% end %>
-              </ul>
-            </div>
-            <div class="d-block col-sm-6 col-md-8 col-lg-6 px-1 ml-auto ">
-              <!-- tab headers -->
-              <ul class="nav nav-tabs nav-justified mb-1" id="taskTab" role="tablist">
-
-                <li class="nav-item">
-                  <a class="nav-link text-dark px-1 py-1 active" id="active-tasks-tab" data-toggle="tab" data-target="#activeTasks" role="tab" aria-controls="activetasks" aria-selected="true">
-                      <div class="">
-                        <% if @user.tasks.assigned.active.any? %>
-                        <% end %>
-                        <span class="d-block">ACTIVE</span>
-                        <span class="badge badge-pill badge-dark">
-                          <%= @user.tasks.assigned.active.length %>
-                        </span>
-                      </div>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link text-dark px-1 py-1" id="completed-tasks-tab" data-toggle="tab" data-target="#completedTasks" role="tab" aria-controls="completedtasks" aria-selected="false">
-                    <div class="">
-                      <% if @user.tasks.assigned.completed.any? %>
-                      <% end %>
-                      <span class="d-block">COMPLETE</span>
-                      <span class="badge badge-pill badge-dark">
-                        <%= @user.tasks.assigned.completed.length %>
-                      </span>
-                    </div>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="nav-link text-dark px-1 py-1" id="completed-todos-tab" data-toggle="tab" data-target="#allTodos" role="tab" aria-controls="completedtodos" aria-selected="false">
-                    <div class="">
-                      <% if @user.tasks.my.any? %>
-                      <% end %>
-                      <span class="d-block">ToDo's</span>
-                      <span class="badge badge-pill badge-dark">
-                        <%= @user.tasks.my.length %>
-                      </span>
-                    </div>
-                  </a>
-                </li>
-
-              </ul>
-            </div>
-
-        </div>
-
-        <div class="tab-content" id="taskTabContent">
-          <!-- tab content -->
-          <div class="tab-pane fade show active" id="activeTasks" role="tabpanel">
-            <% @user.tasks.assigned.active.each do |request| %>
-              <%= render partial: 'requests/request', locals: { request: request, task: true } %>
-            <% end %>
-            <% unless @user.tasks.assigned.active.any? %>
-              <div class="text-dark card-body p-0 p-sm-1 mb-2 mb-sm-2">
-                <div class="card col bg-white rounded-0">
-                  <div class="rounded-0 row p-5">
-                    CONGRATULATIONS!<br>No Active requests
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
-
-          <div class="tab-pane fade" id="completedTasks" role="tabpanel">
-            <% @user.tasks.assigned.completed.each do |request| %>
-              <%= render partial: 'requests/request', locals: { request: request, task: true } %>
-            <% end %>
-            <% unless @user.tasks.assigned.completed.any? %>
-              <div class="text-dark card-body p-0 p-sm-1 mb-2 mb-sm-2">
-                <div class="card col bg-white rounded-0">
-                  <div class="rounded-0 row p-5">
-                    CONGRATULATIONS!<br>All completed requests removed
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
-
-          <div class="tab-pane fade" id="allTodos" role="tabpanel">
-            <% @user.tasks.my.each do |task| %>
-              <%= render partial: 'requests/request', locals: { request: task, task: true } %>
-            <% end %>
-            <% unless @user.tasks.my.any? %>
-              <div class="text-dark card-body p-0 p-sm-1 mb-2 mb-sm-2">
-                <div class="card col bg-white rounded-0">
-                  <div class="rounded-0 row p-5">
-                    CONGRATULATIONS!<br>All personal To-Do's removed
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
-
-        </div>
-    </div>
-  </div>
-
-  <div class="d-none d-sm-block d-md-inline col-md-4 px-1 mt-5">
-    <div id="profile_sidebar" class="sidebar sticky-top sticky-top-5 pt-2">
-      <div class="card border border-warning">
-        <div class="card-header p-2 p-md-3">
-          <div class="card-title mb-sm-1">
-            <%= @user.display_name %>
-          </div>
-        </div>
-        <div class="p-2 p-lg-3">
-          <div class="col-6 col-md-12 d-dm-block float-sm-left float-md-none px-0">
-              <%= link_to new_request_path(:recipient_id => params[:id]), class: "rounded-0 btn text-success text-center text-md-left d-block" do %>
-                <%= icon('fas', 'plus') %><span class="ml-2"><%= current_user.is_self(@user) ? 'Create a task' : 'Send a request' %></span>
-              <% end %>
-          </div>
-          <div class="col-6 col-md-12 d-dm-block float-sm-left float-md-none px-0">
+        <div class="card d-none d-sm-block p-1 border-bottom-0 rounded-0">
+          <ul class="nav nav-tabs">
             <% if self_ %>
-              <%= link_to edit_user_registration_path, class: 'rounded-0 btn text-success text-sm-center text-md-left d-block' do %>
-                <%= icon('fas', 'user-cog') %><span class="ml-2">Account Settings</span>
-              <% end %>
+            <li>
+              <span class="">Your Tasks</span>
+            </li>
+            <% else %>
+            <li>
+              <span class="">Tasks You've assigned</span>
+            </li>
             <% end %>
+          </ul>
+        </div>
+        <div class="card bg-warning border-top-0 rounded-0">
+          <!-- tab headers -->
+          <ul class="nav nav-tabs mb-1 d-block" id="taskTab" role="tablist">
+
+            <li class="nav-item d-block">
+              <a class="nav-link text-light p-1 active" id="active-tasks-tab" data-toggle="tab" data-target="#activeTasks" role="tab" aria-controls="activetasks" aria-selected="true">
+                <div class="d-flex">
+                  <% if @user.tasks.assigned.active.any? %>
+                  <% end %>
+                  <span class="flex-grow-1">ACTIVE</span>
+                  <span class="badge badge-pill badge-light">
+                    <%= @user.tasks.assigned.active.length %>
+                  </span>
+                </div>
+              </a>
+            </li>
+
+            <li class="nav-item d-block">
+              <a class="nav-link text-light p-1" id="completed-tasks-tab" data-toggle="tab" data-target="#completedTasks" role="tab" aria-controls="completedtasks" aria-selected="false">
+                <div class="d-flex">
+                  <% if @user.tasks.assigned.completed.any? %>
+                  <% end %>
+                  <span class="flex-grow-1">COMPLETED</span>
+                  <span class="badge badge-pill badge-light">
+                    <%= @user.tasks.assigned.completed.length %>
+                  </span>
+                </div>
+              </a>
+            </li>
+
+            <li class="nav-item d-block">
+              <a class="nav-link text-light p-1" id="completed-todos-tab" data-toggle="tab" data-target="#allTodos" role="tab" aria-controls="completedtodos" aria-selected="false">
+                <div class="d-flex">
+                  <% if @user.tasks.my.any? %>
+                  <% end %>
+                  <span class="flex-grow-1">TASKS</span>
+                  <span class="badge badge-pill badge-light">
+                    <%= @user.tasks.my.length %>
+                  </span>
+                </div>
+              </a>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div id="requests-window" class="col-12 col-md-8 col-lg-6 d-block px-1 pt-2">
+      <div class="col tab-content p-0" id="taskTabContent">
+        <!-- tab content -->
+        <div class="tab-pane fade show active" id="activeTasks" role="tabpanel">
+          <% @user.tasks.assigned.active.each do |request| %>
+            <%= render partial: 'requests/request', locals: { request: request, task: true } %>
+          <% end %>
+          <% unless @user.tasks.assigned.active.any? %>
+            <div class="text-dark card-body p-0 mb-2">
+              <div class="card col bg-white rounded-0">
+                <div class="rounded-0 row p-5">
+                  CONGRATULATIONS!<br>No Active requests
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="tab-pane fade" id="completedTasks" role="tabpanel">
+          <% @user.tasks.assigned.completed.each do |request| %>
+            <%= render partial: 'requests/request', locals: { request: request, task: true } %>
+          <% end %>
+          <% unless @user.tasks.assigned.completed.any? %>
+            <div class="text-dark card-body p-0 mb-2">
+              <div class="card col bg-white rounded-0">
+                <div class="rounded-0 row p-5">
+                  CONGRATULATIONS!<br>All completed requests removed
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="tab-pane fade" id="allTodos" role="tabpanel">
+          <% @user.tasks.my.each do |task| %>
+            <%= render partial: 'requests/request', locals: { request: task, task: true } %>
+          <% end %>
+          <% unless @user.tasks.my.any? %>
+            <div class="text-dark card-body p-0 mb-2">
+              <div class="card col bg-white rounded-0">
+                <div class="rounded-0 row p-5">
+                  CONGRATULATIONS!<br>All personal To-Do's removed
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+    <div class="d-none d-lg-inline col-md-3 px-1">
+      <div id="profile_sidebar" class="sidebar sticky-top pt-2">
+        <div class="card border border-warning">
+          <div class="card-header p-2 p-md-3">
+            <div class="card-title mb-sm-1">
+              <%= @user.display_name %>
+            </div>
           </div>
-          <div class="d-flex border-top pt-2 mt-2 w-100">
-            <span class="small text-muted d-block"><i>Last logged in: <%= format_date(current_user.last_sign_in_at) + " at " + format_time(current_user.last_sign_in_at) %></i></span>
+          <div class="p-2 p-lg-3">
+            <div class="col-6 col-md-12 d-dm-block float-sm-left float-md-none px-0">
+                <%= link_to new_request_path(:recipient_id => params[:id]), class: "rounded-0 btn text-success text-center text-md-left d-block" do %>
+                  <%= icon('fas', 'plus') %><span class="ml-2"><%= current_user.is_self(@user) ? 'Create a task' : 'New Request' %></span>
+                <% end %>
+            </div>
+            <div class="col-6 col-md-12 d-dm-block float-sm-left float-md-none px-0">
+              <% if self_ %>
+                <%= link_to edit_user_registration_path, class: 'rounded-0 btn text-success text-sm-center text-md-left d-block' do %>
+                  <%= icon('fas', 'user-cog') %><span class="ml-2">Account Settings</span>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="d-flex border-top pt-2 mt-2 w-100">
+              <span class="small text-muted d-block"><i>Last logged in: <%= format_date(current_user.last_sign_in_at) + " at " + format_time(current_user.last_sign_in_at) %></i></span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </div>
 
-<div id="mobile_footer sticky_footer" class="d-block d-sm-none fixed-bottom text-center">
+<div id="mobile_footer sticky_footer" class="d-block d-lg-none fixed-bottom text-center">
   <% recipient = self_ ? {} : {:recipient_id => params[:id]} %>
   <div class="btn-group w-100 bg-dark">
 

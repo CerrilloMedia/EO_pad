@@ -2,7 +2,7 @@ class RequestsController < ApplicationController
   before_action :authenticate_user!
 
   before_action :get_request, only: [:show, :edit, :update, :destroy, :update_status]
-  before_action :set_user, only: [:new,:create,:update]
+  before_action :set_user, only: [:new,:create,:edit,:update, :destroy]
 
   def index
     @user = current_user
@@ -44,7 +44,10 @@ class RequestsController < ApplicationController
   end
 
   def edit
-    @user = @request.recipient
+    if @user != @request.user && @user != @request.recipient
+      flash[:alert] = "you do not have appropriate permission"
+      redirect_to @request
+    end
   end
 
   def update
@@ -66,16 +69,12 @@ class RequestsController < ApplicationController
 
   def destroy
 
-    if current_user.id != @request.user_id
-      flash[:alert] = "access denied"
-      redirect_to @request
-    end
-    if @request.destroy
+    if (current_user == @request.user || current_user == @request.recipient) && @request.destroy
         respond_to do |format|
           format.js
-          fortmat.html {
+          format.html {
             flash[:notice] = "request removed"
-            redirect_to root_path
+            redirect_to profiles_path(current_user)
           }
         end
     else
@@ -90,8 +89,10 @@ class RequestsController < ApplicationController
   end
 
   def update_status
-    @request.active? ? @request.completed! : @request.active!
 
+    @request.status = @request.active? ? "completed" : "active"
+
+    if (current_user == @request.user || current_user == @request.recipient)
       if @request.save
         respond_to do |format|
           format.js
@@ -101,12 +102,22 @@ class RequestsController < ApplicationController
         end
       else
         respond_to do |format|
-          format.js
+          format.js {
+            render status: 422
+          }
           format.html {
-            flash[:alert] = "Error with request update"
+            flash[:alert] = "unable to process"
           }
         end
       end
+    else
+      respond_to do |format|
+        format.js { render status: 422}
+        format.html {
+          flash[:alert] = "you do not have the appropriate permissions for this action."
+        }
+      end
+    end
 
   end
 

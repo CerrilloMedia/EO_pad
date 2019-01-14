@@ -35,7 +35,7 @@ module RequestsHelper
                   end
 
     joiner = "::" if date.count + time.count == 2
-    [date,["<br>"],time].flatten.join(" ").html_safe
+    [date,time].flatten.join(" ").html_safe
   end
 
 

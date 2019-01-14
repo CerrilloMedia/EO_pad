@@ -45,6 +45,8 @@ gem 'cocoon'
 
 gem 'devise'
 
+gem "sprockets", ">= 3.7.2"
+
 group :production do
   gem 'rails_12factor'
 end

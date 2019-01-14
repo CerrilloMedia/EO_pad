@@ -17,7 +17,7 @@
 
             </div>
             <%= tag.div @request.client_name, class:'request-name col-12 p-0' %>
-            <div class="request-body border border-warning p-2 mb-2 mt-1">
+            <div class="request-body border border-warning p-2 mb-2 mt-1 bg-white">
               <div class="mb-2"><%= simple_format @request.body %></div>
             </div>
           <% if @request.availabilities.any? %>
@@ -108,12 +108,18 @@
         <div class="user-mini-dash d-inline-flex w-100">
 
             <div class="border-bottom border-warning flex-column w-100">
-              <div class="card-header p-2 p-md-3">
+              <div class="card-header p-2 px-lg-3 no-bg border-0">
                 <div class="card-title mb-sm-1">
-                  <%= @recipient.display_name %>
+                  <% if @recipient != current_user %>
+                    <%= link_to profiles_url(@recipient) do %>
+                      <% @recipient.display_name %>
+                    <% end %>
+                  <% else %>
+                    <%= @recipient.display_name %>
+                  <% end %>
                 </div>
               </div>
-              <div class="p-2 p-lg-3">
+              <div class="p-2 px-lg-3">
                 <div class="col-6 col-md-12 d-dm-block float-sm-left float-md-none px-0">
                     <%= link_to new_request_path(@recipient), class: "rounded-0 btn text-success text-center text-md-left d-block" do %>
                       <%= icon('fas', 'plus') %><span class="ml-2"><%= current_user.is_self(@recipient) ? 'Create a task' : 'Send a request' %></span>

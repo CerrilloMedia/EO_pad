@@ -1,15 +1,15 @@
-<div class="container mt-1">
+<div class="container-fluid mt-1">
   <div class="row">
-  <div class="card col col-sm-8 col-lg-9 px-0 mt-1">
+  <div class="main-content col col-sm-9 col-lg-10 px-1">
 
-    <div class="card-body p-0 p-sm-2">
+
       <% if @users %>
       <div class="d-flex flex-wrap">
         <% @users.each do |u| %>
-            <div class= 'col-6 col-sm-6 col-lg-3 p-2 dashboard-link'>
-              <%= link_to profiles_path(u), class: 'btn btn-outline-secondary w-100 user-profile-card border-0' do %>
-                <div class="d-flex position-relative flex-wrap align-items-stretch">
-                    <div class="d-flex align-items-center mb-0 text-center">
+            <div class= 'col-6 col-sm-4 col-md-3 col-xl-2 p-2 dashboard-link ht-100'>
+              <%= link_to profiles_path(u), class: 'card btn btn-outline-secondary w-100 user-profile-card h-100' do %>
+                <div class="d-flex position-relative flex-wrap">
+                    <div class="mb-0 text-center">
                       <div class="rounded-circle border border-warning">
                         <span class="fa-stack fa-2x">
                           <%= icon('fas','user', class: 'fa-stack-1x')%>
@@ -28,10 +28,10 @@
         <% end %>
       </div>
       <% end %>
-    </div>
+
   </div>
 
-  <div class="right-sidebar d-none d-sm-block d-md-inline col-sm-4 col-lg-3 px-1">
+  <div class="right-sidebar d-none d-sm-block d-md-inline col-sm-3 col-lg-2 px-1 pt-1">
     <div id="profile_sidebar" class="sidebar sticky-top pt-1">
       <div class="card border border-warning">
         <div class="card-header p-2 p-md-3">
