@@ -1,77 +1,106 @@
 <% self_ = current_user.is_self(@user) %>
-<div class="container-fluid pb-5 pb-sm-0 px-1 px-sm-2">
-  <%= labeled_divider(label = self_ ? 'Your' : @user.display_name.concat("'s")) %>
+<%= labeled_divider(label = self_ ? 'Your' : @user.display_name.concat("'s")) %>
+<div class="container-fluid px-1 p-sm-2 p-md-0 full-height position-absolute">
 
-  <div class="d-md-flex mb-sm-2 mb-md-3 ht-inherit">
+  <div class="d-md-flex min-ht-100">
 
-    <div class="left-sidebar col-12 col-md-4 col-lg-3 d-block px-1">
+    <div class="left-sidebar col-12 col-md-4 col-lg-3 mx-0 mt-1 mt-md-0 px-0 bg-teal">
+      <!-- STICKY TOP CONTAINER -->
       <div class="sticky-top pt-2">
+          <div class="border-top-0 rounded-0">
+            <!-- tab headers -->
+            <ul class="nav nav-tabs mb-1 d-block text-white" id="taskTab" role="tablist">
 
-        <div class="card d-none d-sm-block p-1 border-bottom-0 rounded-0">
-          <ul class="nav nav-tabs">
-            <% if self_ %>
-            <li>
-              <span class="">Your Tasks</span>
-            </li>
-            <% else %>
-            <li>
-              <span class="">Tasks You've assigned</span>
-            </li>
-            <% end %>
-          </ul>
-        </div>
-        <div class="card bg-warning border-top-0 rounded-0">
-          <!-- tab headers -->
-          <ul class="nav nav-tabs mb-1 d-block" id="taskTab" role="tablist">
+              <!-- REQUESTS ASSIGNED TO USER -->
+              <li>
+                <div class="col text-center">Your Tasks</div>
+              </li>
+              <li class="nav-item d-block">
+                <a class="nav-link text-light p-1" id="active-assigned-tab" data-toggle="tab" data-target="#activeAssigned" role="tab" aria-controls="activeAssigned" aria-selected="true">
+                  <div class="d-flex px-2 px-md-1">
+                    <span class="flex-grow-1">ACTIVE</span>
+                    <span class="badge badge-pill badge-light">
+                      <%= @user.tasks.assigned.active.length %>
+                    </span>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item d-block">
+                <a class="nav-link text-light p-1" id="completed-assigned-tab" data-toggle="tab" data-target="#completedAssigned" role="tab" aria-controls="completedAssigned" aria-selected="false">
+                  <div class="d-flex px-2 px-md-1">
+                    <span class="flex-grow-1">COMPLETED</span>
+                    <span class="badge badge-pill badge-light">
+                      <%= @user.tasks.assigned.completed.length %>
+                    </span>
+                  </div>
+                </a>
+              </li>
 
-            <li class="nav-item d-block">
-              <a class="nav-link text-light p-1 active" id="active-tasks-tab" data-toggle="tab" data-target="#activeTasks" role="tab" aria-controls="activetasks" aria-selected="true">
-                <div class="d-flex">
-                  <% if @user.tasks.assigned.active.any? %>
-                  <% end %>
-                  <span class="flex-grow-1">ACTIVE</span>
-                  <span class="badge badge-pill badge-light">
-                    <%= @user.tasks.assigned.active.length %>
-                  </span>
-                </div>
-              </a>
-            </li>
+              <!-- REQUESTS ASSIGNED BY USER -->
+              <li>
+                <div class="col text-center">Your Requests</div>
+              </li>
+              <li class="nav-item d-block">
+                <a class="nav-link text-light p-1" id="active-requests-tab" data-toggle="tab" data-target="#activeRequests" role="tab" aria-controls="activeRequests" aria-selected="false">
+                  <div class="d-flex px-2 px-md-1">
+                    <span class="flex-grow-1">ACTIVE</span>
+                    <span class="badge badge-pill badge-light">
+                      <%= @user.requests.assigned.active.length %>
+                    </span>
+                  </div>
+                </a>
+              </li>
 
-            <li class="nav-item d-block">
-              <a class="nav-link text-light p-1" id="completed-tasks-tab" data-toggle="tab" data-target="#completedTasks" role="tab" aria-controls="completedtasks" aria-selected="false">
-                <div class="d-flex">
-                  <% if @user.tasks.assigned.completed.any? %>
-                  <% end %>
-                  <span class="flex-grow-1">COMPLETED</span>
-                  <span class="badge badge-pill badge-light">
-                    <%= @user.tasks.assigned.completed.length %>
-                  </span>
-                </div>
-              </a>
-            </li>
+              <li class="nav-item d-block">
+                <a class="nav-link text-light p-1" id="completed-requests-tab" data-toggle="tab" data-target="#completedRequests" role="tab" aria-controls="completedRequests" aria-selected="false">
+                  <div class="d-flex px-2 px-md-1">
+                    <span class="flex-grow-1">COMPLETED</span>
+                    <span class="badge badge-pill badge-light">
+                      <%= @user.requests.assigned.completed.length %>
+                    </span>
+                  </div>
+                </a>
+              </li>
 
-            <li class="nav-item d-block">
-              <a class="nav-link text-light p-1" id="completed-todos-tab" data-toggle="tab" data-target="#allTodos" role="tab" aria-controls="completedtodos" aria-selected="false">
-                <div class="d-flex">
-                  <% if @user.tasks.my.any? %>
-                  <% end %>
-                  <span class="flex-grow-1">TASKS</span>
-                  <span class="badge badge-pill badge-light">
-                    <%= @user.tasks.my.length %>
-                  </span>
-                </div>
-              </a>
-            </li>
+              <!-- REQUESTS ASSIGNED TO SELF -->
+              <li>
+                <div class="col text-center">Your ToDo's</div>
+              </li>
+              <li class="nav-item d-block">
+                <a class="nav-link text-light p-1 active show" id="active-todos-tab" data-toggle="tab" data-target="#activeTodos" role="tab" aria-controls="activeTodos" aria-selected="false">
+                  <div class="d-flex px-2 px-md-1">
+                    <span class="flex-grow-1">ACTIVE</span>
+                    <span class="badge badge-pill badge-light">
+                      <%= @user.tasks.my.active.length %>
+                    </span>
+                  </div>
+                </a>
+              </li>
 
-          </ul>
-        </div>
+              <li class="nav-item d-block">
+                <a class="nav-link text-light p-1" id="completed-todos-tab" data-toggle="tab" data-target="#completedTodos" role="tab" aria-controls="completedTodos" aria-selected="false">
+                  <div class="d-flex px-2 px-md-1">
+                    <span class="flex-grow-1">COMPLETED</span>
+                    <span class="badge badge-pill badge-light">
+                      <%= @user.tasks.my.completed.length %>
+                    </span>
+                  </div>
+                </a>
+              </li>
+
+            </ul>
+
+          </div>
 
       </div>
     </div>
-    <div id="requests-window" class="col-12 col-md-8 col-lg-6 d-block px-1 pt-2">
-      <div class="col tab-content p-0" id="taskTabContent">
+
+    <div id="requests-window" class="col-12 col-md-8 col-lg-6 pb-2 px-1 pt-1 px-md-2 pt-md-2 pr-lg-1">
+      <div class="col tab-content p-0" id="assignedTabContent">
         <!-- tab content -->
-        <div class="tab-pane fade show active" id="activeTasks" role="tabpanel">
+
+        <!-- REQUESTS ASSIGNED TO USER -->
+        <div class="tab-pane fade show active" id="activeAssigned" role="tabpanel">
           <% @user.tasks.assigned.active.each do |request| %>
             <%= render partial: 'requests/request', locals: { request: request, task: true } %>
           <% end %>
@@ -86,7 +115,7 @@
           <% end %>
         </div>
 
-        <div class="tab-pane fade" id="completedTasks" role="tabpanel">
+        <div class="tab-pane fade" id="completedAssigned" role="tabpanel">
           <% @user.tasks.assigned.completed.each do |request| %>
             <%= render partial: 'requests/request', locals: { request: request, task: true } %>
           <% end %>
@@ -101,11 +130,58 @@
           <% end %>
         </div>
 
-        <div class="tab-pane fade" id="allTodos" role="tabpanel">
-          <% @user.tasks.my.each do |task| %>
+        <!-- REQUESTS USER HAS ASSIGNED -->
+        <div class="tab-pane fade" id="activeRequests" role="tabpanel">
+          <% @user.requests.assigned.active.each do |request| %>
+            <%= render partial: 'requests/request', locals: { request: request, task: true } %>
+          <% end %>
+          <% unless @user.requests.assigned.active.any? %>
+            <div class="text-dark card-body p-0 mb-2">
+              <div class="card col bg-white rounded-0">
+                <div class="rounded-0 row p-5">
+                  CONGRATULATIONS!<br>No Active requests
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="tab-pane fade" id="completedRequests" role="tabpanel">
+          <% @user.requests.assigned.completed.each do |request| %>
+            <%= render partial: 'requests/request', locals: { request: request, task: true } %>
+          <% end %>
+          <% unless @user.requests.assigned.completed.any? %>
+            <div class="text-dark card-body p-0 mb-2">
+              <div class="card col bg-white rounded-0">
+                <div class="rounded-0 row p-5">
+                  CONGRATULATIONS!<br>All completed requests removed
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- PERSONAL USER TODO'S -->
+        <div class="tab-pane fade" id="activeTodos" role="tabpanel">
+          <% @user.tasks.my.active.each do |task| %>
             <%= render partial: 'requests/request', locals: { request: task, task: true } %>
           <% end %>
-          <% unless @user.tasks.my.any? %>
+          <% unless @user.tasks.my.active.any? %>
+            <div class="text-dark card-body p-0 mb-2">
+              <div class="card col bg-white rounded-0">
+                <div class="rounded-0 row p-5">
+                  CONGRATULATIONS!<br>All personal To-Do's removed
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="tab-pane fade" id="completedTodos" role="tabpanel">
+          <% @user.tasks.completed.my.each do |task| %>
+            <%= render partial: 'requests/request', locals: { request: task, task: true } %>
+          <% end %>
+          <% unless @user.tasks.my.completed.any? %>
             <div class="text-dark card-body p-0 mb-2">
               <div class="card col bg-white rounded-0">
                 <div class="rounded-0 row p-5">
@@ -118,7 +194,9 @@
 
       </div>
     </div>
-    <div class="d-none d-lg-inline col-md-3 px-1">
+
+    <!-- RIGHT SIDEBAR -->
+    <div class="d-none d-lg-inline col-md-3 pl-1 pr-2">
       <div id="profile_sidebar" class="sidebar sticky-top pt-2">
         <div class="card border border-warning">
           <div class="card-header p-2 p-md-3">

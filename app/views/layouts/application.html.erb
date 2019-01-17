@@ -64,18 +64,16 @@
 
       <% if flash.any? %>
       <!-- ERROR messages -->
-
-      <div id="sitewide-alert" class="shadow my-2 small alert alert-warning alert-dismissible fade show">
-        <button type="button" class="close" data-dismiss="alert" ><%= icon("fas", "times", class: 'fa-sm float-right', id: 'alert-close' ) %></button>
-        <% flash.each do |name,msg| %>
-          <% unless name == "timedout" %>
-            <%= content_tag :div, id: "flash-alert", role:"alert" do %>
-              <%= msg %>
+        <div id="sitewide-alert" class="shadow my-2 small alert alert-dismissible fade show bg-white border d-flex">
+          <button type="button" class="close align-self-center h-100" data-dismiss="alert" ><%= icon("fas", "times", class: 'fa-sm float-right', id: 'alert-close' ) %></button>
+          <% flash.each do |name,msg| %>
+            <% unless name == "timedout" %>
+              <div id="flash-alert" role="alert" class="<%= alert_for(flash.first[0]) %> strong h6 my-1">
+                <%= msg %>
+              </div>
+              <% end %>
             <% end %>
-          <% end %>
-        <% end %>
-
-      </div>
+        </div>
       <% end %>
 
       <%= yield %>

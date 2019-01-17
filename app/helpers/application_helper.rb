@@ -17,10 +17,10 @@ module ApplicationHelper
   def alert_for(flash_type)
     # hash[key_as_sym]
     {
-        :success => 'alert-success',
-        :error => 'alert-damage',
-        :alert => 'alert-warning',
-        :notice => 'alert-info'
+        :success => 'text-success',
+        :error => 'text-danger',
+        :alert => 'text-warning',
+        :notice => 'text-info'
     }[flash_type.to_sym] || flash_type.to_s
   end
 
