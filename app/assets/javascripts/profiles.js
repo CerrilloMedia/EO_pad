@@ -19,7 +19,8 @@ $( document ).on('turbolinks:load', function() {
 
       $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
         var id = $(e.target)[0].dataset.target;
-        sessionStorage.setItem('selectedTab', id)
+        sessionStorage.setItem('selectedTab', id);
+        console.log(sessionStorage);
       });
 
       var selectedTab = sessionStorage.getItem('selectedTab');

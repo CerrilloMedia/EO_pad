@@ -1,7 +1,7 @@
 module ProfilesHelper
 
 def labeled_divider(label, dashboard=true)
-
+  
   ('<div class="col px-0 px-sm-1">
     <div class="d-flex py-2">
       <div class="col col-sm-2 pt-1 pl-0">

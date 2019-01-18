@@ -38,5 +38,4 @@ module RequestsHelper
     [date,time].flatten.join(" ").html_safe
   end
 
-
 end

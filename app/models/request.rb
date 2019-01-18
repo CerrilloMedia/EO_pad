@@ -24,5 +24,14 @@ class Request < ApplicationRecord
   scope :active, -> { where(status: 'active') }
   scope :my, -> { where("user_id = recipient_id") }
   scope :assigned, -> { where("user_id != recipient_id") }
+  scope :to_user, ->(user=nil) { where(recipient: user)}
+  scope :from_user, ->(user=nil) { where(user: user)}
+
+  def participants(*args)
+    args.each do |user|
+      return true if self.user == user || self.recipient == user
+    end
+    false
+  end
 
 end

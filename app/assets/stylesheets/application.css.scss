@@ -386,6 +386,22 @@ div[id^='request_block_']>div:hover {
   right: 0;
 }
 
+#mobile_footer.fixed-bottom {
+  bottom: -16vh;
+  transition: bottom 200ms ease-in-out;
+}
+
+.btn-circle {
+  border: 1px solid #5c6064fa;
+  width: 5vw;
+  height: 5vw;
+  position: relative;
+  margin-top: -1vw;
+  border-radius: 10vw;
+  font-size: 2.25em;
+  transition: all 200ms ease-in;
+}
+
 // mobile zoom override & empty input min-height
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   select,
@@ -395,23 +411,31 @@ div[id^='request_block_']>div:hover {
   }
 }
 
+
 @media screen and (max-width: 991.98px) {
   .user-profile-card {
     font-size: .85em;
   }
-.btn-circle {
-  border: 1px solid #5c6064fa;
-  width: 10vw;
-  height: 10vw;
-  position: relative;
-  margin-top: -3vw;
-  border-radius: 10vw;
-  font-size: 2.25em;
-}
+  .btn-circle {
+    border: 1px solid #5c6064fa;
+    width: 7vw;
+    height: 7vw;
+    position: relative;
+    margin-top: -1vw;
+    border-radius: 10vw;
+    font-size: 1.75em;
+  }
+
+  #mobile_footer.fixed-bottom {
+    bottom: 0;
+    transition: bottom 200ms ease-in-out;
+  }
+
 
 }
 
 @media screen and (max-width: 575.98px) {
+
   a {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
@@ -512,6 +536,12 @@ div[id^='request_block_']>div:hover {
   .list-group-item > .input-group > .input-group-append {
     opacity: 1;
     width: initial;
+  }
+
+  #taskTab {
+    .nav-link:hover {
+      padding-left: .25em !important;
+    }
   }
 
 }

@@ -67,6 +67,7 @@
       <div class="d-flex mt-2 justify-content-end">
         <div class="w-50 text-left">
 
+          <% if request.participants(current_user) %>
           <div id="request_status_<%= request.id %>" class="d-flex" data-request-status="<%= request.status %>">
             <%= link_to update_status_request_path(request), remote: true, method: :patch, class: 'text-dark nav-link p-0' do %>
               <% if request.completed? %>
@@ -89,6 +90,7 @@
               <% end %>
             <% end %>
           </div>
+          <% end %>
 
         </div>
         <div class="w-50 text-right">
