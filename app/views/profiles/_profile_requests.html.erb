@@ -1,0 +1,99 @@
+<div class="col tab-content p-0" id="assignedTabContent">
+  <!-- tab content -->
+
+  <!-- REQUESTS ASSIGNED TO USER -->
+  <div class="tab-pane fade" id="activeAssigned" role="tabpanel">
+    <% user.tasks.assigned.active.each do |r| %>
+      <%= render partial: 'requests/request', locals: { request: r, user: user } %>
+    <% end %>
+    <% unless user.tasks.assigned.active.any? %>
+      <div class="text-dark card-body p-0 mb-2">
+        <div class="card col bg-white rounded-0">
+          <div class="rounded-0 row p-5">
+            No active tasks
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade" id="completedAssigned" role="tabpanel">
+    <% user.tasks.assigned.completed.each do |r| %>
+      <%= render partial: 'requests/request', locals: { request: r, user: user } %>
+    <% end %>
+    <% unless user.tasks.completed.any? %>
+      <div class="text-dark card-body p-0 mb-2">
+        <div class="card col bg-white rounded-0">
+          <div class="rounded-0 row p-5">
+            No completed tasks
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- REQUESTS USER HAS ASSIGNED -->
+  <div class="tab-pane fade" id="activeRequests" role="tabpanel">
+    <% user.requests.assigned.active.each do |r| %>
+      <%= render partial: 'requests/request', locals: { request: r, user: user } %>
+    <% end %>
+    <% unless user.requests.assigned.active.any? %>
+      <div class="text-dark card-body p-0 mb-2">
+        <div class="card col bg-white rounded-0">
+          <div class="rounded-0 row p-5">
+            No active requests
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade" id="completedRequests" role="tabpanel">
+    <% user.requests.assigned.completed.each do |r| %>
+      <%= render partial: 'requests/request', locals: { request: r, user: user } %>
+    <% end %>
+    <% unless user.requests.assigned.completed.any? %>
+      <div class="text-dark card-body p-0 mb-2">
+        <div class="card col bg-white rounded-0">
+          <div class="rounded-0 row p-5">
+            No completed requests
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- PERSONAL USER TODO'S -->
+  <% if self_ %>
+  <div class="tab-pane fade" id="activeTodos" role="tabpanel">
+    <% user.tasks.my.active.each do |r| %>
+      <%= render partial: 'requests/request', locals: { request: r, user: user } %>
+    <% end %>
+    <% unless user.tasks.my.active.any? %>
+      <div class="text-dark card-body p-0 mb-2">
+        <div class="card col bg-white rounded-0">
+          <div class="rounded-0 row p-5">
+            CONGRATULATIONS!<br>All personal To-Do's removed
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade" id="completedTodos" role="tabpanel">
+    <% user.tasks.my.completed.each do |r| %>
+      <%= render partial: 'requests/request', locals: { request: r, user: user } %>
+    <% end %>
+    <% unless user.tasks.my.completed.any? %>
+      <div class="text-dark card-body p-0 mb-2">
+        <div class="card col bg-white rounded-0">
+          <div class="rounded-0 row p-5">
+            CONGRATULATIONS!<br>All personal To-Do's removed
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% end %>
+
+</div>

@@ -92,10 +92,18 @@ class RequestsController < ApplicationController
 
     @request.status = @request.active? ? "completed" : "active"
 
-    if (current_user == @request.user || current_user == @request.recipient)
+    if @request.participants(current_user)
+
+      profile_id = request.referrer.match(/profile\/\d+/) ? request.referrer.match(/profile\/(\d+)/)[1].to_i : current_user.id
+
+      if profile_id
+        @user = User.find(profile_id)
+      end
+
       if @request.save
         respond_to do |format|
-          format.js
+          format.js {
+          }
           format.html {
             flash[:notice] = "Request status updated"
           }
@@ -103,6 +111,7 @@ class RequestsController < ApplicationController
       else
         respond_to do |format|
           format.js {
+            # render status: 422
             render status: 422
           }
           format.html {
@@ -111,8 +120,10 @@ class RequestsController < ApplicationController
         end
       end
     else
+      puts "error from non-authorized user"
+      puts @request
       respond_to do |format|
-        format.js { render status: 422}
+        format.js { render status: 422 }
         format.html {
           flash[:alert] = "you do not have the appropriate permissions for this action."
         }

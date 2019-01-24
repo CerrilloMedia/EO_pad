@@ -1,1 +1,9 @@
-var status = '<%= @request.status %>';
+var request = {
+  id: "<%= @request.id %>",
+  status: '<%= @request.status %>'
+}
+$('#taskTab').show(function() {
+  request.profile_user = $('#taskTab')[0].dataset.userId;
+  request.sidebar = "<%= j (render partial: 'profiles/profile_sidebar',   locals: { self_: @user.is_self(current_user), user: @user }) %>";
+  request.requests = "<%= j (render partial: 'profiles/profile_requests', locals: { self_: @user.is_self(current_user), user: @user }) %>";
+});

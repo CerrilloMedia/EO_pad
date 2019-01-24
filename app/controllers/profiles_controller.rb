@@ -3,14 +3,6 @@ class ProfilesController < ApplicationController
   before_action :get_user, only: [:show]
 
   def show
-    @tasks    = @user.tasks    # incoming tasks from other users
-    @requests = @user.requests # outbound requests from user
-    @todos    = @requests.my   # self assigned requests
-
-    if !profile_user_self
-      @tasks, @requests = @tasks.from_user(current_user), @requests.to_user(current_user)
-    end
-
   end
 
   private

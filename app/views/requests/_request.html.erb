@@ -1,9 +1,11 @@
 <div class="text-dark card-body p-0 pb-1" id="request_block_<%= request.id %>">
   <div class="flex-column position-relative bg-white rounded-0 p-2 py-md-1 border">
     <div class=" bg-white rounded-0 d-flex justify-content-between">
-      <div id="request_header_<%= request.id %>" class="d-block flex-sm-grow-1 d-sm-flex justify-content-sm-between align-items-center w-100 py-2">
-          <%= tag.div request.subject, class: '' %>
-          <%= tag.div time_ago_in_words(request.created_at) + " ago ", class: 'small mr-2' %>
+      <div id="request_header_<%= request.id %>" class="d-sm-flex justify-content-between align-items-center w-100 py-0 py-sm-2">
+          <span class="d-flex flex-grow-1"><%= request.subject %></span>
+          <span class='small d-block mr-2'>
+            <%= time_ago_in_words(request.created_at) + " ago " %>
+          </span>
       </div>
 
       <div id="request_<%= request.id %>_tools" class="request-tools align-items-center">
@@ -18,13 +20,13 @@
         <%= link_to edit_request_path(request), class: 'btn p-2 p-sm-0 px-sm-1 text-dark btn-lg' do %>
           <%= icon('fas', 'edit') %>
         <% end %>
-        <a class="btn p-2 p-sm-0 px-sm-1 text-dark btn-lg" href="#request_body_<%= request.id %>" data-toggle="collapse" data-loading-text="open" aria-expanded="false">
+        <a class="btn p-2 p-sm-0 px-sm-1 text-dark btn-lg" href="#toggle_<%= request.id %>" data-toggle="collapse" data-loading-text="open" aria-expanded="false">
           <%= icon('fas', 'info-circle', class: 'bs-toggle') %>
         </a>
       </div>
 
     </div>
-    <div class="flex-column collapse" id="request_body_<%= request.id %>" aria-expanded="false">
+    <div class="flex-column collapse" id="toggle_<%= request.id %>" aria-expanded="false">
 
         <div class="py-1 my-1">
           <%= tag.i request.client_name, class: "font-weight-bold" %>
@@ -63,13 +65,12 @@
               </div>
             <% end %>
 
-
       <div class="d-flex mt-2 justify-content-end">
         <div class="w-50 text-left">
 
           <% if request.participants(current_user) %>
           <div id="request_status_<%= request.id %>" class="d-flex" data-request-status="<%= request.status %>">
-            <%= link_to update_status_request_path(request), remote: true, method: :patch, class: 'text-dark nav-link p-0' do %>
+            <%= link_to update_status_request_path(request), remote: true, method: :patch, class: 'text-dark nav-link p-0', data: { request: request.id } do %>
               <% if request.completed? %>
 
                 <span class="d-flex align-items-center" title="status: completed">

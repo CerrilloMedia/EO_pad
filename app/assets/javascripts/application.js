@@ -67,5 +67,9 @@ $( document ).on('turbolinks:load', function() {
     $('#navToggle').click();
   });
 
+  $('[data-toggle="tooltip"]').tooltip({
+    // container: 'body'
+    // template: '<div class="tooltip" role="tooltip"><div class="arrow text-white"></div><div class="tooltip-inner bg-white text-dark"></div></div>'
+  });
 
 });

@@ -3,30 +3,30 @@
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 $( document ).on('turbolinks:load', function() {
 
-    $('div[id^="request_header"]').click(function(e) {
-      // console.log(e);
-      var requestID = e.currentTarget.id.match(/\d+/g)[0];
-      var requestTargetBody = 'a[href="#request_body_' + requestID + '"]';
-    	$(requestTargetBody).click();
+  var reloadRequestHeaderEventListener = function() {
+    $('div[id^="request_block"]').on('click','div[id^="request_header"] > span',function(e) {
+      $(e.target).parent().next().find('a[href^="#toggle_"]').click();
     });
+  };
 
-    // Utilize session storage for profile#show tab selection persistence
+  reloadRequestHeaderEventListener();
 
-      $('a[data-toggle="tab"]').click(function (e) {
-        e.preventDefault();
-        $(this).tab('show');
-      });
+  // Utilize session storage for profile#show tab selection persistence
 
-      $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
-        var id = $(e.target)[0].dataset.target;
-        sessionStorage.setItem('selectedTab', id);
-        console.log(sessionStorage);
-      });
+  $('a[data-toggle="tab"]').click(function (e) {
+    e.preventDefault();
+    $(this).tab('show');
+  }).on("shown.bs.tab", function (e) {
+    var id = $(e.target)[0].dataset.target;
+    sessionStorage.setItem('selectedTab', id);
+    // console.log(sessionStorage);
+  });
 
-      var selectedTab = sessionStorage.getItem('selectedTab');
-      if (selectedTab != null) {
-        $('a[data-toggle="tab"][data-target="' + selectedTab + '"]').tab('show');
-      };
+
+  var selectedTab = sessionStorage.getItem('selectedTab');
+  if (selectedTab != null) {
+    $('a[data-toggle="tab"][data-target="' + selectedTab + '"]').tab('show');
+  };
 
 
 });

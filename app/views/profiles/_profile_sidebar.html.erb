@@ -1,0 +1,103 @@
+
+  <!-- REQUESTS ASSIGNED TO USER -->
+
+  <li class="small pt-md-1 px-0 col-2 col-sm-4 col-md-12 float-left float-md-none">
+    <div class="col text-md-center d-flex">
+      <div class="col col-sm-3 col-md-5 d-flex text-center text-sm-right pl-0 pr-1 justify-content-right">
+        <span class="ml-auto d-inline-block request-inbox"></span>
+      </div>
+      <span class="col pl-2 d-none d-sm-inline align-self-center text-left">
+        <%= self_ ? "Your" : "" %> Tasks
+      </span>
+
+    </div>
+  </li>
+  <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0 float-left float-md-none">
+    <a class="nav-link text-light p-1" id="active-assigned-tab" data-toggle="tab" data-target="#activeAssigned" role="tab" aria-controls="activeAssigned" aria-selected="false">
+      <div class="d-flex px-1 px-sm-2 px-md-1">
+        <span class="flex-grow-1 align-self-center">ACTIVE</span>
+        <span class="badge badge-pill badge-light">
+          <%= user.tasks.assigned.active.length %>
+        </span>
+      </div>
+    </a>
+  </li>
+  <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0">
+    <a class="nav-link text-light p-1" id="completed-assigned-tab" data-toggle="tab" data-target="#completedAssigned" role="tab" aria-controls="completedAssigned" aria-selected="false">
+      <div class="d-flex px-1 px-sm-2 px-md-1">
+        <span class="flex-grow-1 align-self-center">COMPLETED</span>
+        <span class="badge badge-pill badge-light">
+          <%= user.tasks.assigned.completed.length %>
+        </span>
+      </div>
+    </a>
+  </li>
+
+
+  <!-- REQUESTS ASSIGNED BY USER -->
+  <li class="small pt-md-1 px-0 col-2 col-sm-4 col-md-12 float-left float-md-none">
+    <div class="col text-md-center d-flex">
+      <div class="col col-sm-3 col-md-5 d-flex text-center text-sm-right pl-0 pr-1 justify-content-right">
+        <span class="ml-auto d-inline-block request-outbox"></span>
+      </div>
+      <span class="col pl-2 d-none d-sm-inline align-self-center text-left">
+        <%= self_ ? "Your" : "" %> Requests
+      </span>
+    </div>
+  </li>
+  <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0 float-left float-md-none">
+    <a class="nav-link text-light p-1" id="active-requests-tab" data-toggle="tab" data-target="#activeRequests" role="tab" aria-controls="activeRequests" aria-selected="false">
+      <div class="d-flex px-1 px-sm-2 px-md-1">
+        <span class="flex-grow-1 align-self-center">ACTIVE</span>
+        <span class="badge badge-pill badge-light">
+          <%= user.requests.assigned.active.length %>
+        </span>
+      </div>
+    </a>
+  </li>
+
+  <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0">
+    <a class="nav-link text-light p-1" id="completed-requests-tab" data-toggle="tab" data-target="#completedRequests" role="tab" aria-controls="completedRequests" aria-selected="false">
+      <div class="d-flex px-1 px-sm-2 px-md-1">
+        <span class="flex-grow-1 align-self-center">COMPLETED</span>
+        <span class="badge badge-pill badge-light">
+          <%= user.requests.assigned.completed.length %>
+        </span>
+      </div>
+    </a>
+  </li>
+
+  <% if self_ %>
+  <!-- REQUESTS ASSIGNED TO SELF -->
+  <li class="small pt-md-1 px-0 col-2 col-sm-4 col-md-12 float-left float-md-none">
+    <div class="col text-md-center d-flex">
+      <div class="col col-sm-3 col-md-5 d-flex text-center text-sm-right pl-0 pr-1 justify-content-right">
+        <span class="ml-auto d-inline-block request-todo"></span>
+      </div>
+      <span class="col pl-2 d-none d-sm-inline align-self-center text-left">
+        Your ToDo's
+      </span>
+    </div>
+  </li>
+  <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0 float-left float-md-none">
+    <a class="nav-link text-light p-1" id="active-todos-tab" data-toggle="tab" data-target="#activeTodos" role="tab" aria-controls="activeTodos" aria-selected="false">
+      <div class="d-flex px-1 px-sm-2 px-md-1">
+        <span class="flex-grow-1 align-self-center">ACTIVE</span>
+        <span class="badge badge-pill badge-light">
+          <%= user.tasks.my.active.length %>
+        </span>
+      </div>
+    </a>
+  </li>
+
+  <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0">
+    <a class="nav-link text-light p-1" id="completed-todos-tab" data-toggle="tab" data-target="#completedTodos" role="tab" aria-controls="completedTodos" aria-selected="false">
+      <div class="d-flex px-1 px-sm-2 px-md-1">
+        <span class="flex-grow-1 align-self-center">COMPLETED</span>
+        <span class="badge badge-pill badge-light">
+          <%= user.tasks.my.completed.length %>
+        </span>
+      </div>
+    </a>
+  </li>
+  <% end %>

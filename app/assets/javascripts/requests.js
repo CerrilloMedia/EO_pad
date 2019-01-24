@@ -127,20 +127,74 @@ $( document ).on('turbolinks:load', function() {
     // console.log("error removing comment, please try again")
   });
 
+  var reloadRequestHeaderEventListener = function() {
+    $('div[id^="request_block"]').on('click','div[id^="request_header"] > span',function(e) {
+      $(e.target).parent().next().find('a[href^="#toggle_"]').click();
+    });
+  };
+
   // UPDATE REQUEST STATUS TOGGLE
-  $('div[id^="request_status_"] a').on('ajax:success', function(event) {
-    var t = $(event.target);
-    t.attr('data-status', status);
-    // status variable is rendered by update_status.js upon successful patch
-    if (status == 'active') {
-        $(t.find('.toggle-holder')).removeClass('bg-success').addClass('bg-warning').find('.toggle-circle').removeClass('toggle-circle-on');
-    } else {
-      $(t.find('.toggle-holder')).removeClass('bg-warning').addClass('bg-success').find('.toggle-circle').addClass('toggle-circle-on');
-    }
-    t.find('span[title^="status"]').attr('title', "status: " + status)
-    t.find('.request-label').text(status);
-  }).on('ajax:error', function(event) {
-    alert("error updating request status");
-  });
+  var updateToggle = function() {
+
+    var target = 'div[id^="request_status_"] a';
+
+    $(target).on('ajax:success', function(event) {
+
+      var t = $(event.target);
+      t.attr('data-status', request.status);
+      // render css to toggle and update status in view
+      var toggleStatus = function() {
+        if (request.status == 'active') {
+          $(t.find('.toggle-holder')).removeClass('bg-success').addClass('bg-warning').find('.toggle-circle').removeClass('toggle-circle-on');
+        } else {
+          $(t.find('.toggle-holder')).removeClass('bg-warning').addClass('bg-success').find('.toggle-circle').addClass('toggle-circle-on');
+        }
+        t.find('span[title^="status"]').attr('title', "status: " + request.status)
+        t.find('.request-label').text(request.status);
+      };
+      // fire once at load time
+      toggleStatus();
+
+      // update DOM for sidebar request content
+      $("#requests-window").show(function(){
+          toggleStatus();
+          // fade out request & process the new DOM update
+          $("#request_block_" + request.id).animate({'opacity': 0}, 400).slideUp(function() {
+
+            var siblings = $(this).siblings().length;
+
+            // update DOM
+            $('#requests-window').html(request.requests);
+            $("#taskTab").html(request.sidebar);
+
+            reloadRequestHeaderEventListener();
+
+            // set current tab view into sessionStorage
+            $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
+              var id = $(e.target)[0].dataset.target;
+              sessionStorage.setItem('selectedTab', id);
+              sessionStorage.setItem('selectedTab', id);
+            });
+
+            // reload currently opened active tab from sessionStorage
+            var selectedTab = sessionStorage.getItem('selectedTab');
+            if (selectedTab != null) {
+              if (siblings == 0) {
+                $('a[data-toggle="tab"][data-target="' + selectedTab + '"]').tab('show');;
+              } else {
+                $('a[data-toggle="tab"][data-target="' + selectedTab + '"]').addClass("active show");;
+                $(selectedTab).addClass("active show");
+              }
+            };
+            updateToggle();
+          });
+      });
+
+    }).on('ajax:error', function(event) {
+      alert("error updating request status");
+    });
+  };
+
+  updateToggle();
 
 });
