@@ -1,5 +1,10 @@
 
   <!-- REQUESTS ASSIGNED TO USER -->
+  <% if user != current_user %>
+  <li class="d-block d-md-none border-bottom border-light">
+    <div class="user-name text-center py-2"><%= user.display_name %></div>
+  </li>
+  <% end %>
 
   <li class="small pt-md-1 px-0 col-2 col-sm-4 col-md-12 float-left float-md-none">
     <div class="col text-md-center d-flex">
@@ -13,7 +18,7 @@
     </div>
   </li>
   <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0 float-left float-md-none">
-    <a class="nav-link text-light p-1" id="active-assigned-tab" data-toggle="tab" data-target="#activeAssigned" role="tab" aria-controls="activeAssigned" aria-selected="false">
+    <a class="nav-link text-light p-1" id="active-assigned-tab" data-toggle="tab" href="#activeAssigned" data-target="#activeAssigned" role="tab" aria-controls="activeAssigned" aria-selected="false">
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">ACTIVE</span>
         <span class="badge badge-pill badge-light">
@@ -23,7 +28,7 @@
     </a>
   </li>
   <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0">
-    <a class="nav-link text-light p-1" id="completed-assigned-tab" data-toggle="tab" data-target="#completedAssigned" role="tab" aria-controls="completedAssigned" aria-selected="false">
+    <a class="nav-link text-light p-1" id="completed-assigned-tab" data-toggle="tab" href="#completedAssigned" data-target="#completedAssigned" role="tab" aria-controls="completedAssigned" aria-selected="false">
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">COMPLETED</span>
         <span class="badge badge-pill badge-light">
@@ -46,7 +51,7 @@
     </div>
   </li>
   <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0 float-left float-md-none">
-    <a class="nav-link text-light p-1" id="active-requests-tab" data-toggle="tab" data-target="#activeRequests" role="tab" aria-controls="activeRequests" aria-selected="false">
+    <a class="nav-link text-light p-1" id="active-requests-tab" data-toggle="tab" href="#activeRequests" data-target="#activeRequests" role="tab" aria-controls="activeRequests" aria-selected="false">
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">ACTIVE</span>
         <span class="badge badge-pill badge-light">
@@ -57,7 +62,7 @@
   </li>
 
   <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0">
-    <a class="nav-link text-light p-1" id="completed-requests-tab" data-toggle="tab" data-target="#completedRequests" role="tab" aria-controls="completedRequests" aria-selected="false">
+    <a class="nav-link text-light p-1" id="completed-requests-tab" data-toggle="tab" href="#completedRequests" data-target="#completedRequests" role="tab" aria-controls="completedRequests" aria-selected="false">
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">COMPLETED</span>
         <span class="badge badge-pill badge-light">
@@ -80,7 +85,7 @@
     </div>
   </li>
   <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0 float-left float-md-none">
-    <a class="nav-link text-light p-1" id="active-todos-tab" data-toggle="tab" data-target="#activeTodos" role="tab" aria-controls="activeTodos" aria-selected="false">
+    <a class="nav-link text-light p-1" id="active-todos-tab" data-toggle="tab" href="#activeTodos" data-target="#activeTodos" role="tab" aria-controls="activeTodos" aria-selected="false">
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">ACTIVE</span>
         <span class="badge badge-pill badge-light">
@@ -91,7 +96,7 @@
   </li>
 
   <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0">
-    <a class="nav-link text-light p-1" id="completed-todos-tab" data-toggle="tab" data-target="#completedTodos" role="tab" aria-controls="completedTodos" aria-selected="false">
+    <a class="nav-link text-light p-1" id="completed-todos-tab" data-toggle="tab" href="#completedTodos" data-target="#completedTodos" role="tab" aria-controls="completedTodos" aria-selected="false">
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">COMPLETED</span>
         <span class="badge badge-pill badge-light">

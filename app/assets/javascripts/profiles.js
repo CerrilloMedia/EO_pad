@@ -3,13 +3,13 @@
 // # You can use CoffeeScript in this file: http://coffeescript.org/
 $( document ).on('turbolinks:load', function() {
 
-  var reloadRequestHeaderEventListener = function() {
+  var reloadListeneronRequest = function() {
     $('div[id^="request_block"]').on('click','div[id^="request_header"] > span',function(e) {
       $(e.target).parent().next().find('a[href^="#toggle_"]').click();
     });
   };
 
-  reloadRequestHeaderEventListener();
+  reloadListeneronRequest();
 
   // Utilize session storage for profile#show tab selection persistence
 

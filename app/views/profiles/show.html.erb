@@ -55,7 +55,8 @@
   <% recipient = self_ ? {} : {:recipient_id => params[:id]} %>
   <div class="btn-group w-100 bg-teal">
 
-  <%= link_to root_path, class: 'd-flex flex-grow-1 text-light justify-content-center', data:{ toggle: "tooltip", title:"group" } do %>
+  <%= link_to root_path, class: 'd-flex flex-grow-1 text-light justify-content-center',
+      data:{ toggle: "tooltip", title:"group" } do %>
     <div class="d-flex align-self-center d-block">
       <span class="fa-stack">
       <%= icon('fas', 'users', class: 'fa-stack-2x') %>
@@ -63,7 +64,9 @@
     </div>
   <% end %>
 
-  <%= link_to new_request_path(:recipient_id => current_user.id), class: "d-flex flex-grow-1 text-light justify-content-center", data:{ toggle: "tooltip", title:"assign to #{current_user.display_name}" } do %>
+  <%= link_to new_request_path(:recipient_id => current_user.id),
+      class: "d-flex flex-grow-1 text-light justify-content-center",
+      data:{ toggle: "tooltip", title:"assign to #{current_user.display_name}" } do %>
     <div class="d-flex align-self-center d-block">
       <span class="fa-stack">
         <%= icon('fas', 'plus', class: 'fa-stack-1x') %>
@@ -72,7 +75,9 @@
     </div>
   <% end %>
 
-  <%= link_to new_request_path(recipient), class: "text-light rounded-0 px-0 btn-wrap py-0", data:{ toggle: "tooltip", title:"assign to #{@user.display_name}", offset:"30px" } do %>
+  <%= link_to new_request_path(recipient),
+      class: "text-light rounded-0 px-0 btn-wrap py-0",
+      data:{ toggle: "tooltip", title:"assign to #{@user.display_name}" } do %>
   <div class="small flex-grow-1">
     <div class="btn-circle d-flex align-items-center justify-content-center bg-warning h3 mb-0 border-light">
       <span class="fa-stack fa-2x">
@@ -82,7 +87,8 @@
   </div>
   <% end %>
 
-  <%= link_to profiles_path(current_user), class: 'd-flex flex-grow-1 text-light justify-content-center' do %>
+  <%= link_to profiles_path(current_user),
+      class: 'd-flex flex-grow-1 text-light justify-content-center' do %>
   <div class="d-flex align-self-center d-block">
     <span class="fa-stack">
       <%= icon('fas', 'user', class: 'fa-stack-2x') %>
@@ -90,7 +96,8 @@
   </div>
   <% end %>
 
-  <%= link_to edit_user_registration_path, class: 'd-flex flex-grow-1 text-light justify-content-center' do %>
+  <%= link_to edit_user_registration_path,
+      class: 'd-flex flex-grow-1 text-light justify-content-center' do %>
     <div class="d-flex align-self-center d-block">
       <span class="fa-stack">
         <%= icon('fas', 'cog', class: 'fa-stack-2x') %>

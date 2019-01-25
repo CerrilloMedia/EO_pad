@@ -99,16 +99,6 @@ $( document ).on('turbolinks:load', function() {
 
   });
 
-  // ADD FORM INPUT ANIMATION
-  $('.input-hr').show(function() {
-    // find sibling input div above and add/remove class to alter 'underline'
-  	$($(this)[0].previousElementSibling).focus(function(e) {
-      	$($(this)[0].nextElementSibling).addClass('input-hr-focus');
-      }).focusout(function(e) {
-      	$($(this)[0].nextElementSibling).removeClass('input-hr-focus');
-      });
-  });
-
   // INCLUDE SECONDARY SUPPORT TO PROCESSED JS COMMENT INPUT
   $("#request_comment").on('ajax:success', function(data) {
     if ($('.empty-comments').length) {
@@ -127,7 +117,7 @@ $( document ).on('turbolinks:load', function() {
     // console.log("error removing comment, please try again")
   });
 
-  var reloadRequestHeaderEventListener = function() {
+  var reloadListeneronRequest = function() {
     $('div[id^="request_block"]').on('click','div[id^="request_header"] > span',function(e) {
       $(e.target).parent().next().find('a[href^="#toggle_"]').click();
     });
@@ -157,17 +147,37 @@ $( document ).on('turbolinks:load', function() {
 
       // update DOM for sidebar request content
       $("#requests-window").show(function(){
+
           toggleStatus();
           // fade out request & process the new DOM update
-          $("#request_block_" + request.id).animate({'opacity': 0}, 400).slideUp(function() {
+          $("#request_block_" + request.id).animate({'opacity': 0}, 400).slideUp('300',function() {
 
+            // record # of siblings in view
             var siblings = $(this).siblings().length;
 
+            var nodeParent = $(this).parent()[0].id;
+
+            var tabReference = $('a[href="#'+ nodeParent + '"]');
+
+            console.log(tabReference);
+
+            // remove hidden node from DOM
+            $(this).remove();
+
+            // updated html post removal
+            var newDomNodeHtml = $('#'+nodeParent).html();
+
             // update DOM
-            $('#requests-window').html(request.requests);
             $("#taskTab").html(request.sidebar);
 
-            reloadRequestHeaderEventListener();
+            // render new partial and update with new DOM data
+            $('#requests-window').html(request.requests);
+
+            if (siblings) {
+              $('#requests-window').html(request.requests).find('#'+nodeParent).html(newDomNodeHtml);
+            }
+
+            reloadListeneronRequest();
 
             // set current tab view into sessionStorage
             $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {

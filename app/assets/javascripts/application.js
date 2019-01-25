@@ -67,9 +67,18 @@ $( document ).on('turbolinks:load', function() {
     $('#navToggle').click();
   });
 
+  // ENABLE TOOLTIP
   $('[data-toggle="tooltip"]').tooltip({
-    // container: 'body'
-    // template: '<div class="tooltip" role="tooltip"><div class="arrow text-white"></div><div class="tooltip-inner bg-white text-dark"></div></div>'
+  });
+
+  // ANIMATE INPUTS ON FOCUS
+  $('.input-hr').show(function() {
+    // find sibling input div above and add/remove class to alter 'underline'
+  	$($(this)[0].previousElementSibling).focus(function(e) {
+      	$($(this)[0].nextElementSibling).addClass('input-hr-focus');
+      }).focusout(function(e) {
+      	$($(this)[0].nextElementSibling).removeClass('input-hr-focus');
+      });
   });
 
 });
