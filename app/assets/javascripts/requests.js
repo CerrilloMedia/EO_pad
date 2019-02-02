@@ -123,7 +123,8 @@ $( document ).on('turbolinks:load', function() {
     });
   };
 
-  // UPDATE REQUEST STATUS TOGGLE
+
+  // UPDATE REQUEST STATUS & UPDATE PROFILE VIEW
   var updateToggle = function() {
 
     var target = 'div[id^="request_status_"] a';
@@ -135,17 +136,17 @@ $( document ).on('turbolinks:load', function() {
       t.attr('data-status', request.status);
 
       // render css animation to toggle and update status in view
-      var toggleStatus = function() {
+      var toggleStatus = function(elem) {
         if (request.status == 'active') {
-          $(t.find('.toggle-holder')).removeClass('bg-success').addClass('bg-warning').find('.toggle-circle').removeClass('toggle-circle-on');
+          $(t.find('.toggle-holder')).addClass('bg-status-active').find('.toggle-circle').removeClass('toggle-circle-on');
         } else {
-          $(t.find('.toggle-holder')).removeClass('bg-warning').addClass('bg-success').find('.toggle-circle').addClass('toggle-circle-on');
+          $(t.find('.toggle-holder')).removeClass('bg-status-active').find('.toggle-circle').addClass('toggle-circle-on');
         }
         t.find('span[title^="status"]').attr('title', "status: " + request.status)
         t.find('.request-label').text(request.status);
       };
       // fire once at load time
-      toggleStatus();
+      toggleStatus(request);
 
       // update DOM for sidebar request content
       $("#requests-window").show(function(){
@@ -194,7 +195,7 @@ $( document ).on('turbolinks:load', function() {
               if (siblings == 0) {
                 $('a[data-toggle="tab"][data-target="' + selectedTab + '"]').tab('show');;
               } else {
-                $('a[data-toggle="tab"][data-target="' + selectedTab + '"]').addClass("active show");;
+                $('a[data-toggle="tab"][data-target="' + selectedTab + '"]').addClass("active show");
                 $(selectedTab).addClass("active show");
               }
             };

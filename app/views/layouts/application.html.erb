@@ -15,17 +15,17 @@
   <body class="body-element">
     <div class="header px-0 px-sm-3 pb-5 smooth-scrolling">
       <!-- NAVIGATION -->
-      <nav class="navbar navbar-expand-sm d-flex px-0 py-0 fixed-top border-bottom bg-light">
+      <nav class="navbar navbar-expand-sm d-flex px-0 py-0 fixed-top bg-light">
 
-          <a href="<%= root_path %>" class="navbar-brand text-dark px-2 py-0 pt-1">
+          <a href="<%= root_path %>" class="navbar-brand px-2 py-0 pt-1 text-dark align-self-center">
             <span class="d-none d-sm-inline">Exploring Options</span>
             <span class="d-inline d-sm-none">EO</span>
           </a>
-          <a id="navToggle" class="navbar-toggler px-2 px-sm-3 py-2" data-toggle="collapse" data-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle Navigation" title="menu">
+          <a id="navToggle" class="navbar-toggler px-2 px-sm-3 align-self-center" data-toggle="collapse" data-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle Navigation" title="menu">
             <%= icon('fas', 'ellipsis-h', class: 'mb-1 pt-1') %>
           </a>
 
-        <div id="navbarDropdown" class="navbar-collapse collapse px-3 px-sm-0 pt-1 bg-xs-inherit">
+        <div id="navbarDropdown" class="navbar-collapse collapse px-3 px-sm-0 pt-1 bg-xs-inherit align-self-end">
           <% if current_user %>
             <ul class="navbar-nav my-0">
               <li class="nav-item">

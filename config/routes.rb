@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   ActiveAdmin.routes(self)
-  
+
   devise_for :users
 
   resources :users do
@@ -16,6 +16,11 @@ Rails.application.routes.draw do
     member do
       patch :update_status
     end
+  end
+
+  #CHART routes
+  namespace :charts do
+    get 'get_requests_for_user'
   end
 
   get '/profile/:id', to: "profiles#show", as: 'profiles'

@@ -1,8 +1,8 @@
 
   <!-- REQUESTS ASSIGNED TO USER -->
-  <% if user != current_user %>
-  <li class="d-block d-md-none border-bottom border-light">
-    <div class="user-name text-center py-2"><%= user.display_name %></div>
+  <% unless self_ %>
+  <li class="d-flex border-bottom text-white user-name">
+    <div class="flex-grow-1 text-center align-self-center"><%= user.display_name %></div>
   </li>
   <% end %>
 
@@ -18,11 +18,12 @@
     </div>
   </li>
   <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0 float-left float-md-none">
+    <% assigned = all_requests_for(user, self_, 'assigned' ) %>
     <a class="nav-link text-light p-1" id="active-assigned-tab" data-toggle="tab" href="#activeAssigned" data-target="#activeAssigned" role="tab" aria-controls="activeAssigned" aria-selected="false">
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">ACTIVE</span>
         <span class="badge badge-pill badge-light">
-          <%= user.tasks.assigned.active.length %>
+          <%= assigned.active.length %>
         </span>
       </div>
     </a>
@@ -32,7 +33,7 @@
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">COMPLETED</span>
         <span class="badge badge-pill badge-light">
-          <%= user.tasks.assigned.completed.length %>
+          <%= assigned.completed.length %>
         </span>
       </div>
     </a>
@@ -41,6 +42,7 @@
 
   <!-- REQUESTS ASSIGNED BY USER -->
   <li class="small pt-md-1 px-0 col-2 col-sm-4 col-md-12 float-left float-md-none">
+    <% requested = all_requests_for(user, self_, 'requested' ) %>
     <div class="col text-md-center d-flex">
       <div class="col col-sm-3 col-md-5 d-flex text-center text-sm-right pl-0 pr-1 justify-content-right">
         <span class="ml-auto d-inline-block request-outbox"></span>
@@ -55,7 +57,7 @@
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">ACTIVE</span>
         <span class="badge badge-pill badge-light">
-          <%= user.requests.assigned.active.length %>
+          <%= requested.active.length %>
         </span>
       </div>
     </a>
@@ -66,7 +68,7 @@
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">COMPLETED</span>
         <span class="badge badge-pill badge-light">
-          <%= user.requests.assigned.completed.length %>
+          <%= requested.completed.length %>
         </span>
       </div>
     </a>
@@ -75,6 +77,7 @@
   <% if self_ %>
   <!-- REQUESTS ASSIGNED TO SELF -->
   <li class="small pt-md-1 px-0 col-2 col-sm-4 col-md-12 float-left float-md-none">
+    <% todo = current_user.requests.my %>
     <div class="col text-md-center d-flex">
       <div class="col col-sm-3 col-md-5 d-flex text-center text-sm-right pl-0 pr-1 justify-content-right">
         <span class="ml-auto d-inline-block request-todo"></span>
@@ -89,7 +92,7 @@
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">ACTIVE</span>
         <span class="badge badge-pill badge-light">
-          <%= user.tasks.my.active.length %>
+          <%= todo.active.length %>
         </span>
       </div>
     </a>
@@ -100,7 +103,7 @@
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">COMPLETED</span>
         <span class="badge badge-pill badge-light">
-          <%= user.tasks.my.completed.length %>
+          <%= todo.completed.length %>
         </span>
       </div>
     </a>

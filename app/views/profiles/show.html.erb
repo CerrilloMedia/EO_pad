@@ -4,12 +4,12 @@
 
   <div class="d-md-flex min-ht-100 pt-1 pt-sm-0 pb-5 pb-md-0">
     <!-- LEFT SIDEBAR -->
-    <div id="left-sidebar" class="left-sidebar col-12 col-md-4 col-lg-3 mx-0 mt-md-0 px-0 bg-teal">
+    <div id="left-sidebar" class="left-sidebar col-12 col-md-4 col-lg-3 mx-0 mt-md-0 px-0 bg-dark">
       <!-- STICKY TOP CONTAINER -->
-      <div class="sticky-top pt-md-2">
+      <div class="sticky-top">
           <div class="border-top-0 rounded-0">
             <!-- tab headers -->
-            <ul class="nav nav-tabs mb-1 d-block text-white" id="taskTab" role="tablist" data-user-id="<%= @user.id %>">
+            <ul class="nav nav-tabs mb-1 d-block text-white bg-primary-dark" id="taskTab" role="tablist" data-user-id="<%= @user.id %>">
               <%= render partial: 'profile_sidebar', locals: { self_: self_, user: @user } %>
             </ul>
           </div>
@@ -24,27 +24,8 @@
     <div class="d-none d-lg-inline col-md-3 pl-1 pr-2">
       <div id="profile_sidebar" class="sidebar sticky-top pt-2">
         <div class="card border border-warning">
-          <div class="card-header p-2 p-md-3">
-            <div class="card-title mb-sm-1">
-              <%= @user.display_name %>
-            </div>
-          </div>
-          <div class="p-2 p-lg-3">
-            <div class="col-6 col-md-12 d-dm-block float-sm-left float-md-none px-0">
-                <%= link_to new_request_path(:recipient_id => params[:id]), class: "rounded-0 btn text-success text-center text-md-left d-block" do %>
-                  <%= icon('fas', 'plus') %><span class="ml-2"><%= self_ ? 'Create a task' : 'New Request' %></span>
-                <% end %>
-            </div>
-            <div class="col-6 col-md-12 d-dm-block float-sm-left float-md-none px-0">
-              <% if self_ %>
-                <%= link_to edit_user_registration_path, class: 'rounded-0 btn text-success text-sm-center text-md-left d-block' do %>
-                  <%= icon('fas', 'user-cog') %><span class="ml-2">Account Settings</span>
-                <% end %>
-              <% end %>
-            </div>
-            <div class="d-flex border-top pt-2 mt-2 w-100">
-              <span class="small text-muted d-block"><i>Last logged in: <%= format_date(current_user.last_sign_in_at) + " at " + format_time(current_user.last_sign_in_at) %></i></span>
-            </div>
+          <div class="charts">
+            <%= render partial: 'charts/request_chart', locals: {user: @user, days: 5} %>
           </div>
         </div>
       </div>
@@ -53,7 +34,7 @@
 
 <div id="mobile_footer" class="d-block col-md-4 col-lg-3 px-0 fixed-bottom text-center">
   <% recipient = self_ ? {} : {:recipient_id => params[:id]} %>
-  <div class="btn-group w-100 bg-teal">
+  <div class="btn-group w-100 bg-dark">
 
   <%= link_to root_path, class: 'd-flex flex-grow-1 text-light justify-content-center',
       data:{ toggle: "tooltip", title:"group" } do %>
@@ -79,7 +60,7 @@
       class: "text-light rounded-0 px-0 btn-wrap py-0",
       data:{ toggle: "tooltip", title:"assign to #{@user.display_name}" } do %>
   <div class="small flex-grow-1">
-    <div class="btn-circle d-flex align-items-center justify-content-center bg-warning h3 mb-0 border-light">
+    <div class="btn-circle d-flex align-items-center justify-content-center bg-primary-light text-dark h3 mb-0 border-light">
       <span class="fa-stack fa-2x">
         <%= icon('fas', 'plus', class: 'fa-stack-1x') %>
       </span>

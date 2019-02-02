@@ -24,6 +24,11 @@ gem 'jbuilder', '~> 2.5'
 # ActiveAdmin
 gem 'activeadmin', '~> 1.4'
 
+# add support for displaying data charts
+gem 'chartkick'
+# add Groupdate for organizing data for Chartkick
+gem 'groupdate'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

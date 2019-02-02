@@ -1,12 +1,12 @@
 <div class="col tab-content p-0" id="assignedTabContent">
   <!-- tab content -->
-
   <!-- REQUESTS ASSIGNED TO USER -->
   <div class="tab-pane fade" id="activeAssigned" role="tabpanel">
-    <% user.tasks.assigned.active.each do |r| %>
+    <% assigned = all_requests_for(user, self_, 'assigned' ) %>
+    <% assigned.active.each do |r| %>
       <%= render partial: 'requests/request', locals: { request: r, user: user } %>
     <% end %>
-    <% unless user.tasks.assigned.active.any? %>
+    <% unless assigned.active.any? %>
       <div class="text-dark card-body p-0 mb-2">
         <div class="card col bg-white rounded-0">
           <div class="rounded-0 row p-5">
@@ -18,10 +18,10 @@
   </div>
 
   <div class="tab-pane fade" id="completedAssigned" role="tabpanel">
-    <% user.tasks.assigned.completed.each do |r| %>
+    <% assigned.completed.each do |r| %>
       <%= render partial: 'requests/request', locals: { request: r, user: user } %>
     <% end %>
-    <% unless user.tasks.completed.any? %>
+    <% unless assigned.completed.any? %>
       <div class="text-dark card-body p-0 mb-2">
         <div class="card col bg-white rounded-0">
           <div class="rounded-0 row p-5">
@@ -34,10 +34,11 @@
 
   <!-- REQUESTS USER HAS ASSIGNED -->
   <div class="tab-pane fade" id="activeRequests" role="tabpanel">
-    <% user.requests.assigned.active.each do |r| %>
+    <% requested = all_requests_for(user, self_, 'requested' ) %>
+    <% requested.active.each do |r| %>
       <%= render partial: 'requests/request', locals: { request: r, user: user } %>
     <% end %>
-    <% unless user.requests.assigned.active.any? %>
+    <% unless requested.active.any? %>
       <div class="text-dark card-body p-0 mb-2">
         <div class="card col bg-white rounded-0">
           <div class="rounded-0 row p-5">
@@ -49,10 +50,10 @@
   </div>
 
   <div class="tab-pane fade" id="completedRequests" role="tabpanel">
-    <% user.requests.assigned.completed.each do |r| %>
+    <% requested.completed.each do |r| %>
       <%= render partial: 'requests/request', locals: { request: r, user: user } %>
     <% end %>
-    <% unless user.requests.assigned.completed.any? %>
+    <% unless requested.completed.any? %>
       <div class="text-dark card-body p-0 mb-2">
         <div class="card col bg-white rounded-0">
           <div class="rounded-0 row p-5">
@@ -65,11 +66,12 @@
 
   <!-- PERSONAL USER TODO'S -->
   <% if self_ %>
+  <% todo = current_user.requests.my %>
   <div class="tab-pane fade" id="activeTodos" role="tabpanel">
-    <% user.tasks.my.active.each do |r| %>
+    <% todo.active.each do |r| %>
       <%= render partial: 'requests/request', locals: { request: r, user: user } %>
     <% end %>
-    <% unless user.tasks.my.active.any? %>
+    <% unless todo.active.any? %>
       <div class="text-dark card-body p-0 mb-2">
         <div class="card col bg-white rounded-0">
           <div class="rounded-0 row p-5">
@@ -81,10 +83,10 @@
   </div>
 
   <div class="tab-pane fade" id="completedTodos" role="tabpanel">
-    <% user.tasks.my.completed.each do |r| %>
+    <% todo.completed.each do |r| %>
       <%= render partial: 'requests/request', locals: { request: r, user: user } %>
     <% end %>
-    <% unless user.tasks.my.completed.any? %>
+    <% unless todo.completed.any? %>
       <div class="text-dark card-body p-0 mb-2">
         <div class="card col bg-white rounded-0">
           <div class="rounded-0 row p-5">
