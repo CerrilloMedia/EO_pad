@@ -64,9 +64,8 @@ body {
 
 nav {
   box-shadow: 0 -2px 10px;
-  // height: 3em;
   z-index: 100;
-  // border-bottom: 1px solid transparent !important;
+  font-size: 14px;
   .navbar-brand {
     // border-bottom: 1px solid transparent;
     font-weight: 500;
@@ -126,7 +125,7 @@ nav {
   position: fixed;
   left: 0;
   right: 0;
-  top: 46px;
+  top: 43px;
   overflow: scroll;
 }
 
@@ -172,6 +171,10 @@ nav {
   background: $primary-dark !important;
 }
 
+.bg-light {
+  background: #fbfcfe !important;
+}
+
 .bg-active {
   background-color: $primary-light !important;
 }
@@ -180,18 +183,30 @@ nav {
   background-color: $primary-light !important;
 }
 
+.border-primary {
+  border-color: $primary-reg !important;
+}
+
+.border-primary-dark {
+  border-color: $primary-dark !important;
+}
+
+.border-primary-light {
+  border-color: $primary-light !important;
+}
+
 .text-light {
-  color: $primary-light !important;
-  &:hover {
-    color: $secondary-light !important;
-  }
+  // color: $primary-light !important;
+  // &:hover {
+  //   color: $secondary-light !important;
+  // }
 }
 
 .text-dark {
-  color: $primary-dark !important;
-  &:hover {
-    color: $primary-text !important;
-  }
+  // color: $primary-dark !important;
+  // a &:hover {
+  //   color: $primary-text !important;
+  // }
 }
 
 .no-bg {
@@ -204,16 +219,6 @@ nav {
 
 .no-border-radius {
   border-radius: 0 !important;
-}
-
-.badge-float {
-  position: absolute !important;
-  right: -2px !important;
-  top: -2px !important;
-}
-
-.badge {
-  line-height: inherit !important;
 }
 
 .sticky-top-5 {
@@ -386,6 +391,15 @@ nav {
   .nav-item {
     margin-bottom: 0;
   }
+  .badge-float {
+    position: absolute !important;
+    right: -2px !important;
+    top: -2px !important;
+  }
+
+  .badge {
+    line-height: inherit !important;
+  }
 }
 
 .request-tools {
@@ -411,6 +425,10 @@ div[id^='request_block_']>div:hover {
   box-shadow: 0 0rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
+.btn-no-focus {
+    outline: 0;
+    box-shadow: none !important;
+}
 // active/completed toggle for request
 
 .toggle-holder {
@@ -478,6 +496,7 @@ div[id^='request_block_']>div:hover {
 }
 
 #mobile_footer {
+  // width: 250px;
   font-size: 12px;
   &.fixed-bottom {
     // bottom: -16vh;
@@ -505,6 +524,11 @@ div[id^='request_block_']>div:hover {
 
 
 @media screen and (max-width: 991.98px) {
+
+  body {
+    font-size: 14px;
+  }
+
   .user-profile-card {
     font-size: .85em;
   }
@@ -515,6 +539,10 @@ div[id^='request_block_']>div:hover {
       bottom: 0;
       transition: bottom 200ms ease-in-out;
     }
+  }
+
+  #right-sidebar {
+    font-size: 14px !important;
   }
 
 }
@@ -531,16 +559,12 @@ div[id^='request_block_']>div:hover {
     top: 43px;
   }
 
+  // #left-sidebar {
+  //   width: 100%;
+  // }
+
   #mobile_footer {
-    .btn-circle {
-      border: 1px solid #5c6064fa;
-      width: 3em;
-      height: 3em;
-      position: relative;
-      margin-top: -15%;
-      border-radius: 50%;
-      font-size: 2em;
-    }
+    width: 100%;
   }
 
   #taskTab {
@@ -548,6 +572,9 @@ div[id^='request_block_']>div:hover {
     line-height: 1em;
     .lh-1em {
       line-height: 1em;
+    }
+    .nav-link {
+      // border-radius: 1em !important;
     }
   }
   // tooltip adjustments
@@ -610,6 +637,7 @@ div[id^='request_block_']>div:hover {
   }
 
   #mobile_footer {
+
     .btn-circle {
       margin-top: -20%;
       font-size: 2.25em;
@@ -658,8 +686,14 @@ div[id^='request_block_']>div:hover {
   }
 
   #taskTab {
-    .nav-link:hover {
-      padding-left: .25em !important;
+    .nav-item {
+      height: 30px;
+    }
+    .nav-link {
+      border-radius: 1em !important;
+      &:hover {
+        padding-left: .25em !important;
+      }
     }
     font-size: 1em;
     line-height: 1em;

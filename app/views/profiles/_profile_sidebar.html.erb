@@ -6,7 +6,7 @@
   </li>
   <% end %>
 
-  <li class="small pt-md-1 px-0 col-2 col-sm-4 col-md-12 float-left float-md-none">
+  <li class="small pt-md-1 px-0 col-2 col-sm-12 col-md-12 float-left float-md-none">
     <div class="col text-md-center d-flex">
       <div class="col col-sm-3 col-md-5 d-flex text-center text-sm-right pl-0 pr-1 justify-content-right">
         <span class="ml-auto d-inline-block request-inbox"></span>
@@ -17,7 +17,7 @@
 
     </div>
   </li>
-  <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0 float-left float-md-none">
+  <li class="nav-item col-5 col-sm-12 col-md-12 d-inline-block d-md-block px-0 float-left float-md-none">
     <% assigned = all_requests_for(user, self_, 'assigned' ) %>
     <a class="nav-link text-light p-1" id="active-assigned-tab" data-toggle="tab" href="#activeAssigned" data-target="#activeAssigned" role="tab" aria-controls="activeAssigned" aria-selected="false">
       <div class="d-flex px-1 px-sm-2 px-md-1">
@@ -28,7 +28,7 @@
       </div>
     </a>
   </li>
-  <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0">
+  <li class="nav-item col-5 col-sm-12 col-md-12 d-inline-block d-md-block px-0">
     <a class="nav-link text-light p-1" id="completed-assigned-tab" data-toggle="tab" href="#completedAssigned" data-target="#completedAssigned" role="tab" aria-controls="completedAssigned" aria-selected="false">
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">COMPLETED</span>
@@ -41,7 +41,7 @@
 
 
   <!-- REQUESTS ASSIGNED BY USER -->
-  <li class="small pt-md-1 px-0 col-2 col-sm-4 col-md-12 float-left float-md-none">
+  <li class="small pt-md-1 px-0 col-2 col-sm-12 col-md-12 float-left float-md-none">
     <% requested = all_requests_for(user, self_, 'requested' ) %>
     <div class="col text-md-center d-flex">
       <div class="col col-sm-3 col-md-5 d-flex text-center text-sm-right pl-0 pr-1 justify-content-right">
@@ -52,7 +52,7 @@
       </span>
     </div>
   </li>
-  <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0 float-left float-md-none">
+  <li class="nav-item col-5 col-sm-12 col-md-12 d-inline-block d-md-block px-0 float-left float-md-none">
     <a class="nav-link text-light p-1" id="active-requests-tab" data-toggle="tab" href="#activeRequests" data-target="#activeRequests" role="tab" aria-controls="activeRequests" aria-selected="false">
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">ACTIVE</span>
@@ -63,7 +63,7 @@
     </a>
   </li>
 
-  <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0">
+  <li class="nav-item col-5 col-sm-12 col-md-12 d-inline-block d-md-block px-0">
     <a class="nav-link text-light p-1" id="completed-requests-tab" data-toggle="tab" href="#completedRequests" data-target="#completedRequests" role="tab" aria-controls="completedRequests" aria-selected="false">
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">COMPLETED</span>
@@ -76,7 +76,7 @@
 
   <% if self_ %>
   <!-- REQUESTS ASSIGNED TO SELF -->
-  <li class="small pt-md-1 px-0 col-2 col-sm-4 col-md-12 float-left float-md-none">
+  <li class="small pt-md-1 px-0 col-2 col-sm-12 col-md-12 float-left float-md-none">
     <% todo = current_user.requests.my %>
     <div class="col text-md-center d-flex">
       <div class="col col-sm-3 col-md-5 d-flex text-center text-sm-right pl-0 pr-1 justify-content-right">
@@ -87,7 +87,7 @@
       </span>
     </div>
   </li>
-  <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0 float-left float-md-none">
+  <li class="nav-item col-5 col-sm-12 col-md-12 d-inline-block d-md-block px-0 float-left float-md-none">
     <a class="nav-link text-light p-1" id="active-todos-tab" data-toggle="tab" href="#activeTodos" data-target="#activeTodos" role="tab" aria-controls="activeTodos" aria-selected="false">
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">ACTIVE</span>
@@ -98,7 +98,7 @@
     </a>
   </li>
 
-  <li class="nav-item col-5 col-sm-4 col-md-12 d-inline-block d-md-block px-0">
+  <li class="nav-item col-5 col-sm-12 col-md-12 d-inline-block d-md-block px-0">
     <a class="nav-link text-light p-1" id="completed-todos-tab" data-toggle="tab" href="#completedTodos" data-target="#completedTodos" role="tab" aria-controls="completedTodos" aria-selected="false">
       <div class="d-flex px-1 px-sm-2 px-md-1">
         <span class="flex-grow-1 align-self-center">COMPLETED</span>

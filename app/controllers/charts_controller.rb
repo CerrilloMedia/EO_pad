@@ -25,4 +25,8 @@ class ChartsController < ApplicationController
     render json: user_chart
   end
 
+  def update_expiring_tasks
+    
+  end
+
 end

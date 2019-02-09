@@ -33,6 +33,4 @@ class Request < ApplicationRecord
     false
   end
 
-
-
 end

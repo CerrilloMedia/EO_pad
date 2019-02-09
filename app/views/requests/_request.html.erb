@@ -41,32 +41,31 @@
         </div>
 
           <% if request.availabilities.any? %>
-            <div class="col px-0 px-sm-1">
-              <div class="row">
-                <div class="col-2 col-sm-1 pt-1">
+
+              <div class="d-flex pb-1 px-0 px-sm-1">
+                <div class="col-1 d-flex align-self-center p-0">
                   <hr class="mt-1 hr-divider">
                 </div>
-                <div class="small text-center">
+                <div class="small text-center px-1">
                   <span class="">requests</span>
                 </div>
-                <div class="col pt-1">
+                <div class="col px-0 align-self-center">
                   <hr class="my-1 hr-divider">
                 </div>
               </div>
-            </div>
               <div class="d-block d-md-flex">
-                <div class="col">
-                  <div class="row d-block d-md-flex">
+                <div class="">
+                  <div class="d-block d-sm-flex">
                     <% request.availabilities.each_with_index do |a, i| %>
                       <%= render partial: 'requests/datetime_request', locals: { availability: a, index: i } %>
                     <% end %>
                   </div>
                 </div>
               </div>
-              <div class="col px-0 px-sm-1">
-                  <div class="d-block pt-1">
-                    <hr class="mt-1 hr-divider">
-                  </div>
+              <div class="d-block px-0 px-sm-1">
+                <div class="d-block">
+                  <hr class="hr-divider">
+                </div>
               </div>
             <% end %>
 
