@@ -24,7 +24,7 @@
               </a>
             </div>
               <div id="charts_view_01" class="charts w-100 position-relative collapse show">
-                <%= render partial: 'charts/request_chart', locals: {user: @user, days: 14} %>
+                <%= render partial: 'charts/request_chart', locals: {user: @user, days: 7} %>
               </div>
           </div>
           <div id="requests-window" class="pb-2 px-0 px-md-2 pt-1 pt-md-2">
@@ -37,11 +37,11 @@
         <div class="pt-0 sticky-top">
 
           <div id="expring_requests" class="list-group list-group-flush">
-            <%= render partial: 'charts/expiring_requests', locals: { user: @user, self_: self_, days: 14, request_type: 'requested' } %>
+            <%= render partial: 'charts/expiring_requests', locals: { user: @user, self_: self_, days: 7, request_type: 'requested' } %>
           </div>
 
           <div id="expring_tasks"  class="list-group list-group-flush">
-            <%= render partial: 'charts/expiring_requests', locals: { user: @user, self_: self_, days: 14, request_type: 'assigned' } %>
+            <%= render partial: 'charts/expiring_requests', locals: { user: @user, self_: self_, days: 7, request_type: 'assigned' } %>
           </div>
 
         </div>

@@ -6,7 +6,7 @@
       </span>
       <% if comment.user != current_user %>
         <span class="d-block text-muted small text-right">
-          sent <%= time_ago_in_words(comment.created_at) %>ago by <%= comment.user.display_name %>
+          <%= comment.user.display_name %> - <%= time_ago_in_words(comment.created_at) %> ago
         </span>
       <% end %>
     </div>

@@ -31,7 +31,7 @@ $( document ).on('turbolinks:load', function() {
   // Toggle chart view in profile
   $('#charts_view_01').on('hide.bs.collapse', function() {
     var parent = $('#toggle_charts_view');
-  	parent.find('.button-label').html('show');
+  	parent.find('.button-label').html('display');
   }).on('show.bs.collapse', function() {
   	var parent = $('#toggle_charts_view')
     parent.find('.button-label').html('hide');

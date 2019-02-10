@@ -1,31 +1,27 @@
-# Exploring Options
+# Exploring Options - a waitlist dashboard
 ####  A collaborative web-app for salon professionals looking to maximize their opportunities
 
 #### Current Setup:
+  - Rails 5.2 on PostgreSQL because I heart Heroku
   - [Devise](https://github.com/plataformatec/devise)-gem for user management
-  - Rails 5.2 as the MVC (using sqlite for dev environment)
-  - Bootstrap for quick prototyping of layout and minor animation
-  - jQuery for handling AJAX requests and supporting Bootstrap
-  - Utilizing [Cocoon](https://github.com/nathanvda/cocoon)-gem to manage nested forms for Requests and their Availabilities.
+  - Bootstrap & FontAwesome for quick prototyping of layout & UX
+  - jQuery for handling AJAX requests and supporting Bootstrap UX
+  - [ActiveAdmin](https://github.com/activeadmin/activeadmin) for backend management of Users and database records
+  - Utilizing [Cocoon](https://github.com/nathanvda/cocoon)-gem to manage nested forms for Requests and Availabilities.
+  - [Chartkick](https://github.com/ankane/chartkick) gem added for visualizing progress of task completion.
 
 
 #### Current Capabilities
-- Anyone can sign up and generate a request to any other user from their respective dashboard.
-  - Mobile formatted screens allow for faster access with fixed-bottom menu.
-  - A request can also be utilized as a To-Do as they can also be self-assigned and managed separately from the other team oriented requests.
-- Each request is currently set up to allow for (4) guest availabilities.
-  - An Availability has a start-time, end/exit-time, start-date and/or end-date.
-  - Requests have a recipient and author as well as message-title and client fields if need be.
-  - The number of Availabilities within a request can be adjusted within the Request model.
+- [x] Users can assign and manage tasks and requests to/from other team members through their primary dashboard.
+- [x] Mobile friendly because duh it's 2019
+- [x] Requests can also be utilized as a personally assigned task (To-Do) and managed separately from outbound and incoming requests.
+- [x] Each Request is set up to allow for (4) guest availabilities but can be extended from within the model. Will most likely move it to a global config variable.
+- [x] ActiveAdmin to manage Model Data
+- [x] Each Request has a comments thread to maximize realtime collaboration. Will dabble with ActionCable for notifications and if all goes well extend it to the Comments model.
 
 #### Future:
 Project __direction__ and _opportunities_
-- [ ] __Adding Active-Admin to help manage team/company participants__.
-
-- [ ] *Current Availability validation/form errors are global and not specific to each availability failing within the parent Request. Would like to leverage jQuery/Bootstrap to highlight which availabilities require adjustments as opposed to just the general Request.errors.full_messages I'm currently dealing with.*
-
-- [ ] **Adding a __Conversation__ thread to each __Request__ so recipient and subsequent team members can have a chat about each request and guest opportunity. Might go the route of having a has_many_through join-table for Request -> Conversation -> Comment... but we shall see.**
-
-- [ ] **A Notification system to alert recipients or collaborative teams of new messages and updates. This would be my shot at dealing with ActionCable! Wish me luck. ;)**
-
-- [ ] **Querying request opportunities allowing for anyone to utilize this app to manage a waitlist for open appointments.**
+- [ ] Adding an extra layer of organization for building out collaborative teams.
+- [ ] A Notification system to alert recipients or collaborative teams of new messages and updates. This would be my shot at dealing with ActionCable! Wish me luck. ;)
+- [ ] Adding search capabilities to user Dashboard to quickly find a specific request.
+- [ ] Focus on cleaning up and personalizing Active Admin dashboard for visual consistency.

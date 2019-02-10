@@ -65,30 +65,33 @@
   </div>
   </div>
 
-  <div id="mobile_footer" class="d-block d-sm-none px-0 fixed-bottom text-center">
-    <div class="btn-group w-100 bg-teal">
+  <div id="mobile_footer" class="col col-sm-4 col-md-3 col-xl-2 px-0 fixed-bottom text-center">
 
+    <div class="btn-group w-100 pb-sm-2 bg-dark">
 
-    <%= link_to profiles_path(current_user), class: 'd-flex flex-grow-1 text-light justify-content-center' do %>
-    <div class="d-flex align-self-center d-block">
-      <span class="fa-stack">
-        <%= icon('fas', 'user', class: 'fa-stack-2x') %>
-      </span>
-    </div>
-    <% end %>
-
-    <%= link_to new_request_path(:recipient_id => current_user.id), class: "d-flex text-light justify-content-center" do %>
-    <div class="small flex-grow-1">
-      <div class="btn-circle d-flex align-items-center justify-content-center bg-warning h3 mb-0">
-        <span class="fa-stack fa-2x">
-          <%= icon('fas', 'plus', class: 'fa-stack-1x') %>
-
+      <%= link_to profiles_path(current_user),
+      class: 'd-flex flex-grow-1 text-light justify-content-center' do %>
+      <div class="d-flex align-self-center d-block">
+        <span class="fa-stack">
+          <%= icon('fas', 'user', class: 'fa-stack-2x') %>
         </span>
       </div>
-    </div>
+      <% end %>
+
+    <%= link_to new_request_path,
+        class: "d-flex flex-shrink text-light justify-content-center",
+        data:{ toggle: "tooltip", title:"assign to #{current_user.display_name}" } do %>
+        <div class="small flex-grow-1">
+          <div class="btn-circle d-flex align-items-center justify-content-center bg-white text-dark h3 mb-0 border border-primary-dark">
+            <span class="fa-stack fa-2x">
+              <%= icon('fas', 'plus', class: 'fa-stack-1x') %>
+            </span>
+          </div>
+        </div>
     <% end %>
 
-    <%= link_to edit_user_registration_path, class: 'd-flex flex-grow-1 text-light justify-content-center' do %>
+    <%= link_to edit_user_registration_path,
+        class: 'd-flex flex-grow-1 text-light justify-content-center' do %>
       <div class="d-flex align-self-center d-block">
         <span class="fa-stack">
           <%= icon('fas', 'cog', class: 'fa-stack-2x') %>

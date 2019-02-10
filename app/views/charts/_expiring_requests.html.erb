@@ -1,8 +1,9 @@
 <% req = get_expiring_requests( all_requests_for(user, self_, request_type), days ) %>
 <% if req.any? %>
-<div class="list-group-item bg-primary-dark text-light px-2 justify-content-start d-flex">
-  <span class="pr-1">upcoming <%= request_type %></span>
-  <span class="ml-auto badge badge-pill bg-white text-primary align-self-center"><%= req.length %></span>
+<div class="list-group-item bg-primary-dark text-light px-2 justify-content-start">
+  <span class="pr-1">type:</span>
+  <span class="bold"><%= request_type %></span>
+  <span class="d-block small">expring in <%= days %> days</span>
 </div>
   <% req.each do |r| %>
     <%= link_to request_path(r['request']), class: 'list-group-item list-group-item-action p-md-1 p-lg-2' do %>

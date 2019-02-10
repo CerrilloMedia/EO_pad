@@ -13,8 +13,8 @@
           </span>
       </div>
 
-      <div id="request_<%= request.id %>_tools" class="request-tools align-items-center">
-        <%= link_to request_path(request), class: 'btn p-2 p-sm-0 px-sm-1 text-dark btn-lg' do %>
+      <div id="request_<%= request.id %>_tools" class="request-tools align-items-sm-center">
+        <%= link_to request_path(request), class: 'btn px-1 py-0 text-dark btn-lg' do %>
           <% if request.comments.any? %>
             <%= icon('fas', 'comments') %>
           <% else %>
@@ -22,10 +22,10 @@
           <% end %>
         <% end %>
 
-        <%= link_to edit_request_path(request), class: 'btn p-2 p-sm-0 px-sm-1 text-dark btn-lg' do %>
+        <%= link_to edit_request_path(request), class: 'btn px-1 py-0 text-dark btn-lg' do %>
           <%= icon('fas', 'edit') %>
         <% end %>
-        <a class="btn p-2 p-sm-0 px-sm-1 text-dark btn-lg" href="#toggle_<%= request.id %>" data-toggle="collapse" data-loading-text="open" aria-expanded="false">
+        <a class="btn px-1 py-0 text-dark btn-lg" href="#toggle_<%= request.id %>" data-toggle="collapse" data-loading-text="open" aria-expanded="false">
           <%= icon('fas', 'info-circle', class: 'bs-toggle') %>
         </a>
       </div>
@@ -54,13 +54,13 @@
                 </div>
               </div>
               <div class="d-block d-md-flex">
-                <div class="">
-                  <div class="d-block d-sm-flex">
+
+                  <div class="d-flex">
                     <% request.availabilities.each_with_index do |a, i| %>
                       <%= render partial: 'requests/datetime_request', locals: { availability: a, index: i } %>
                     <% end %>
                   </div>
-                </div>
+
               </div>
               <div class="d-block px-0 px-sm-1">
                 <div class="d-block">

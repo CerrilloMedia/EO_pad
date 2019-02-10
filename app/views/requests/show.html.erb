@@ -4,7 +4,7 @@
     <div class="request-left-column col-12 col-sm-4 col-lg-3 p-0">
       <div class="col-12 col-sm-4 col-lg-3 p-0 bg-dark text-light">
         <div class="request-card pt-2 border-bottom p-2 py-lg-3">
-          <div class="">
+
             <div class="request-header d-flex">
               <span class="request-subject d-inline-flex mr-auto h5"><%= @request.subject %></span>
             </div>
@@ -16,28 +16,25 @@
             <!-- availabilities -->
 
 
-            <div class="panel-divider row d-flex align-items-center my-1 mx-0">
-              <div class="offset-2 small text-center position-absolute bg-teal px-2">
+            <div class="align-items-center my-1 mx-0">
+              <div class="small px-2">
                 requests
               </div>
-              <hr class="hr-divider">
             </div>
 
-            <div class="d-block d-md-flex">
-              <div class="col p-0 small">
-                <div class="">
+            <div class="d-flex mb-2">
+
                   <% @request.availabilities.each_with_index do |a, i| %>
-                    <div class="col mb-2 px-0 px-sm-1">
-                      <%= tag.div class: 'card p-1 p-sm-2 text-center text-dark' do %>
+                    <div class="m-1">
+                      <%= tag.div class: 'p-1 bg-white rounded text-center text-dark' do %>
                         <%= format_availability(a) %>
                       <% end %>
                     </div>
                   <% end %>
-                </div>
-              </div>
+
             </div>
           <% end %>
-          </div>
+
           <!-- request footer -->
           <div class="request-card-footer">
             <div class="mb-2 d-flex">
