@@ -16,10 +16,12 @@
                         </span>
                       <% end %>
                     </div>
+
                     <div class="mb-auto text-center">
                         <span class='d-block'><%= u.display_name %></span>
                         <span class="badge badge-success d-inline"><%= u.tasks.completed.from_user(current_user).count %> / <%= u.tasks.from_user(current_user).count %> </span>
                     </div>
+
                     <div class="d-block text-left">
                       <%=  link_to new_request_path(:recipient_id => u.id), class: 'btn btn-outline-secondary btn-sm', title: "issue new request" do %>
                         <%= icon('fas', 'plus') %>
@@ -65,7 +67,7 @@
   </div>
   </div>
 
-  <div id="mobile_footer" class="col col-sm-4 col-md-3 col-xl-2 px-0 fixed-bottom text-center">
+  <div id="mobile_footer" class="col col-sm-4 col-md-3 col-xl-2 d-sm-none px-0 fixed-bottom text-center">
 
     <div class="btn-group w-100 pb-sm-2 bg-dark">
 

@@ -6,10 +6,11 @@
   <span class="d-block small">expring in <%= days %> days</span>
 </div>
   <% req.each do |r| %>
-    <%= link_to request_path(r['request']), class: 'list-group-item list-group-item-action p-md-1 p-lg-2' do %>
+    <%= link_to request_path(r['request']), id: "request_sidebar_#{r['request'].id}",class: 'list-group-item list-group-item-action p-md-1 p-lg-2', data: {toggle: 'tooltip', placement: 'left', title: "#{r['request'].subject.blank? ? r['request'].client_name : r['request'].subject }" } do %>
       <div class="d-flex">
         <span class="mr-auto d-none d-xl-block"><%= self_ ? r['request'].user.display_name : r['request'].recipient.display_name %></span>
-        <span class=""><%= r['availability'].endDate || r['availability'].date %></span>
+        <span class="small text-muted align-self-lg-center mr-1">due:</span>
+        <span class=""><%= r['date'] %></span>
       </div>
     <% end %>
   <% end %>

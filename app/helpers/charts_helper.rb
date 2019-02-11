@@ -5,14 +5,11 @@ module ChartsHelper
     arr.active.map { |r|
       [ r, get_availability(r,days) ]
     }
-    .delete_if {|a,b|
-      # delete request if no availabilities found
-      b.nil? }
-    .sort_by {|a,b|
-      # sort response first by endDate then by date
-      [ b.endDate , b.date ]
-    }.map { |r,a|
-      {'request' => r, 'availability' => a }
+    .sort_by {|r,date|
+      # sort requests by most recent expriation date
+      date
+    }.map { |r,date|
+      {'request' => r, 'date' => date }
     }
 
   end
@@ -25,9 +22,10 @@ module ChartsHelper
     return nil unless request.availabilities
     request.availabilities.select { |a|
       ( a.endDate && is_within_range?(a.endDate, days) ) || ( a.date && is_within_range?(a.date,days) )
-    }.sort_by! {|a|
-      # first sort by endDate, then by startDate
-      [a.endDate, a.date] }.first
+    }.map {|a|
+      a.endDate || a.date
+    }.compact.first
+
   end
 
 end

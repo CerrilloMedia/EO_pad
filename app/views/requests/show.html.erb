@@ -39,7 +39,7 @@
           <div class="request-card-footer">
             <div class="mb-2 d-flex">
 
-              <div id="request_status_<%= @request.id %>" class="flex-grow-1" >
+              <div id="request_status_<%= @request.id %>" class="mr-auto" >
 
                 <%= link_to update_status_request_path(@request), remote: true, method: :patch, class: 'text-light nav-link p-0', data:  {status: "#{@request.status}"} do %>
                   <% if @request.completed? %>
