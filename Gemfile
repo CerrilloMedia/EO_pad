@@ -51,7 +51,7 @@ gem 'font-awesome-sass', '~> 5.0.13'
 
 gem 'cocoon'
 
-gem 'devise'
+gem 'devise', '~> 4.4.1'
 
 gem "sprockets", ">= 3.7.2"
 

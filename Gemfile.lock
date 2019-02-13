@@ -282,7 +282,7 @@ DEPENDENCIES
   chromedriver-helper
   cocoon
   coffee-rails (~> 4.2)
-  devise
+  devise (~> 4.4.1)
   font-awesome-sass (~> 5.0.13)
   groupdate
   jbuilder (~> 2.5)
