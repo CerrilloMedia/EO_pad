@@ -52,7 +52,7 @@
   <% recipient = self_ ? {} : {:recipient_id => params[:id]} %>
   <div class="btn-group w-100 pb-sm-2 bg-dark">
 
-  <%= link_to root_path, class: 'd-flex flex-grow-1 text-light justify-content-center',
+  <%= link_to organization_path(@user.team.organization), class: 'd-flex flex-grow-1 text-light justify-content-center',
       data:{ toggle: "tooltip", title:"group" } do %>
     <div class="d-flex align-self-center d-block">
       <span class="fa-stack">

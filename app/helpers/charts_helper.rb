@@ -4,12 +4,13 @@ module ChartsHelper
     # get an array of requests each with it's most recent availability if any from within the timeframe passed
     arr.active.map { |r|
       [ r, get_availability(r,days) ]
-    }
+    }.drop_while {|r,date| date.nil? }
     .sort_by {|r,date|
       # sort requests by most recent expriation date
       date
     }.map { |r,date|
-      {'request' => r, 'date' => date }
+      puts date
+      {'request' => r, 'date' => date } unless date.blank?
     }
 
   end

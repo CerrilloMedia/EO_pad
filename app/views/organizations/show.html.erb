@@ -1,0 +1,126 @@
+<div class="container-fluid mt-1 px-0">
+  <div class="d-flex px-0 px-sm-1 pb-3">
+  <div class="main-content px-0 px-sm-1 pb-5 pb-sm-1 w-100">
+
+      <div class="bg-primary text-white p-2 d-flex">
+        <div class="col flex-grow-1">
+          Teams
+
+        </div>
+        <div class="header-tools">
+          <div class="btn btn-dark btn-sm">create new team</div>
+        </div>
+      </div>
+      <% if @organization.teams.any? %>
+       <% @organization.teams.each do |team| %>
+        <% if team.users %>
+        <div class="d-flex flex-wrap pt-0">
+          <table class="table table-hover">
+            <thead>
+              <tr class="">
+                <th class="col"><%= team.name %></th>
+                <th>Requests</th>
+                <th>Tools</th>
+              </tr>
+            </thead>
+            <tbody>
+                  <% team.users.sort_by{|a| a.firstname }.each do |u| %>
+                  <tr>
+                    <td class="p-2 align-middle">
+                      <%= link_to profiles_path(u), class: "d-flex nav-link text-dark p-0", title: "profile for: #{u.display_name}" do %>
+                        <div class="rounded-circle btn btn-outline-secondary p-0 border border-warning">
+                          <div class="fa-stack fa-1x">
+                            <%= icon('fas','user', class: 'fa-stack-1x')%>
+                          </div>
+                        </div>
+                        <div class='ml-2 d-block align-self-center'><%= u.display_name %></div>
+                      <% end %>
+                    </td>
+                    <td class="py-1 align-middle text-center">
+                      <div class="badge badge-success d-inline"><%= u.tasks.completed.from_user(current_user).count %> / <%= u.tasks.from_user(current_user).count %> </div>
+                    </td>
+                    <td class="py-1 align-middle text-center">
+                      <div class="d-block">
+                        <%=  link_to new_request_path(:recipient_id => u.id), class: 'btn btn-outline-secondary btn-sm', title: "issue new request", data: {toggle: 'tooltip', placement: 'left'} do %>
+                          <%= icon('fas', 'plus') %>
+                        <% end %>
+                      </div>
+                    </td>
+                  </tr>
+                  <% end %>
+              </tbody>
+          </table>
+        </div>
+        <% end %>
+        <% end %>
+      <% end %>
+
+  </div>
+
+  <div class="right-sidebar col d-none d-sm-inline px-1 pt-1">
+    <div id="profile_sidebar" class="sidebar sticky-top pt-1">
+      <div class="card border border-warning">
+        <div class="card-header p-2 p-md-3">
+          <div class="card-title mb-sm-1">
+            <%= @user.display_name %>
+          </div>
+        </div>
+        <div class="p-1 p-md-2 p-lg-3">
+          <div class="col-12 d-dm-block px-0">
+              <%= link_to new_request_path(:recipient_id => params[:id]), class: "rounded-0 btn text-success text-left d-block w-100 px-1" do %>
+                <%= icon('fas', 'plus') %><span class="ml-2"><%= current_user.is_self(@user) ? 'Create a task' : 'Send a request' %></span>
+              <% end %>
+          </div>
+          <div class="col-12 d-dm-block px-0">
+            <% if current_user %>
+              <%= link_to edit_user_registration_path, class: 'rounded-0 btn text-success text-left d-block w-100 px-1' do %>
+                <%= icon('fas', 'cog') %><span class="ml-2">Account Settings</span>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="d-flex border-top pt-2 mt-2 w-100">
+            <span class="small text-muted d-block"><i>Last logged in: <%= format_date(current_user.last_sign_in_at) + " at " + format_time(current_user.last_sign_in_at) %></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div id="mobile_footer" class="col col-sm-4 col-md-3 col-xl-2 d-sm-none px-0 fixed-bottom text-center">
+
+    <div class="btn-group w-100 pb-sm-2 bg-dark">
+
+      <%= link_to profiles_path(current_user),
+      class: 'd-flex flex-grow-1 text-light justify-content-center' do %>
+      <div class="d-flex align-self-center d-block">
+        <span class="fa-stack">
+          <%= icon('fas', 'user', class: 'fa-stack-2x') %>
+        </span>
+      </div>
+      <% end %>
+
+    <%= link_to new_request_path,
+        class: "d-flex flex-shrink text-light justify-content-center",
+        data:{ toggle: "tooltip", title:"assign to #{current_user.display_name}" } do %>
+        <div class="small flex-grow-1">
+          <div class="btn-circle d-flex align-items-center justify-content-center bg-white text-dark h3 mb-0 border border-primary-dark">
+            <span class="fa-stack fa-2x">
+              <%= icon('fas', 'plus', class: 'fa-stack-1x') %>
+            </span>
+          </div>
+        </div>
+    <% end %>
+
+    <%= link_to edit_user_registration_path,
+        class: 'd-flex flex-grow-1 text-light justify-content-center' do %>
+      <div class="d-flex align-self-center d-block">
+        <span class="fa-stack">
+          <%= icon('fas', 'cog', class: 'fa-stack-2x') %>
+        </span>
+      </div>
+    <% end %>
+
+    </div>
+  </div>
+</div>

@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
-
   ActiveAdmin.routes(self)
 
   devise_for :users
+
+  # scope module: 'organizations', path: 'o'  do
+  resources :organizations do
+    resources :teams,       only: :show
+  end
+
+  resources :teams,         except: [:show, :index]
+  resources :organizations, only: :show
 
   resources :users do
     resources :requests, only: [:show, :index]

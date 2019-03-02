@@ -2,6 +2,9 @@ class User < ApplicationRecord
   has_many :requests
   has_many :tasks, :class_name => 'Request', :foreign_key => 'recipient_id'
 
+  belongs_to :team
+  # belongs_to :organization
+
   devise :database_authenticatable, :registerable, :confirmable, :timeoutable,
          :recoverable, :rememberable, :trackable, :validatable
 
